@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  :root {
+    --primary-100: #c21d03;
+    --primary-200: #fd5732;
+    --primary-300: #ffb787;
+    --accent-100: #393939;
+    --accent-200: #bebebe;
+    --text-100: #232121;
+    --text-200: #4b4848;
+    --bg-100: #fbfbfb;
+    --bg-200: #f1f1f1;
+    --bg-300: #c8c8c8;
+
+    /* Scrollbar colors for light theme */
+    --scrollbar-track: var(--bg-200);
+    --scrollbar-thumb: var(--accent-200);
+    --scrollbar-thumb-hover: var(--accent-100);
+  }
+
+  :root[data-theme="dark"] {
+    --primary-100:#FF6600;
+    --primary-200:#f95937;
+    --primary-300:#ffffa1;
+    --accent-100:#F5F5F5;
+    --accent-200:#929292;
+    --text-100:#FFFFFF;
+    --text-200:#e0e0e0;
+    --bg-100:#1D1F21;
+    --bg-200:#2c2e30;
+    --bg-300:#444648;
+
+    /* Scrollbar colors for dark theme */
+    --scrollbar-track: var(--bg-300);
+    --scrollbar-thumb: var(--accent-200);
+    --scrollbar-thumb-hover: var(--accent-100);
+  }
+
+  /* Custom scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+}
+
+@layer components {
+  .bento-grid {
+    @apply grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .bento-card {
+    @apply bg-bg-200 rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+}
+
+body {
+  @apply bg-bg-100 text-text-100 transition-colors duration-300;
+}
