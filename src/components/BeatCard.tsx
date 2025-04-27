@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Tag, Clock, Music } from 'lucide-react';
 import { Beat } from '../types/beat';
-import { useBeatsStore } from '../hooks/useBeatsStore';
+import { useCartStore } from '../store/cartStore';
 import toast from 'react-hot-toast';
 import { AudioPlayer } from './AudioPlayer';
 
@@ -19,49 +19,54 @@ export const BeatCard: React.FC<BeatCardProps> = ({
   onPlay,   
   globalVolume = 0.5  
 }) => {
-  const { addToCart } = useBeatsStore();
-  const [loading, setLoading] = React.useState(true);
+  const addToCart = useCartStore(state => state.addToCart);
 
   const handleAddToCart = () => {
-    addToCart(beat);
-    toast.success('Added to cart!');
+    addToCart({
+      id: beat.id,
+      type: 'beat',
+      title: beat.title,
+      price: beat.price,
+      coverUrl: beat.coverUrl,
+    });
+    toast.success('Beat added to cart!');
   };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-4 bg-bg-200 rounded-2xl hover:shadow-lg transition-all duration-300"
+      className="p-4 rounded-2xl transition-all duration-300 bg-bg-200 hover:shadow-lg"
     >
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         {/* Cover Image Section */}
-        <div className="relative w-full md:w-48 h-48 md:h-48 overflow-hidden rounded-xl group">
+        <div className="overflow-hidden relative w-full h-48 rounded-xl md:w-48 md:h-48 group">
           <img
             src={beat.coverUrl}
             alt={beat.title}
             className="object-cover w-full h-full"
           />
           {beat.featured && (
-            <div className="absolute px-3 py-1 text-sm font-medium text-white rounded-full top-3 left-3 bg-primary-200/90 backdrop-blur-sm">
+            <div className="absolute top-3 left-3 px-3 py-1 text-sm font-medium text-white rounded-full backdrop-blur-sm bg-primary-200/90">
               Featured
             </div>
           )}
         </div>
 
         {/* Content Section */}
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex flex-col flex-1 justify-between">
           <div>
-            <div className="flex items-start justify-between mb-2">
+            <div className="flex justify-between items-start mb-2">
               <div>
-                <h3 className="text-2xl font-bold text-text-100 mb-1">{beat.title}</h3>
-                <p className="text-text-200 text-lg">{beat.producer}</p>
+                <h3 className="mb-1 text-2xl font-bold text-text-100">{beat.title}</h3>
+                <p className="text-lg text-text-200">{beat.producer}</p>
               </div>
               <div className="text-2xl font-bold text-primary-200">
-                ${beat.price.basic}
+                ${beat.price}
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex flex-wrap gap-4 items-center mb-4">
               <span className="flex items-center gap-2 text-sm text-text-200 bg-bg-300/50 px-3 py-1.5 rounded-full">
                 <Tag size={16} />
                 {beat.genre}
@@ -83,7 +88,6 @@ export const BeatCard: React.FC<BeatCardProps> = ({
                 onPlayPause={onPlay}
                 onFinish={onPlay}
                 globalVolume={globalVolume}
-                onLoadingChange={setLoading}
               />
             </div>
           </div>
@@ -92,7 +96,7 @@ export const BeatCard: React.FC<BeatCardProps> = ({
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleAddToCart}
-            className="w-full mt-4 flex items-center justify-center gap-2 px-6 py-3 font-medium text-white rounded-xl bg-primary-200 hover:bg-primary-300 transition-colors duration-300"
+            className="flex gap-2 justify-center items-center px-6 py-3 mt-4 w-full font-medium text-white rounded-xl transition-colors duration-300 bg-primary-200 hover:bg-primary-300"
           >
             <ShoppingCart size={20} />
             <span>Add to Cart</span>

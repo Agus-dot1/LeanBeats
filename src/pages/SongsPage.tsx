@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, BaseSyntheticEvent } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Music, Volume2 } from 'lucide-react';
@@ -8,7 +8,7 @@ import { BeatsFilter } from '../components/BeatsFilter';
 import { Beat } from '../types/beat';
 import { Toaster } from 'react-hot-toast';
 
-const BeatsPage: React.FC = () => {
+const SongsPage: React.FC = () => {
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set(['All']));
@@ -16,59 +16,30 @@ const BeatsPage: React.FC = () => {
   const [volume, setVolume] = useState(0.8);
   const { ref: loadMoreRef, inView } = useInView();
 
-  const beats = useMemo(() => [
+  const songs = useMemo(() => [
     {
       id: '1',
-      title: 'Noche de Verano',
-      producer: 'Lea in the Mix',
-      genre: 'Trap',
-      bpm: 140,
-      key: 'Am',
-      duration: '3:24',
-      price: 100,
-      coverUrl: 'https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg',
-      audioUrl: 'https://res.cloudinary.com/do17gdc0b/video/upload/v1745683911/beat-reggaeton-013_asvPv5N1_zw6dqc.mp3',
-      mood: ['Dark', 'Atmospheric'],
-      tags: ['Trap', 'Dark', '140bpm'],
-      releaseDate: '2024-03-10',
-      createdAt: '2024-03-10',
-      plays: 1200,
-      ratings: {
-        average: 4.8,
-        count: 156
-      },
-      featured: true
-    },
-    {
-      id: '2',
-      title: 'Summer Vibes',
-      producer: 'DJ Sunny',
+      title: 'Example Song',
+      producer: 'Artist Name',
       genre: 'Pop',
-      bpm: 120,
-      key: 'C',
+      bpm: 128,
+      key: 'Am',
       duration: '3:45',
-      price: 80,
-      coverUrl: 'https://images.pexels.com/photos/1234567/pexels-photo-1234567.jpeg',
+      price: 150,
+      coverUrl: 'https://example.com/cover.jpg',
       audioUrl: 'https://res.cloudinary.com/do17gdc0b/video/upload/v1745683911/beat-reggaeton-013_asvPv5N1_zw6dqc.mp3',
       mood: ['Happy', 'Energetic'],
-      tags: ['Pop', 'Summer', '120bpm'],
-      releaseDate: '2024-05-15',
-      createdAt: '2024-05-15',
-      plays: 800,
+      tags: ['Pop', 'Summer', '128bpm'],
+      releaseDate: '2024-03-15',
+      createdAt: '2024-03-15',
+      plays: 1000,
       ratings: {
         average: 4.5,
-        count: 120
+        count: 100
       },
-      featured: false
-    },
-    // Add more beats here following the same structure
-  ], []);
-
-  useEffect(() => {
-    if (inView && beats.length > 0) {
-      // Load more beats logic here
+      featured: true
     }
-  }, [inView, beats.length]);
+  ], []);
 
   const handleGenreChange = (genre: string) => {
     setSelectedGenres(prev => {
@@ -87,12 +58,12 @@ const BeatsPage: React.FC = () => {
     });
   };
 
-  const filteredBeats = useMemo(() => {
-    return beats.filter(beat => {
+  const filteredSongs = useMemo(() => {
+    return songs.filter(song => {
       const matchesSearch = 
-        beat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        beat.producer.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesGenre = selectedGenres.has('All') || selectedGenres.has(beat.genre);
+        song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        song.producer.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesGenre = selectedGenres.has('All') || selectedGenres.has(song.genre);
       return matchesSearch && matchesGenre;
     }).sort((a, b) => {
       switch (sortBy) {
@@ -107,32 +78,22 @@ const BeatsPage: React.FC = () => {
           return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
       }
     });
-  }, [beats, searchQuery, selectedGenres, sortBy]);
+  }, [songs, searchQuery, selectedGenres, sortBy]);
 
-  const featuredBeats = useMemo(() => 
-    filteredBeats.filter(beat => beat.featured),
-    [filteredBeats]
-  );
-
-  const regularBeats = useMemo(() => 
-    filteredBeats.filter(beat => !beat.featured),
-    [filteredBeats]
-  );
-
-  const togglePlay = (beatId: string) => {
-    setCurrentlyPlaying(current => current === beatId ? null : beatId);
+  const togglePlay = (songId: string) => {
+    setCurrentlyPlaying(current => current === songId ? null : songId);
   };
 
   return (
     <div className="pt-28 pb-20 min-h-screen bg-bg-100">
       <Helmet>
-        <title>Catálogo de beats | Lea in the Mix</title>
-        <meta name="description" content="Explore our collection of professional beats. Preview and purchase high-quality instrumentals for your next project." />
+        <title>Songs | Artist Name</title>
+        <meta name="description" content="Listen to and purchase songs by Artist Name" />
       </Helmet>
 
       <Toaster position="bottom-center" />
 
-      <div className="container px-4 mx-auto max-w-6xl">
+      <div className="container px-4 mx-auto max-w-5xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -140,7 +101,7 @@ const BeatsPage: React.FC = () => {
             className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <Music size={16} className="animate-pulse" />
-            <span>Catálogo</span>
+            <span>Songs</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -148,7 +109,7 @@ const BeatsPage: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="mb-4 text-4xl font-bold md:text-6xl text-text-100"
           >
-            Encontrá tu próximo <span className="text-primary-200">Hit</span>
+            Latest <span className="text-primary-200">Releases</span>
           </motion.h1>
         </div>
 
@@ -161,8 +122,7 @@ const BeatsPage: React.FC = () => {
           onSortChange={setSortBy}
         />
 
-        {/* Volume Control */}
-        <div className="fixed bottom-4 left-20 z-50">
+        <div className="fixed right-4 bottom-4 z-50">
           <div className="flex gap-2 items-center p-2 rounded-full border shadow-lg bg-bg-100 border-bg-200">
             <Volume2 size={20} className="text-text-100" />
             <input
@@ -172,47 +132,27 @@ const BeatsPage: React.FC = () => {
               step="0.1"
               value={volume}
               onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="w-44 h-10 rounded-full bg-primary-200"
+              className="w-24"
             />
           </div>
         </div>
 
-    {/* Featured Beats */}
-    {featuredBeats.length > 0 && (
-      <div className="mb-12">
-        <h2 className="mb-6 text-2xl font-bold text-text-100">Featured Beats</h2>
         <div className="space-y-4">
-          {featuredBeats.map(beat => (
+          {filteredSongs.map(song => (
             <BeatCard
-              key={beat.id}
-              beat={beat}
-              isPlaying={currentlyPlaying === beat.id}
-              onPlay={() => togglePlay(beat.id)}
+              key={song.id}
+              beat={song}
+              isPlaying={currentlyPlaying === song.id}
+              onPlay={() => togglePlay(song.id)}
               globalVolume={volume}
             />
           ))}
         </div>
-      </div>
-    )}
 
-    {/* Regular Beats */}
-    <div className="space-y-4">
-      {regularBeats.map(beat => (
-        <BeatCard
-          key={beat.id}
-          beat={beat}
-          isPlaying={currentlyPlaying === beat.id}
-          onPlay={() => togglePlay(beat.id)}
-          globalVolume={volume}
-        />
-      ))}
-    </div>
-
-        {/* Load More Trigger */}
         <div ref={loadMoreRef} className="h-20" />
       </div>
     </div>
   );
 };
 
-export default BeatsPage;
+export default SongsPage;

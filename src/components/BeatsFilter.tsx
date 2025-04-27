@@ -29,8 +29,8 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
   ];
 
   return (
-    <div className="sticky top-20 z-30 bg-bg-100/80 backdrop-blur-lg py-4 space-y-6 mb-8">
-      <div className="flex items-center gap-4">
+    <div className="sticky top-20 z-30 py-4 mb-8 space-y-6 rounded-3xl backdrop-blur-lg bg-bg-100/80">
+      <div className="flex gap-4 items-center">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-200" size={20} />
           <input
@@ -38,7 +38,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Buscá por título o género..."
-            className="w-full py-3 pl-12 pr-4 rounded-full bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+            className="py-3 pr-4 pl-12 w-full rounded-full bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
         </div>
         <div className="relative">
@@ -46,7 +46,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
             whileHover={{ scale: 1.05 }}
             onClick={() => setShowSort(!showSort)}
             className={`flex items-center gap-2 px-6 py-3 rounded-full transition-colors ${
-              showSort ? 'bg-primary-200 text-white' : 'bg-bg-200 text-text-100'
+              showSort ? 'text-white bg-primary-200' : 'bg-bg-200 text-text-100'
             }`}
           >
             <SlidersHorizontal size={20} />
@@ -58,7 +58,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="absolute right-0 mt-2 w-48 rounded-xl bg-bg-100 shadow-lg border border-bg-200 overflow-hidden"
+                className="overflow-hidden absolute right-0 mt-2 w-48 rounded-xl border shadow-lg bg-bg-100 border-bg-200"
               >
                 {sortOptions.map((option) => (
                   <button

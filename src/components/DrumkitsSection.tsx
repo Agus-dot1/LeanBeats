@@ -51,13 +51,13 @@ const drumkits = [
 export const DrumkitsSection: React.FC = () => {
     return (
         <section className="py-24 bg-bg-100">
-            <div className="container px-4 mx-auto max-w-7xl">
+            <div className="container px-4 mx-auto max-w-6xl">
                 <div className="flex flex-col gap-8 mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-2 w-fit text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+                        className="inline-flex gap-2 items-center px-4 py-2 text-sm font-medium rounded-full w-fit bg-primary-200/10 text-primary-200"
                     >
                         <Package size={16} className="animate-pulse" />
                         <span>Drum Kits</span>
@@ -77,39 +77,39 @@ export const DrumkitsSection: React.FC = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
                 >
                     {drumkits.map((kit) => (
                         <motion.div
                             key={kit.id}
                             variants={item}
-                            className="bg-bg-200 rounded-2xl overflow-hidden group"
+                            className="overflow-hidden rounded-2xl bg-bg-200 group"
                         >
                             <div className="relative h-48">
                                 <img
                                     src={kit.coverUrl}
                                     alt={kit.title}
-                                    className="w-full h-full object-cover transition-transform duration-300"
+                                    className="object-cover w-full h-full transition-transform duration-300"
                                 />
                             </div>
 
                             <div className="p-6">
-                                <div className="flex items-start justify-between mb-4">
+                                <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <h3 className="text-xl font-bold text-text-100 mb-2">{kit.title}</h3>
+                                        <h3 className="mb-2 text-xl font-bold text-text-100">{kit.title}</h3>
                                         <p className="text-text-200">{kit.description}</p>
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-3 mb-6">
-                                    <div className="flex items-center gap-2 p-3 rounded-xl bg-bg-300/50">
+                                    <div className="flex gap-2 items-center p-3 rounded-xl bg-bg-300/50">
                                         <FileAudio className="w-5 h-5 text-primary-200" />
                                         <div>
                                             <div className="text-sm font-medium text-text-100">{kit.samples}</div>
                                             <div className="text-xs text-text-200">Samples</div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2 p-3 rounded-xl bg-bg-300/50">
+                                    <div className="flex gap-2 items-center p-3 rounded-xl bg-bg-300/50">
                                         <Waveform className="w-5 h-5 text-primary-200" />
                                         <div>
                                             <div className="text-sm font-medium text-text-100">24bit</div>
@@ -118,7 +118,7 @@ export const DrumkitsSection: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center justify-between">
+                                <div className="flex justify-between items-center">
                                     <div className="text-2xl font-bold text-text-100">
                                         ${kit.price}
                                     </div>
@@ -127,7 +127,7 @@ export const DrumkitsSection: React.FC = () => {
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             onClick={() => toast.success('Demo downloading...')}
-                                            className="p-2 text-text-100 rounded-full bg-bg-300"
+                                            className="p-2 rounded-full text-text-100 bg-bg-300"
                                         >
                                             <Download size={20} />
                                         </motion.button>

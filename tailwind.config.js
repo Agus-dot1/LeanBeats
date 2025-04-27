@@ -27,11 +27,20 @@ export default {
         },
       },
       maxWidth: {
-        'container': '1200px',
+        'container': '100px',
       },
       transitionDuration: {
         '300': '300ms',
       },
+      keyframes: {
+        'scroll-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' }
+        }
+      },
+      animation: {
+        'scroll-left': 'scroll-left 3s linear infinite',
+      }
     },
   },
   darkMode: ['class', '[data-theme="dark"]'],

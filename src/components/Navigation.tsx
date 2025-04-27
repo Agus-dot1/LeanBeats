@@ -19,10 +19,10 @@ export const Navigation: React.FC = () => {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 shadow-lg bg-bg-100 shadow-black/5"
+        className="fixed top-0 right-0 left-0 z-50 shadow-lg bg-bg-100 shadow-black/5 border-bg-200"
       >
-        <nav className="container px-4 py-4 mx-auto max-w-container">
-          <div className="flex items-center justify-between">
+        <nav className="container px-4 py-4 mx-auto">
+          <div className="flex justify-between items-center">
             <NavLink
               to="/"
               className="text-2xl font-bold transition-colors duration-300 text-text-100 hover:text-primary-200"
@@ -31,7 +31,7 @@ export const Navigation: React.FC = () => {
               Lea in the Mix
             </NavLink>
 
-            <div className="items-center hidden space-x-6 md:flex">
+            <div className="hidden items-center space-x-6 md:flex">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <NavLink
                   key={path}
@@ -55,7 +55,7 @@ export const Navigation: React.FC = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-4 py-2 transition-colors duration-300 rounded-full text-text-100 hover:bg-bg-200"
+                className="flex gap-2 items-center px-4 py-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200"
                 aria-label="Shopping Cart"
               >
                 <ShoppingCart size={20} aria-hidden="true" />
@@ -66,7 +66,7 @@ export const Navigation: React.FC = () => {
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 transition-colors duration-300 rounded-full text-text-100 hover:bg-bg-200 md:hidden"
+                className="p-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200 md:hidden"
                 aria-expanded={isOpen}
                 aria-label="Toggle menu"
               >
@@ -86,7 +86,7 @@ export const Navigation: React.FC = () => {
             transition={{ duration: 0.3 }}
             className="fixed inset-x-0 top-[73px] z-40 md:hidden"
           >
-            <div className="p-4 mx-4 border shadow-lg rounded-2xl bg-bg-100/80 backdrop-blur-lg border-bg-200">
+            <div className="p-4 mx-4 rounded-2xl border shadow-lg backdrop-blur-lg bg-bg-100/80 border-bg-200">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <NavLink
                   key={path}

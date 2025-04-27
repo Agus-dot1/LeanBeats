@@ -6,17 +6,15 @@ export interface Beat {
   bpm: number;
   key: string;
   duration: string;
-  price: {
-    basic: number;
-  };
+  price: number;
   coverUrl: string;
   audioUrl: string;
-  waveformData?: number[];
-  mood: string[];
+  mood?: string[];
   tags: string[];
   releaseDate: string;
+  createdAt: string;
   plays: number;
-  ratings: {
+  ratings?: {
     average: number;
     count: number;
   };

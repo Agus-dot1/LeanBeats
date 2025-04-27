@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Package, Music2, Download, Play, Wand2, FileAudio, Folder, HardDrive } from 'lucide-react';
+import { useCartStore } from '../store/cartStore';
+import toast from 'react-hot-toast';
 
 interface Pack {
   id: string;
@@ -25,11 +27,13 @@ interface Pack {
 }
 
 const PacksPage: React.FC = () => {
+  const addToCart = useCartStore(state => state.addToCart);
+  
   const packs: Pack[] = [
     {
       id: '1',
       title: 'Trap Soul Essentials Vol. 1',
-      description: 'A premium collection of soulful melodies, hard-hitting drums, and atmospheric sounds perfect for modern Trap Soul production.',
+      description: 'Una colección premium de melodías con alma, baterías contundentes y sonidos atmosféricos perfectos para la producción moderna de Trap Soul.',
       imageUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2940',
       price: 49.99,
       category: 'Trap Soul',
@@ -49,60 +53,60 @@ const PacksPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-bg-100 pt-28 pb-20">
+    <div className="pt-28 pb-20 min-h-screen bg-bg-100">
       <Helmet>
-        <title>Sample Packs & Drum Kits | Lea in the Mix</title>
-        <meta name="description" content="Professional sample packs and drum kits for music producers. High-quality sounds for your productions." />
+        <title>Packs de Samples y Kits de Batería | Lea in the Mix</title>
+        <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
       </Helmet>
 
-      <div className="container mx-auto px-4">
+      <div className="container px-4 mx-auto max-w-6xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <Wand2 size={16} className="animate-pulse" />
-            <span>Premium Sounds</span>
+            <span>Sonidos Premium</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold text-text-100 mb-4"
+            className="mb-4 text-4xl font-bold md:text-6xl text-text-100"
           >
-            Sample Packs & <span className="text-primary-200">Drum Kits</span>
+            Packs de Samples & <span className="text-primary-200">Kits de Batería</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-text-200 text-lg max-w-2xl"
+            className="max-w-2xl text-lg text-text-200"
           >
             Samples, loops y kits de calidad profesional creados para la producción musical moderna.
             Todos los sonidos son 100% libres de regalías y están listos para tu próximo éxito.
           </motion.p>
         </div>
 
-        {/* Featured Pack */}
+        {/* Pack Destacado */}
         {packs.map(pack => (
           <motion.div
             key={pack.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-bg-200 rounded-3xl overflow-hidden mb-12"
+            className="overflow-hidden mb-12 rounded-3xl bg-bg-200"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="relative h-[300px] lg:h-full min-h-[400px]">
                 <img
                   src={pack.imageUrl}
                   alt={pack.title}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="object-cover absolute inset-0 w-full h-full"
                 />
                 <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
-                <div className="absolute inset-0 p-8 flex flex-col justify-between">
+                <div className="flex absolute inset-0 flex-col justify-between p-8">
                   <div className="space-y-4">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm">
+                    <span className="inline-flex gap-2 items-center px-3 py-1 text-sm text-white rounded-full backdrop-blur-sm bg-white/10">
                       <Package size={14} />
                       {pack.category}
                     </span>
@@ -112,10 +116,10 @@ const PacksPage: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary-200 text-white font-medium w-fit"
+                    className="flex gap-2 items-center px-6 py-3 font-medium text-white rounded-full bg-primary-200 w-fit"
                   >
                     <Play size={18} />
-                    Preview
+                    Vista Previa
                   </motion.button>
                 </div>
               </div>
@@ -123,22 +127,22 @@ const PacksPage: React.FC = () => {
               <div className="p-8 space-y-8">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 rounded-2xl bg-bg-300/50">
-                    <FileAudio className="w-6 h-6 text-primary-200 mb-2" />
+                    <FileAudio className="mb-2 w-6 h-6 text-primary-200" />
                     <div className="text-2xl font-bold text-text-100">{pack.features.samples}</div>
                     <div className="text-sm text-text-200">Samples Totales</div>
                   </div>
                   <div className="p-4 rounded-2xl bg-bg-300/50">
-                    <Folder className="w-6 h-6 text-primary-200 mb-2" />
+                    <Folder className="mb-2 w-6 h-6 text-primary-200" />
                     <div className="text-2xl font-bold text-text-100">{pack.features.formats.join(', ')}</div>
                     <div className="text-sm text-text-200">Formatos</div>
                   </div>
                   <div className="p-4 rounded-2xl bg-bg-300/50">
-                    <HardDrive className="w-6 h-6 text-primary-200 mb-2" />
+                    <HardDrive className="mb-2 w-6 h-6 text-primary-200" />
                     <div className="text-2xl font-bold text-text-100">{pack.features.size}</div>
                     <div className="text-sm text-text-200">Tamaño Total</div>
                   </div>
                   <div className="p-4 rounded-2xl bg-bg-300/50">
-                    <Music2 className="w-6 h-6 text-primary-200 mb-2" />
+                    <Music2 className="mb-2 w-6 h-6 text-primary-200" />
                     <div className="text-2xl font-bold text-text-100">{pack.features.bpm}</div>
                     <div className="text-sm text-text-200">Rango BPM</div>
                   </div>
@@ -148,28 +152,38 @@ const PacksPage: React.FC = () => {
                   <h3 className="text-xl font-semibold text-text-100">Contenido</h3>
                   <div className="space-y-3">
                     {Object.entries(pack.contents).map(([key, value]) => (
-                      <div key={key} className="flex items-center justify-between py-2 border-b border-bg-300">
-                        <span className="text-text-200 capitalize">{key}</span>
-                        <span className="text-text-100 font-medium">{value} Archivos</span>
+                      <div key={key} className="flex justify-between items-center py-2 border-b border-bg-300">
+                        <span className="capitalize text-text-200">{key}</span>
+                        <span className="font-medium text-text-100">{value} Archivos</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4">
+                <div className="flex justify-between items-center pt-4">
                   <div className="text-3xl font-bold text-text-100">${pack.price}</div>
                   <div className="flex gap-3">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary-200 text-white font-medium"
+                      className="flex gap-2 items-center px-6 py-3 font-medium text-white rounded-full bg-primary-200"
+                      onClick={() => {
+                        addToCart({
+                          id: pack.id,
+                          type: 'pack',
+                          title: pack.title,
+                          price: pack.price,
+                          coverUrl: pack.imageUrl,
+                        });
+                        toast.success('¡Pack añadido al carrito!');
+                      }}
                     >
                       Añadir al carrito
                     </motion.button>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center gap-2 px-6 py-3 rounded-full bg-bg-300 text-text-100 font-medium"
+                      className="flex gap-2 items-center px-6 py-3 font-medium rounded-full bg-bg-300 text-text-100"
                     >
                       <Download size={18} />
                       Demo

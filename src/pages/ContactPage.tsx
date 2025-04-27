@@ -14,7 +14,7 @@ const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
+    console.log('Formulario enviado:', formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -25,102 +25,102 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bg-100 pt-28 pb-20">
+    <div className="pt-28 pb-20 min-h-screen bg-bg-100">
       <Helmet>
-        <title>Contact Us | Lea in the Mix</title>
-        <meta name="description" content="Get in touch with us for music production, studio bookings, or any inquiries." />
+        <title>Contacto | Lea in the Mix</title>
+        <meta name="description" content="Contáctanos para producción musical, reservas de estudio o cualquier consulta." />
       </Helmet>
 
-      <div className="container mx-auto px-4">
+      <div className="container px-4 mx-auto max-w-6xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <MessageSquare size={16} className="animate-pulse" />
-            <span>Get in Touch</span>
+            <span>Contáctanos</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold text-text-100 mb-4"
+            className="mb-4 text-4xl font-bold md:text-6xl text-text-100"
           >
-            Let's Make <span className="text-primary-200">Music</span>
+            Hagamos <span className="text-primary-200">Música</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-text-200 text-lg max-w-2xl"
+            className="max-w-2xl text-lg text-text-200"
           >
-            Whether you're looking to book studio time, purchase beats, or collaborate on a project,
-            we're here to help bring your vision to life.
+            Ya sea que estés buscando reservar tiempo de estudio, comprar beats o colaborar en un proyecto,
+            estamos aquí para ayudarte a hacer realidad tu visión.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+          {/* Información de Contacto */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="p-6 rounded-2xl bg-bg-200">
-                <Phone className="w-6 h-6 text-primary-200 mb-4" />
-                <h3 className="text-lg font-semibold text-text-100 mb-2">Phone</h3>
+                <Phone className="mb-4 w-6 h-6 text-primary-200" />
+                <h3 className="mb-2 text-lg font-semibold text-text-100">Teléfono</h3>
                 <p className="text-text-200">+54 11 1234-5678</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
-                <Mail className="w-6 h-6 text-primary-200 mb-4" />
-                <h3 className="text-lg font-semibold text-text-100 mb-2">Email</h3>
+                <Mail className="mb-4 w-6 h-6 text-primary-200" />
+                <h3 className="mb-2 text-lg font-semibold text-text-100">Correo</h3>
                 <p className="text-text-200">contacto@leainthemix.com</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
-                <MapPin className="w-6 h-6 text-primary-200 mb-4" />
-                <h3 className="text-lg font-semibold text-text-100 mb-2">Location</h3>
+                <MapPin className="mb-4 w-6 h-6 text-primary-200" />
+                <h3 className="mb-2 text-lg font-semibold text-text-100">Ubicación</h3>
                 <p className="text-text-200">Buenos Aires, Argentina</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
-                <Clock className="w-6 h-6 text-primary-200 mb-4" />
-                <h3 className="text-lg font-semibold text-text-100 mb-2">Hours</h3>
-                <p className="text-text-200">24/7 by appointment</p>
+                <Clock className="mb-4 w-6 h-6 text-primary-200" />
+                <h3 className="mb-2 text-lg font-semibold text-text-100">Horarios</h3>
+                <p className="text-text-200">24/7 con cita previa</p>
               </div>
             </div>
 
             <div className="p-6 rounded-2xl bg-bg-200">
-              <h3 className="text-xl font-semibold text-text-100 mb-4">Quick Links</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h3 className="mb-4 text-xl font-semibold text-text-100">Enlaces Rápidos</h3>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-bg-300/50 text-text-100"
+                  className="flex gap-3 items-center p-4 rounded-xl bg-bg-300/50 text-text-100"
                 >
                   <Music2 size={20} />
-                  <span>Browse Beats</span>
+                  <span>Explorar Beats</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-bg-300/50 text-text-100"
+                  className="flex gap-3 items-center p-4 rounded-xl bg-bg-300/50 text-text-100"
                 >
                   <Calendar size={20} />
-                  <span>Book Studio</span>
+                  <span>Reservar Estudio</span>
                 </motion.button>
               </div>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Formulario de Contacto */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-text-200 mb-2">
-                    Name
+                  <label htmlFor="name" className="block mb-2 text-sm font-medium text-text-200">
+                    Nombre
                   </label>
                   <input
                     type="text"
@@ -128,14 +128,14 @@ const ContactPage: React.FC = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
-                    placeholder="Your name"
+                    className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                    placeholder="Tu nombre"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text-200 mb-2">
-                    Email
+                  <label htmlFor="email" className="block mb-2 text-sm font-medium text-text-200">
+                    Correo
                   </label>
                   <input
                     type="email"
@@ -143,36 +143,36 @@ const ContactPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
-                    placeholder="your@email.com"
+                    className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                    placeholder="tu@email.com"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-text-200 mb-2">
-                  Subject
+                <label htmlFor="subject" className="block mb-2 text-sm font-medium text-text-200">
+                  Asunto
                 </label>
                 <select
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                  className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-200"
                   required
                 >
-                  <option value="">Select a subject</option>
-                  <option value="studio">Studio Booking</option>
-                  <option value="beats">Beat Purchase</option>
-                  <option value="collaboration">Collaboration</option>
-                  <option value="other">Other</option>
+                  <option value="">Selecciona un asunto</option>
+                  <option value="studio">Reserva de Estudio</option>
+                  <option value="beats">Compra de Beat</option>
+                  <option value="collaboration">Colaboración</option>
+                  <option value="other">Otro</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-text-200 mb-2">
-                  Message
+                <label htmlFor="message" className="block mb-2 text-sm font-medium text-text-200">
+                  Mensaje
                 </label>
                 <textarea
                   id="message"
@@ -180,8 +180,8 @@ const ContactPage: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
-                  placeholder="Tell us about your project..."
+                  className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                  placeholder="Cuéntanos sobre tu proyecto..."
                   required
                 />
               </div>
@@ -190,10 +190,10 @@ const ContactPage: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary-200 text-white font-medium"
+                className="flex gap-2 justify-center items-center px-8 py-4 w-full font-medium text-white rounded-xl bg-primary-200"
               >
                 <Send size={20} />
-                Send Message
+                Enviar Mensaje
               </motion.button>
             </form>
           </motion.div>

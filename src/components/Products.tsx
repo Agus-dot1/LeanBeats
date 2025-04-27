@@ -53,14 +53,14 @@ const beats = [
 export const Products: React.FC = () => {
     return (
         <section className="py-24 bg-bg-200">
-            <div className="container px-4 mx-auto max-w-5xl">
+            <div className="container px-4 mx-auto max-w-6xl">
                 <div className="flex flex-col gap-8 mb-16 md:flex-row md:items-end md:justify-between">
                     <div className="max-w-2xl">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+                            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
                         >
                             <Wand2 size={16} className="animate-pulse" />
                             <span>Beats Exclusivos</span>
@@ -90,12 +90,12 @@ export const Products: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-4"
+                        className="flex gap-4 items-center"
                     >
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="flex items-center gap-2 px-8 py-4 font-semibold text-white transition-colors rounded-full bg-primary-200"
+                            className="flex gap-2 items-center px-8 py-4 font-semibold text-white rounded-full transition-colors bg-primary-200"
                         >
                             <Music2 size={20} />
                             <span>Ver Catálogo</span>
@@ -114,19 +114,19 @@ export const Products: React.FC = () => {
                         <motion.div
                             key={beat.id}
                             variants={item}
-                            className="bg-bg-100 rounded-xl p-4 flex items-center gap-6"
+                            className="flex gap-6 items-center p-4 rounded-xl bg-bg-100"
                         >
-                            <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                            <div className="overflow-hidden relative flex-shrink-0 w-20 h-20 rounded-lg">
                                 <img
                                     src={beat.coverUrl}
                                     alt={beat.title}
-                                    className="w-full h-full object-cover"
+                                    className="object-cover w-full h-full"
                                 />
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={() => toast.success('Playing: ' + beat.title)}
-                                    className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity"
+                                    className="flex absolute inset-0 justify-center items-center opacity-0 transition-opacity bg-black/50 hover:opacity-100"
                                 >
                                     <div className="p-2 rounded-full bg-primary-200">
                                         <Play className="w-4 h-4 text-white" />
@@ -135,21 +135,21 @@ export const Products: React.FC = () => {
                             </div>
 
                             <div className="flex-1 min-w-0">
-                                <div className="flex items-start justify-between mb-2">
+                                <div className="flex justify-between items-start mb-2">
                                     <div>
-                                        <h3 className="text-lg font-semibold text-text-100 truncate">{beat.title}</h3>
+                                        <h3 className="text-lg font-semibold truncate text-text-100">{beat.title}</h3>
                                         <p className="text-sm text-text-200">{beat.producer}</p>
                                     </div>
                                     <div className="text-lg font-bold text-text-100">
                                         ${beat.price}
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-4">
-                                    <span className="flex items-center gap-1 text-sm text-text-200">
+                                <div className="flex gap-4 items-center">
+                                    <span className="flex gap-1 items-center text-sm text-text-200">
                                         <Tag size={14} />
                                         {beat.genre}
                                     </span>
-                                    <span className="flex items-center gap-1 text-sm text-text-200">
+                                    <span className="flex gap-1 items-center text-sm text-text-200">
                                         <Clock size={14} />
                                         {beat.bpm} BPM
                                     </span>
