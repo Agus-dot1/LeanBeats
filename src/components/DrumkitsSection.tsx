@@ -1,22 +1,7 @@
 import { motion } from 'framer-motion';
-import { Package, Download, FileAudio, AudioWaveform as Waveform } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { Package, FileAudio, Music2, Play, Folder, HardDrive, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import React from 'react';
-
-const container = {
-    hidden: { opacity: 0 },
-    show: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1
-        }
-    }
-};
-
-const item = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0 }
-};
 
 const drumkits = [
     {
@@ -24,127 +9,116 @@ const drumkits = [
         title: 'Trap Essentials Vol. 1',
         description: 'Essential drum sounds for modern trap production',
         price: 49.99,
-        samples: 150,
         coverUrl: 'https://images.pexels.com/photos/1010518/pexels-photo-1010518.jpeg',
-        demoUrl: 'https://example.com/demo.mp3'
-    },
-    {
-        id: '2',
-        title: 'Lo-Fi Dreams',
-        description: 'Vintage drums with character and warmth',
-        price: 39.99,
-        samples: 120,
-        coverUrl: 'https://images.pexels.com/photos/1436141/pexels-photo-1436141.jpeg',
-        demoUrl: 'https://example.com/demo.mp3'
-    },
-    {
-        id: '3',
-        title: 'Future Bass Kit',
-        description: 'Cutting-edge sounds for electronic music',
-        price: 59.99,
-        samples: 200,
-        coverUrl: 'https://images.pexels.com/photos/1021876/pexels-photo-1021876.jpeg',
-        demoUrl: 'https://example.com/demo.mp3'
+        category: 'trap',
+        features: {
+            samples: 150,
+            formats: ['WAV', 'MIDI'],
+            size: '1.2 GB',
+            bpm: '80-160'
+        }
     }
 ];
 
 export const DrumkitsSection: React.FC = () => {
     return (
-        <section className="py-24 bg-bg-100">
+        <section className="py-12 sm:py-24 bg-bg-100">
             <div className="container px-4 mx-auto max-w-6xl">
-                <div className="flex flex-col gap-8 mb-16">
+                <div className="mb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="inline-flex gap-2 items-center px-4 py-2 text-sm font-medium rounded-full w-fit bg-primary-200/10 text-primary-200"
+                        className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
                     >
                         <Package size={16} className="animate-pulse" />
-                        <span>Drum Kits</span>
+                        <span>Librerías</span>
                     </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl font-bold text-text-100"
+                        className="mb-4 text-4xl font-bold text-text-100"
                     >
-                        Professional <span className="text-primary-200">Sound Kits</span>
+                        <span className="text-primary-200">Profesionales</span> Librerías
                     </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="max-w-2xl text-lg text-text-200"
+                    >
+                        Descubre nuestra colección de kits de samples profesionales. Desde drums hasta melodías, 
+                        todo lo que necesitas para tu próxima producción.
+                    </motion.p>
                 </div>
 
-                <motion.div
-                    variants={container}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-                >
-                    {drumkits.map((kit) => (
-                        <motion.div
-                            key={kit.id}
-                            variants={item}
-                            className="overflow-hidden rounded-2xl bg-bg-200 group"
-                        >
-                            <div className="relative h-48">
+                {drumkits.map((kit) => (
+                    <motion.div
+                        key={kit.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="overflow-hidden mb-12 rounded-3xl transition-shadow duration-300 bg-bg-200 hover:shadow-xl"
+                    >
+                        <div className="grid grid-cols-1 lg:grid-cols-2">
+                            <div className="relative h-[300px] lg:h-full min-h-[400px]">
                                 <img
                                     src={kit.coverUrl}
                                     alt={kit.title}
-                                    className="object-cover w-full h-full transition-transform duration-300"
+                                    className="object-cover absolute inset-0 w-full h-full"
                                 />
-                            </div>
-
-                            <div className="p-6">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h3 className="mb-2 text-xl font-bold text-text-100">{kit.title}</h3>
-                                        <p className="text-text-200">{kit.description}</p>
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-3 mb-6">
-                                    <div className="flex gap-2 items-center p-3 rounded-xl bg-bg-300/50">
-                                        <FileAudio className="w-5 h-5 text-primary-200" />
-                                        <div>
-                                            <div className="text-sm font-medium text-text-100">{kit.samples}</div>
-                                            <div className="text-xs text-text-200">Samples</div>
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-2 items-center p-3 rounded-xl bg-bg-300/50">
-                                        <Waveform className="w-5 h-5 text-primary-200" />
-                                        <div>
-                                            <div className="text-sm font-medium text-text-100">24bit</div>
-                                            <div className="text-xs text-text-200">Quality</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex justify-between items-center">
-                                    <div className="text-2xl font-bold text-text-100">
-                                        ${kit.price}
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            onClick={() => toast.success('Demo downloading...')}
-                                            className="p-2 rounded-full text-text-100 bg-bg-300"
-                                        >
-                                            <Download size={20} />
-                                        </motion.button>
-                                        <motion.button
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            onClick={() => toast.success('Added to cart!')}
-                                            className="px-6 py-2 text-sm font-medium text-white rounded-full bg-primary-200"
-                                        >
-                                            Add to Cart
-                                        </motion.button>
+                                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+                                <div className="flex absolute inset-0 flex-col justify-between p-8">
+                                    <div className="space-y-4">
+                                        <span className="inline-flex gap-2 items-center px-3 py-1 text-sm text-white rounded-full backdrop-blur-sm bg-white/10">
+                                            <Package size={14} />
+                                            {kit.category}
+                                        </span>
+                                        <h2 className="text-3xl font-bold text-white">{kit.title}</h2>
+                                        <p className="text-white/80">{kit.description}</p>
                                     </div>
                                 </div>
                             </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+
+                            <div className="p-8 space-y-8">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="p-4 rounded-2xl bg-bg-300/50">
+                                        <FileAudio className="mb-2 w-6 h-6 text-primary-200" />
+                                        <div className="text-2xl font-bold text-text-100">{kit.features.samples}</div>
+                                        <div className="text-sm text-text-200">Samples Totales</div>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-bg-300/50">
+                                        <Folder className="mb-2 w-6 h-6 text-primary-200" />
+                                        <div className="text-2xl font-bold text-text-100">{kit.features.formats.join(', ')}</div>
+                                        <div className="text-sm text-text-200">Formatos</div>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-bg-300/50">
+                                        <HardDrive className="mb-2 w-6 h-6 text-primary-200" />
+                                        <div className="text-2xl font-bold text-text-100">{kit.features.size}</div>
+                                        <div className="text-sm text-text-200">Tamaño Total</div>
+                                    </div>
+                                    <div className="p-4 rounded-2xl bg-bg-300/50">
+                                        <Music2 className="mb-2 w-6 h-6 text-primary-200" />
+                                        <div className="text-2xl font-bold text-text-100">{kit.features.bpm}</div>
+                                        <div className="text-sm text-text-200">Rango BPM</div>
+                                    </div>
+                                </div>
+
+                                <Link to="/packs" className="block">
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex gap-2 justify-center items-center px-8 py-4 w-full font-semibold text-white rounded-full transition-all bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
+                                    >
+                                        <span>Ver Todas las Librerías</span>
+                                        <ArrowRight size={20} />
+                                    </motion.button>
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
             </div>
         </section>
     );

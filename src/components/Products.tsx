@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Wand2, Music2, Play, Tag, Clock } from 'lucide-react';
+import { Wand2, Music2, Play, Tag, Clock, Download, Link2Off, Share, Share2, ArrowBigRight, ArrowUpRightFromSquare } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { Link } from "react-router-dom";
 
 const container = {
     hidden: { opacity: 0 },
@@ -52,9 +53,9 @@ const beats = [
 
 export const Products: React.FC = () => {
     return (
-        <section className="py-24 bg-bg-200">
+        <section className="py-12 sm:py-24 bg-bg-200">
             <div className="container px-4 mx-auto max-w-6xl">
-                <div className="flex flex-col gap-8 mb-16 md:flex-row md:items-end md:justify-between">
+                <div className="flex flex-col gap-6 sm:gap-8 mb-8 sm:mb-16 md:flex-row md:items-end md:justify-between">
                     <div className="max-w-2xl">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -69,11 +70,11 @@ export const Products: React.FC = () => {
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="mb-4 text-6xl font-bold tracking-tight md:text-8xl text-text-100"
+                            className="mb-4 text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-text-100"
                         >
-                            Innecesariamente
+                            Catálogo de
                             <br />
-                            <span className="text-primary-200">Buenos Beat(s)</span>
+                            <span className="text-primary-200">Beats</span>
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0 }}
@@ -97,8 +98,10 @@ export const Products: React.FC = () => {
                             whileTap={{ scale: 0.95 }}
                             className="flex gap-2 items-center px-8 py-4 font-semibold text-white rounded-full transition-colors bg-primary-200"
                         >
-                            <Music2 size={20} />
-                            <span>Ver Catálogo</span>
+                            <Link to="/beats" className="flex gap-2">
+                                <Music2 size={20} />
+                                <span>Ver Catálogo</span>
+                            </Link>
                         </motion.button>
                     </motion.div>
                 </div>
@@ -108,15 +111,15 @@ export const Products: React.FC = () => {
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="space-y-4"
+                    className="space-y-3 sm:space-y-4"
                 >
                     {beats.map((beat) => (
                         <motion.div
                             key={beat.id}
                             variants={item}
-                            className="flex gap-6 items-center p-4 rounded-xl bg-bg-100"
+                            className="flex flex-col gap-4 sm:gap-6 items-start p-3 sm:p-4 rounded-xl md:flex-row md:items-center bg-bg-100"
                         >
-                            <div className="overflow-hidden relative flex-shrink-0 w-20 h-20 rounded-lg">
+                            <div className="overflow-hidden relative flex-shrink-0 w-full h-20 rounded-lg md:w-20">
                                 <img
                                     src={beat.coverUrl}
                                     alt={beat.title}
@@ -135,35 +138,42 @@ export const Products: React.FC = () => {
                             </div>
 
                             <div className="flex-1 min-w-0">
-                                <div className="flex justify-between items-start mb-2">
+                                <div className="flex items-start mb-2">
                                     <div>
                                         <h3 className="text-lg font-semibold truncate text-text-100">{beat.title}</h3>
                                         <p className="text-sm text-text-200">{beat.producer}</p>
                                     </div>
-                                    <div className="text-lg font-bold text-text-100">
-                                        ${beat.price}
-                                    </div>
                                 </div>
                                 <div className="flex gap-4 items-center">
-                                    <span className="flex gap-1 items-center text-sm text-text-200">
+                                    <span className="flex gap-1 items-center px-3 py-1 text-sm rounded-full border text-text-200">
                                         <Tag size={14} />
                                         {beat.genre}
                                     </span>
-                                    <span className="flex gap-1 items-center text-sm text-text-200">
+                                    <span className="flex gap-1 items-center px-3 py-1 text-sm rounded-full border text-text-200">
                                         <Clock size={14} />
                                         {beat.bpm} BPM
                                     </span>
                                 </div>
                             </div>
+                                <div className="flex flex-row min-w-0 align-middle">
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => toast.success('Added to cart!')}
+                                        className="w-full sm:w-auto px-4 sm:px-6 py-2 text-sm font-medium text-white rounded-full sm:rounded-tl-full sm:rounded-bl-full border border-white/20"
+                                    >
+                                        <Download size={18} className="mx-auto sm:mx-0" />
+                                    </motion.button>
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="flex gap-2 px-6 py-2 text-sm font-medium text-white rounded-tr-full rounded-br-full border border-primary-200 bg-primary-200"
+                                    >
+                                        Escuchar preview 
+                                        <Play size={20}/>
+                                    </motion.button>
 
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => toast.success('Added to cart!')}
-                                className="px-6 py-2 text-sm font-medium text-white rounded-full bg-primary-200"
-                            >
-                                Add to Cart
-                            </motion.button>
+                                </div>
                         </motion.div>
                     ))}
                 </motion.div>

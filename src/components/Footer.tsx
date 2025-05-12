@@ -1,118 +1,172 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Twitter, Youtube, Music, Mail, MapPin } from 'lucide-react';
+import { Instagram, Twitter, Youtube, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const socialLinks = [
+  { icon: Instagram, href: 'https://www.instagram.com/leainthemix/?hl=es', label: 'Instagram' },
+  { icon: Twitter, href: 'https://x.com/LEAINTHEMIX?t=Uit1fcaASO7KLOHw7F19hw&s=09&fbclid=PAZXh0bgNhZW0CMTEAAafIrp2K50oy2Lq33m-G_FVeWcebG5JKB7b2GjYpsvAqv9yRFUREm3NizN9Opg_aem_KruvMSPge_EL8Uj5TfMnNA  ', label: 'Twitter' },
+  { icon: Youtube, href: 'https://www.youtube.com/@LEAINTHEMIX', label: 'Youtube' },
+];
+
+const navLinks = [
+  { name: 'Inicio', path: '/' },
+  { name: 'Beats', path: '/beats' },
+  { name: 'Librerias', path: '/librerias' },
+  { name: 'Contacto', path: '/contacto' },
+];
+
+const beatTypes = [
+  { name: 'Aleteo', path: '/beats?genre=trap-soul' },
+  { name: 'Remix Drop', path: '/beats?genre=latin-house' },
+  { name: 'Reguetón', path: '/beats?genre=reggaeton' },
+  { name: 'RKT', path: '/beats?genre=pop' },
+];
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-bg-100 pt-20 pb-10">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div>
-            <h3 className="text-2xl font-bold text-text-100 mb-6">Lea in the Mix</h3>
-            <p className="text-text-200 mb-6">
-              Creando sonidos innecesariamente buenos desde Buenos Aires para el mundo.
+    <footer className="relative pt-20 pb-10 overflow-hidden bg-bg-100">
+      <div className="container max-w-6xl px-4 mx-auto">
+        <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2 lg:grid-cols-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="mb-6 text-2xl font-bold text-text-100">Lea in the Mix</h3>
+            <p className="mb-6 text-text-200">
+              Creando sonidos innecesariamente buenos, desde Buenos Aires para el mundo.
             </p>
             <div className="flex gap-4">
-              <motion.a
-                href="#"
-                whileHover={{ y: -3 }}
-                className="p-2 rounded-full bg-bg-200 text-text-100"
-              >
-                <Instagram size={20} />
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -3 }}
-                className="p-2 rounded-full bg-bg-200 text-text-100"
-              >
-                <Twitter size={20} />
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -3 }}
-                className="p-2 rounded-full bg-bg-200 text-text-100"
-              >
-                <Youtube size={20} />
-              </motion.a>
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-2 transition-colors duration-300 rounded-full bg-bg-200 text-text-100 hover:bg-primary-200 hover:text-white"
+                  aria-label={label}
+                >
+                  <Icon size={20} />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="text-lg font-semibold text-text-100 mb-6">Navegación</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h4 className="mb-6 text-lg font-semibold text-text-100">Navegación</h4>
             <ul className="space-y-3">
-              {['Inicio', 'Beats', 'Estudio', 'Agenda', 'Contacto'].map((item) => (
-                <li key={item}>
-                  <motion.a
-                    href="#"
-                    whileHover={{ x: 3 }}
-                    className="text-text-200 hover:text-text-100 transition-colors"
-                  >
-                    {item}
-                  </motion.a>
+              {navLinks.map(({ name, path }) => (
+                <li key={name}>
+                  <Link to={path}>
+                    <motion.div
+                      whileHover={{ x: 1 }}
+                      className="flex items-center transition-colors group text-text-200 hover:text-primary-200"
+                    >
+                      <ArrowRight className="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-0" />
+                      <span>{name}</span>
+                    </motion.div>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="text-lg font-semibold text-text-100 mb-6">Beats</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h4 className="mb-6 text-lg font-semibold text-text-100">Beats</h4>
             <ul className="space-y-3">
-              {['Trap Soul', 'Latin House', 'Reggaeton', 'Pop', 'Kits'].map((item) => (
-                <li key={item}>
-                  <motion.a
-                    href="#"
-                    whileHover={{ x: 3 }}
-                    className="text-text-200 hover:text-text-100 transition-colors"
-                  >
-                    {item}
-                  </motion.a>
+              {beatTypes.map(({ name, path }) => (
+                <li key={name}>
+                  <Link to={path}>
+                    <motion.div
+                      whileHover={{ x: 3 }}
+                      className="flex items-center transition-colors group text-text-200 hover:text-primary-200"
+                    >
+                      <ArrowRight className="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-0" />
+                      <span>{name}</span>
+                    </motion.div>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="text-lg font-semibold text-text-100 mb-6">Contacto</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h4 className="mb-6 text-lg font-semibold text-text-100">Contacto</h4>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-text-200">
-                <Mail size={18} />
-                <span>contacto@leainthemix.com</span>
-              </li>
-              <li className="flex items-center gap-3 text-text-200">
-                <MapPin size={18} />
+              <motion.li 
+                whileHover={{ x: 1 }}
+                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+              >
+                <a href="mailto:leainthemix.c@hotmail.com">leainthemix.c@hotmail.com</a>
+              </motion.li>
+              <motion.li 
+                whileHover={{ x: 1 }}
+                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+              >
                 <span>Buenos Aires, Argentina</span>
-              </li>
-              <li className="flex items-center gap-3 text-text-200">
-                <Music size={18} />
-                <span>Estudio: +54 11 1234-5678</span>
-              </li>
+              </motion.li>
+              <motion.li 
+                whileHover={{ x: 1 }}
+                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+              >
+                <a href="tel:+54 11 5333-8653">Tel: +54 11 5333-8653</a>
+              </motion.li>
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-bg-300 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-text-200 text-sm">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="pt-8 border-t border-bg-300"
+        >
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-text-200">
               © {new Date().getFullYear()} Lea in the Mix. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
-              <motion.a
-                href="#"
-                whileHover={{ y: -2 }}
-                className="text-text-200 hover:text-text-100 text-sm"
-              >
-                Términos y Condiciones
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -2 }}
-                className="text-text-200 hover:text-text-100 text-sm"
-              >
-                Política de Privacidad
-              </motion.a>
+              <Link to="/Legal">
+                <motion.a
+                  href="/terminos"
+                  whileHover={{ y: -2 }}
+                  className="text-sm transition-colors text-text-200 hover:text-primary-200"
+                >
+                  Términos y Condiciones
+                </motion.a>
+              </Link>
+              <Link to="/Legal">
+                <motion.a
+                  href="/privacidad"
+                  whileHover={{ y: -2 }}
+                  className="text-sm transition-colors text-text-200 hover:text-primary-200"
+                >
+                  Política de Privacidad
+                </motion.a>
+              </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

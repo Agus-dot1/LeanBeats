@@ -3,29 +3,33 @@ import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Music, Package, MessageSquare, ShoppingCart, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { useCart } from '../context/CartContext';
 
 const navItems = [
   { path: '/', label: 'Inicio', icon: Home },
+  { path: '/librerias', label: 'Librerías', icon: Package },
   { path: '/beats', label: 'Beats', icon: Music },
-  { path: '/packs', label: 'Packs & Drumkits', icon: Package },
   { path: '/contacto', label: 'Contacto', icon: MessageSquare },
 ];
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { items, setIsOpen: setIsCartOpen } = useCart();
 
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed top-0 right-0 left-0 z-50 shadow-lg bg-bg-100 shadow-black/5 border-bg-200"
+                    initial={{ opacity: 0, y: -40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 1 }}
+        className="fixed top-0 right-0 left-0 z-50 bg-bg-100 border-bg-200"
       >
         <nav className="container px-4 py-4 mx-auto">
           <div className="flex justify-between items-center">
             <NavLink
               to="/"
-              className="text-2xl font-bold transition-colors duration-300 text-text-100 hover:text-primary-200"
+              className="text-base font-bold transition-colors duration-300 md:text-2xl text-text-100 hover:text-primary-200"
               aria-label="Home"
             >
               Lea in the Mix
@@ -53,13 +57,15 @@ export const Navigation: React.FC = () => {
 
             <div className="flex items-center space-x-4">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex gap-2 items-center px-4 py-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200"
+                onClick={() => setIsCartOpen(true)}
+                className="flex relative gap-2 items-center px-4 py-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200"
                 aria-label="Shopping Cart"
               >
                 <ShoppingCart size={20} aria-hidden="true" />
                 <span className="hidden sm:inline">Carrito</span>
+                <span className="flex absolute -top-1 -right-1 justify-center items-center w-5 h-5 text-xs font-bold text-white rounded-full bg-primary-200">
+                  {items.length}
+                </span>
               </motion.button>
 
               <ThemeToggle />
@@ -83,10 +89,10 @@ export const Navigation: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.1 }}
             className="fixed inset-x-0 top-[73px] z-40 md:hidden"
           >
-            <div className="p-4 mx-4 rounded-2xl border shadow-lg backdrop-blur-lg bg-bg-100/80 border-bg-200">
+            <div className="p-4 mx-4 rounded-2xl border shadow-lg bg-bg-100 border-bg-200">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <NavLink
                   key={path}
@@ -112,3 +118,4 @@ export const Navigation: React.FC = () => {
     </>
   );
 };
+

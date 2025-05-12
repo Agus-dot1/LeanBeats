@@ -1,204 +1,279 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Shield, Lock } from 'lucide-react';
+import { Shield, Lock, Cookie, ChevronRight, ChevronUp, FileText, Scale } from 'lucide-react';
+
+type LegalTab = 'terms' | 'privacy' | 'cookies';
+
+interface Section {
+  id: string;
+  title: string;
+  content: React.ReactNode;
+}
 
 const LegalPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'terms' | 'privacy'>('terms');
+  const [activeTab, setActiveTab] = useState<LegalTab>('terms');
+  const [activeSection, setActiveSection] = useState<string>('');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const termsSections: Section[] = [
+    {
+      id: 'introduccion',
+      title: 'Introducción',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Bienvenido a Lea in the Mix, su plataforma de producción musical.</li>
+          <li>Al usar este sitio, acepta cumplir con estos términos y condiciones.</li>
+          <li>Si no está de acuerdo, por favor absténgase de usar nuestros servicios.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'copyright',
+      title: 'Derechos de Autor',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Todo el contenido musical, incluyendo beats y samples, está protegido por derechos de autor © {new Date().getFullYear()} Lea in the Mix.</li>
+          <li>La compra de beats otorga una licencia específica de uso, no la propiedad de los derechos de autor.</li>
+          <li>No está permitida la redistribución, reventa o modificación no autorizada de nuestros productos.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'licencia',
+      title: 'Licencia de Uso',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Al adquirir un pack de sonidos, se otorga una licencia no exclusiva, intransferible y revocable para usar el contenido en proyectos personales o comerciales.</li>
+          <li>No se permite revender, sublicenciar o distribuir los archivos tal como fueron adquiridos, ni modificados con fines de reventa.</li>
+          <li>El cliente conserva la titularidad de sus creaciones que usen estos sonidos, pero no de los sonidos originales.</li>
+          <li>La licencia no implica cesión de derechos de autor.</li>
+        </ul>
+      )
+    }
+  ];
+
+  const privacySections: Section[] = [
+    {
+      id: 'datos-personales',
+      title: 'Uso de Datos Personales',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>No compartimos ni vendemos datos personales a terceros.</li>
+          <li>Usamos los datos solo para procesar pedidos, brindar soporte y mejorar el sitio.</li>
+          <li>No recolectamos intencionalmente datos de menores de 13 años. Si se detecta tal caso, se eliminarán inmediatamente.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'cookies',
+      title: 'Política de Cookies',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Cookies esenciales: Necesarias para el funcionamiento del sitio.</li>
+          <li>Cookies analíticas: Análisis de uso y mejora del servicio.</li>
+          <li>Cookies de preferencias: Almacenan sus preferencias de usuario.</li>
+          <li>Cookies de marketing: Personalización de anuncios (opcional).</li>
+        </ul>
+      )
+    }
+  ];
+
+  // Cookie Consent Component
+  const CookieConsent = () => {
+    const [showConsent, setShowConsent] = useState(true);
+
+    const acceptCookies = () => {
+      localStorage.setItem('cookieConsent', 'accepted');
+      setShowConsent(false);
+    };
+
+    const declineCookies = () => {
+      localStorage.setItem('cookieConsent', 'declined');
+      setShowConsent(false);
+    };
+
+    useEffect(() => {
+      const consent = localStorage.getItem('cookieConsent');
+      if (consent) {
+        setShowConsent(false);
+      }
+    }, []);
+
+    if (!showConsent) return null;
+
+    return (
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 100, opacity: 0 }}
+        className="fixed right-0 bottom-0 left-0 z-50 p-4 border-t bg-bg-200 border-bg-300"
+      >
+        <div className="container mx-auto max-w-4xl">
+          <div className="flex flex-col gap-4 justify-between items-center sm:flex-row">
+            <div className="text-sm text-text-200">
+              <p>Utilizamos cookies para mejorar su experiencia. Al continuar navegando, acepta nuestra política de cookies.</p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={declineCookies}
+                className="px-4 py-2 text-sm font-medium rounded-lg bg-bg-300 text-text-200 hover:bg-bg-400"
+              >
+                Rechazar
+              </button>
+              <button
+                onClick={acceptCookies}
+                className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-200 hover:bg-primary-300"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>  
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
-    <div className="pt-28 pb-20 min-h-screen bg-bg-100">
+    <div className="relative pt-28 pb-20 min-h-screen bg-bg-100">
       <Helmet>
         <title>Legal | Lea in the Mix</title>
-        <meta name="description" content="Términos y condiciones y política de privacidad de Lea in the Mix" />
+        <meta name="description" content="Términos y condiciones, política de privacidad y política de cookies de Lea in the Mix" />
       </Helmet>
 
       <div className="container px-4 mx-auto max-w-4xl">
-        <div className="mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
-          >
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-12"
+        >
+          <div className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200">
             <Shield size={16} className="animate-pulse" />
             <span>Legal</span>
-          </motion.div>
-          
-          <div className="flex gap-4 mb-8">
-            <button
-              onClick={() => setActiveTab('terms')}
-              className={`px-6 py-3 rounded-full transition-colors ${
-                activeTab === 'terms'
-                  ? 'bg-primary-200 text-white'
-                  : 'bg-bg-200 text-text-200 hover:bg-bg-300'
-              }`}
-            >
-              Términos y Condiciones
-            </button>
-            <button
-              onClick={() => setActiveTab('privacy')}
-              className={`px-6 py-3 rounded-full transition-colors ${
-                activeTab === 'privacy'
-                  ? 'bg-primary-200 text-white'
-                  : 'bg-bg-200 text-text-200 hover:bg-bg-300'
-              }`}
-            >
-              Política de Privacidad
-            </button>
           </div>
-        </div>
 
+          <h1 className="mb-6 text-4xl font-bold text-text-100">
+            Información Legal
+          </h1>
+          
+          <div className="flex flex-wrap gap-4 mb-8">
+            {[
+              { id: 'terms', icon: Shield, text: 'Términos y Condiciones' },
+              { id: 'privacy', icon: Lock, text: 'Política de Privacidad' },
+            ].map(({ id, icon: Icon, text }) => (
+              <button
+                key={id}
+                onClick={() => setActiveTab(id as LegalTab)}
+                className={`px-6 py-3 rounded-full transition-colors ${
+                  activeTab === id
+                    ? 'bg-primary-200 text-white'
+                    : 'bg-bg-200 text-text-200 hover:bg-bg-300'
+                }`}
+              >
+                <Icon className="inline-block mr-2 w-4 h-4" />
+                {text}
+              </button>
+            ))}
+          </div>
+
+          <div className="p-4 mb-8 text-sm rounded-xl bg-bg-200">
+            <p className="text-text-200">
+              Última actualización: {new Date().toLocaleDateString()}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Main Content */}
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="prose prose-invert max-w-none"
+          className="grid grid-cols-1 gap-8 lg:grid-cols-4"
         >
-          {activeTab === 'terms' ? (
-            <div className="space-y-8">
-              <section>
-                <h2>1. Introducción</h2>
-                <p>
-                  Bienvenido a Lea in the Mix ("nosotros", "nuestro", "el sitio"). Al acceder y utilizar este sitio web,
-                  usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos,
-                  por favor no utilice este sitio.
-                </p>
-              </section>
-
-              <section>
-                <h2>2. Uso del Sitio</h2>
-                <h3>2.1 Licencia de Uso</h3>
-                <p>
-                  Se le otorga una licencia limitada, no exclusiva y no transferible para acceder y utilizar este sitio
-                  de acuerdo con estos términos.
-                </p>
-
-                <h3>2.2 Restricciones de Uso</h3>
-                <p>Usted se compromete a no:</p>
-                <ul>
-                  <li>Utilizar el sitio de manera ilegal o fraudulenta</li>
-                  <li>Copiar, modificar o distribuir el contenido sin autorización</li>
-                  <li>Intentar acceder a áreas restringidas del sitio</li>
-                  <li>Utilizar bots o métodos automatizados para acceder al sitio</li>
-                  <li>Realizar actividades que puedan dañar o sobrecargar nuestros sistemas</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>3. Propiedad Intelectual</h2>
-                <p>
-                  Todo el contenido presente en este sitio (incluyendo pero no limitado a beats, samples, drumkits,
-                  logotipos, textos e imágenes) está protegido por derechos de autor y es propiedad de Lea in the Mix.
-                </p>
-              </section>
-
-              <section>
-                <h2>4. Condiciones de Compra</h2>
-                <p>
-                  Los precios se muestran en dólares estadounidenses. El pago se procesa a través de plataformas seguras.
-                  La entrega es inmediata mediante descarga digital. No se realizan reembolsos en productos digitales una
-                  vez descargados.
-                </p>
-              </section>
-
-              <section>
-                <h2>5. Limitación de Responsabilidad</h2>
-                <p>No nos hacemos responsables por:</p>
-                <ul>
-                  <li>Interrupciones temporales del servicio</li>
-                  <li>Pérdidas indirectas derivadas del uso del sitio</li>
-                  <li>Contenido generado por usuarios</li>
-                  <li>Problemas técnicos fuera de nuestro control</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>6. Modificaciones</h2>
-                <p>
-                  Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en
-                  vigor inmediatamente después de su publicación en el sitio.
-                </p>
-              </section>
+          {/* Sidebar Navigation */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-28 p-4 rounded-xl bg-bg-200">
+              <h3 className="mb-4 text-lg font-semibold text-text-100">Contenido</h3>
+              <nav className="space-y-2">
+                {(activeTab === 'terms' ? termsSections : privacySections).map((section, index) => (
+                  <button
+                    key={section.id}
+                    onClick={() => scrollToSection(section.id)}
+                    className={`flex gap-2 items-center p-2 w-full text-sm text-left rounded transition-colors ${
+                      activeSection === section.id
+                        ? 'bg-primary-200/10 text-primary-200'
+                        : 'text-text-200 hover:text-text-100 hover:bg-bg-300'
+                    }`}
+                  >
+                    <ChevronRight 
+                      size={16} 
+                      className={activeSection === section.id ? 'text-primary-200' : ''} 
+                    />
+                    <span>{index + 1}. {section.title}</span>
+                  </button>
+                ))}
+              </nav>
             </div>
-          ) : (
-            <div className="space-y-8">
-              <section>
-                <h2>1. Recopilación de Datos</h2>
-                <p>Recopilamos:</p>
-                <ul>
-                  <li>Información de contacto (nombre, email)</li>
-                  <li>Datos de facturación</li>
-                  <li>Historial de compras</li>
-                  <li>Información técnica (IP, dispositivo)</li>
-                  <li>Preferencias musicales y de uso</li>
-                </ul>
-              </section>
+          </div>
 
-              <section>
-                <h2>2. Uso de la Información</h2>
-                <p>Utilizamos sus datos para:</p>
-                <ul>
-                  <li>Procesar pedidos y pagos</li>
-                  <li>Enviar actualizaciones de productos</li>
-                  <li>Mejorar nuestros servicios</li>
-                  <li>Personalizar su experiencia</li>
-                  <li>Cumplir con obligaciones legales</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>3. Compartición de Datos</h2>
-                <p>Compartimos datos con:</p>
-                <ul>
-                  <li>Procesadores de pago</li>
-                  <li>Servicios de análisis web</li>
-                  <li>Proveedores de servicios técnicos</li>
-                  <li>Autoridades (cuando sea legalmente requerido)</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>4. Protección de Datos</h2>
-                <p>Implementamos medidas de seguridad como:</p>
-                <ul>
-                  <li>Encriptación de datos sensibles</li>
-                  <li>Acceso restringido a información personal</li>
-                  <li>Monitoreo regular de seguridad</li>
-                  <li>Copias de seguridad periódicas</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>5. Derechos del Usuario</h2>
-                <p>Usted tiene derecho a:</p>
-                <ul>
-                  <li>Acceder a sus datos personales</li>
-                  <li>Rectificar información incorrecta</li>
-                  <li>Solicitar la eliminación de sus datos</li>
-                  <li>Oponerse al procesamiento</li>
-                  <li>Portar sus datos a otro servicio</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2>6. Contacto</h2>
-                <p>
-                  Para ejercer sus derechos o realizar consultas, contáctenos en privacidad@leainthemix.com o utilice
-                  nuestro formulario de contacto.
-                </p>
-              </section>
-
-              <section>
-                <h2>7. Actualizaciones</h2>
-                <p>
-                  Esta política puede actualizarse periódicamente. La fecha de última actualización se mostrará al inicio
-                  del documento.
-                </p>
-              </section>
+          {/* Content Area */}
+          <div className="lg:col-span-3">
+            <div className="space-y-12">
+              {(activeTab === 'terms' ? termsSections : privacySections).map((section) => (
+                <motion.section
+                  key={section.id}
+                  id={section.id}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="scroll-mt-32"
+                >
+                  <h2 className="mb-6 text-2xl font-bold text-text-100">{section.title}</h2>
+                  {section.content}
+                </motion.section>
+              ))}
             </div>
-          )}
+          </div>
         </motion.div>
       </div>
+
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed right-8 bottom-8 p-3 text-white rounded-full shadow-lg transition-colors bg-primary-200 hover:bg-primary-300"
+          >
+            <ChevronUp size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+      <CookieConsent />
     </div>
   );
 };

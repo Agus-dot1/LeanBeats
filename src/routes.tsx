@@ -2,8 +2,11 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigation } from './components/Navigation';
-import { ProtectedRoute } from './admin/components/ProtectedRoute';
-import { AuthProvider } from './admin/context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { ToastProvider } from './context/ToastContext';
+import Player from './components/MediaPlayer';
+import { CartDrawer } from './components/CartDrawer';
+import { CookieConsent } from './components/CookieConsent';
 
 const queryClient = new QueryClient();
 
@@ -13,13 +16,9 @@ const BeatsPage = React.lazy(() => import('./pages/BeatsPage'));
 const PacksPage = React.lazy(() => import('./pages/PacksPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const SongsPage = React.lazy(() => import('./pages/SongsPage'));
+const LegalPage = React.lazy(() => import('./pages/LegalPage'));
+const NotFound = React.lazy(() => import('./pages/NotFound')); // New NotFound componen
 
-// Admin pages
-const LoginPage = React.lazy(() => import('./admin/pages/auth/LoginPage'));
-const AdminLayout = React.lazy(() => import('./admin/components/layout/Layout'));
-const Productos = React.lazy(() => import('./admin/pages/products/ProductsPage'));
-const Ayuda = React.lazy(() => import('./admin/pages/help/HelpPage'));
-const Configuracion = React.lazy(() => import('./admin/pages/settings/SettingsPage'));
 
 const LoadingFallback = () => (
   <div className="flex justify-center items-center min-h-screen bg-bg-100">
@@ -33,6 +32,8 @@ const Layout = () => {
     <>
       <Navigation />
       <Outlet />
+      <CartDrawer />
+      <CookieConsent />
     </>
   );
 };
@@ -40,36 +41,28 @@ const Layout = () => {
 const RoutesApp = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Router>
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              {/* Main app routes */}
-              <Route element={<Layout />}>
-                <Route path="/" element={<App />} />
-                <Route path="/beats" element={<BeatsPage />} />
-                <Route path="/packs" element={<PacksPage />} />
-                <Route path="/contacto" element={<ContactPage />} />
-                <Route path="/songs" element={<SongsPage />} />
-              </Route>
-
-              {/* Admin routes */}
-              <Route path="/admin">
-                <Route path="login" element={<LoginPage />} />
-                <Route element={
-                  <ProtectedRoute>
-                    <AdminLayout />
-                  </ProtectedRoute>
-                }>
-                  <Route index element={<Productos />} />
-                  <Route path="ayuda" element={<Ayuda />} />
-                  <Route path="configuracion" element={<Configuracion />} />
-                </Route>
-              </Route>
-            </Routes>
-          </Suspense>
-        </Router>
-      </AuthProvider>
+        <CartProvider>
+          <ToastProvider>
+            <Router>
+              <Suspense fallback={<LoadingFallback />}>
+                <Player />
+                <Routes>
+                  {/* Main app routes */}
+                  <Route element={<Layout />}>
+                    <Route path="/" element={<App />} />
+                    <Route path="/beats" element={<BeatsPage />} />
+                    <Route path="/librerias" element={<PacksPage />} />
+                    <Route path="/contacto" element={<ContactPage />} />
+                    <Route path="/songs" element={<SongsPage />} />
+                    <Route path="/legal" element={<LegalPage />} />
+                    {/* Catch-all route for 404 */}
+                    <Route path="*" element={<NotFound />} />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </Router>
+          </ToastProvider>
+        </CartProvider>
     </QueryClientProvider>
   );
 };

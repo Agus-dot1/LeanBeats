@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'poppins', sans-serif;
+  }
+  h1, h2 {
+    font-family: 'inter', sans-serif;
   }
 
   :root {
@@ -71,10 +76,10 @@
   }
 
   .bento-card {
-    @apply bg-bg-200 rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-xl;
+    @apply p-6 rounded-2xl shadow-lg transition-all duration-300 bg-bg-200 hover:shadow-xl;
   }
 }
 
 body {
-  @apply bg-bg-100 text-text-100 transition-colors duration-300;
+  @apply transition-colors duration-300 bg-bg-100 text-text-100;
 }

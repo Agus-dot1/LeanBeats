@@ -2,9 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Set up music producer portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Lean Beats</title>
+    
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Lea in the Mix",
+      "url": "https://leanbeats.com",
+      "image": "https://leanbeats.com/images/og-image.jpg",
+      "description": "Beats y packs de música profesionales por Lean In The Mix. Encuentra beats únicos para reggaeton, trap y música urbana. Productor musical argentino.",
+      "genre": ["Trap", "Hip Hop", "RKT", "Pop", "Reggaeton", "Electronic"],
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Buenos Aires",
+          "addressCountry": "AR"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "ARS",
+        "priceRange": "$$"
+      },
+      "sameAs": [
+        "https://instagram.com/leainthemix",
+        "https://twitter.com/leainthemix",
+        "https://youtube.com/leainthemix"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

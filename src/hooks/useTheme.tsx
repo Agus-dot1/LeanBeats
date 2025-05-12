@@ -8,15 +8,17 @@ interface ThemeStore {
 }
 
 export const useTheme = create<ThemeStore>((set) => {
-  // Set initial theme to dark and update HTML attribute
-  document.documentElement.setAttribute('data-theme', 'dark');
+  // Get initial theme from localStorage or default to dark
+  const savedTheme = localStorage.getItem('theme') as Theme || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
   
   return {
-    theme: 'dark',
+    theme: savedTheme,
     toggleTheme: () => 
       set((state) => {
         const newTheme = state.theme === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
         return { theme: newTheme };
       }),
   };

@@ -8,10 +8,8 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
       onClick={toggleTheme}
-      className="p-2 border rounded-full text-text-100 border-text-text-100/20 backdrop-blur-sm"
+      className="p-2 rounded-full border backdrop-blur-sm transition-all duration-100 text-text-100 border-text-text-100/20 hover:text-bg-100 hover:bg-text-100 hover:shadow-lg hover:shadow-text-text-100/20"
     >
       {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
     </motion.button>

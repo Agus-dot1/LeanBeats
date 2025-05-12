@@ -1,215 +1,55 @@
-import React, { useState, useEffect, useMemo, BaseSyntheticEvent } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Music, Volume2 } from 'lucide-react';
-import { useInView } from 'react-intersection-observer';
-import { BeatCard } from '../components/BeatCard';
-import { BeatsFilter } from '../components/BeatsFilter';
-import { Beat } from '../types/beat';
-import { Toaster } from 'react-hot-toast';
+import { Music, Timer } from 'lucide-react';
 
 const BeatsPage: React.FC = () => {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set(['All']));
-  const [sortBy, setSortBy] = useState('recent');
-  const [volume, setVolume] = useState(0.8);
-  const { ref: loadMoreRef, inView } = useInView();
-
-  const beats = useMemo(() => [
-    {
-      id: '1',
-      title: 'Noche de Verano',
-      producer: 'Lea in the Mix',
-      genre: 'Trap',
-      bpm: 140,
-      key: 'Am',
-      duration: '3:24',
-      price: 100,
-      coverUrl: 'https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg',
-      audioUrl: 'https://res.cloudinary.com/do17gdc0b/video/upload/v1745683911/beat-reggaeton-013_asvPv5N1_zw6dqc.mp3',
-      mood: ['Dark', 'Atmospheric'],
-      tags: ['Trap', 'Dark', '140bpm'],
-      releaseDate: '2024-03-10',
-      createdAt: '2024-03-10',
-      plays: 1200,
-      ratings: {
-        average: 4.8,
-        count: 156
-      },
-      featured: true
-    },
-    {
-      id: '2',
-      title: 'Summer Vibes',
-      producer: 'DJ Sunny',
-      genre: 'Pop',
-      bpm: 120,
-      key: 'C',
-      duration: '3:45',
-      price: 80,
-      coverUrl: 'https://images.pexels.com/photos/1234567/pexels-photo-1234567.jpeg',
-      audioUrl: 'https://res.cloudinary.com/do17gdc0b/video/upload/v1745683911/beat-reggaeton-013_asvPv5N1_zw6dqc.mp3',
-      mood: ['Happy', 'Energetic'],
-      tags: ['Pop', 'Summer', '120bpm'],
-      releaseDate: '2024-05-15',
-      createdAt: '2024-05-15',
-      plays: 800,
-      ratings: {
-        average: 4.5,
-        count: 120
-      },
-      featured: false
-    },
-    // Add more beats here following the same structure
-  ], []);
-
-  useEffect(() => {
-    if (inView && beats.length > 0) {
-      // Load more beats logic here
-    }
-  }, [inView, beats.length]);
-
-  const handleGenreChange = (genre: string) => {
-    setSelectedGenres(prev => {
-      const next = new Set(prev);
-      if (genre === 'All') {
-        return new Set(['All']);
-      }
-      next.delete('All');
-      if (next.has(genre)) {
-        next.delete(genre);
-        if (next.size === 0) next.add('All');
-      } else {
-        next.add(genre);
-      }
-      return next;
-    });
-  };
-
-  const filteredBeats = useMemo(() => {
-    return beats.filter(beat => {
-      const matchesSearch = 
-        beat.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        beat.producer.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesGenre = selectedGenres.has('All') || selectedGenres.has(beat.genre);
-      return matchesSearch && matchesGenre;
-    }).sort((a, b) => {
-      switch (sortBy) {
-        case 'price-low':
-          return a.price - b.price;
-        case 'price-high':
-          return b.price - a.price;
-        case 'popular':
-          return b.plays - a.plays;
-        case 'recent':
-        default:
-          return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-      }
-    });
-  }, [beats, searchQuery, selectedGenres, sortBy]);
-
-  const featuredBeats = useMemo(() => 
-    filteredBeats.filter(beat => beat.featured),
-    [filteredBeats]
-  );
-
-  const regularBeats = useMemo(() => 
-    filteredBeats.filter(beat => !beat.featured),
-    [filteredBeats]
-  );
-
-  const togglePlay = (beatId: string) => {
-    setCurrentlyPlaying(current => current === beatId ? null : beatId);
-  };
-
   return (
-    <div className="pt-28 pb-20 min-h-screen bg-bg-100">
+    <div className="relative pt-24 pb-20 min-h-screen bg-bg-100">
       <Helmet>
-        <title>Catálogo de beats | Lea in the Mix</title>
-        <meta name="description" content="Explore our collection of professional beats. Preview and purchase high-quality instrumentals for your next project." />
+        <title>Beats | Lea in the Mix</title>
+        <meta name="description" content="Nuestro catálogo de beats estará disponible próximamente. Mantente atento para instrumentales de alta calidad para tu próximo proyecto." />
       </Helmet>
 
-      <Toaster position="bottom-center" />
-
-      <div className="container px-4 mx-auto max-w-6xl">
-        <div className="mb-12">
+      <div className="container px-4 mx-auto max-w-7xl">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <Music size={16} className="animate-pulse" />
-            <span>Catálogo</span>
+            <span>Próximamente</span>
           </motion.div>
+          
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-4 text-4xl font-bold md:text-6xl text-text-100"
+            className="mb-6 text-4xl font-bold md:text-6xl text-text-100"
           >
-            Encontrá tu próximo <span className="text-primary-200">Hit</span>
+            Catálogo de Beats <span className="text-primary-200">Próximamente</span>
           </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-8 max-w-2xl text-lg text-text-200"
+          >
+            Estamos trabajando para traerte los mejores beats para tu próximo éxito. ¡Mantenete atento!
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="flex gap-2 items-center px-6 py-3 rounded-full bg-bg-200"
+          >
+            <Timer size={20} className="animate-pulse text-primary-200" />
+            <span className="text-text-200">Próximamente</span>
+          </motion.div>
         </div>
-
-        <BeatsFilter
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          selectedGenres={selectedGenres}
-          onGenreChange={handleGenreChange}
-          sortBy={sortBy}
-          onSortChange={setSortBy}
-        />
-
-        {/* Volume Control */}
-        <div className="fixed bottom-4 left-20 z-50">
-          <div className="flex gap-2 items-center p-2 rounded-full border shadow-lg bg-bg-100 border-bg-200">
-            <Volume2 size={20} className="text-text-100" />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={volume}
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="w-44 h-10 rounded-full bg-primary-200"
-            />
-          </div>
-        </div>
-
-    {/* Featured Beats */}
-    {featuredBeats.length > 0 && (
-      <div className="mb-12">
-        <h2 className="mb-6 text-2xl font-bold text-text-100">Featured Beats</h2>
-        <div className="space-y-4">
-          {featuredBeats.map(beat => (
-            <BeatCard
-              key={beat.id}
-              beat={beat}
-              isPlaying={currentlyPlaying === beat.id}
-              onPlay={() => togglePlay(beat.id)}
-              globalVolume={volume}
-            />
-          ))}
-        </div>
-      </div>
-    )}
-
-    {/* Regular Beats */}
-    <div className="space-y-4">
-      {regularBeats.map(beat => (
-        <BeatCard
-          key={beat.id}
-          beat={beat}
-          isPlaying={currentlyPlaying === beat.id}
-          onPlay={() => togglePlay(beat.id)}
-          globalVolume={volume}
-        />
-      ))}
-    </div>
-
-        {/* Load More Trigger */}
-        <div ref={loadMoreRef} className="h-20" />
       </div>
     </div>
   );
