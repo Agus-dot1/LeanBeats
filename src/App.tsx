@@ -162,6 +162,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Bio />
       <Footer />
     </div>
   );
