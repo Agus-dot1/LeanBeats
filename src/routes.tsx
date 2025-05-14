@@ -52,7 +52,6 @@ const RoutesApp = () => {
                     <Route path="/beats" element={<BeatsPage />} />
                     <Route path="/librerias" element={<PacksPage />} />
                     <Route path="/contacto" element={<ContactPage />} />
-                    <Route path="/songs" element={<SongsPage />} />
                     <Route path="/legal" element={<LegalPage />} />
                     {/* Catch-all route for 404 */}
                     <Route path="*" element={<NotFound />} />
