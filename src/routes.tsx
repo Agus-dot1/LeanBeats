@@ -15,7 +15,6 @@ const App = React.lazy(() => import('./App'));
 const BeatsPage = React.lazy(() => import('./pages/BeatsPage'));
 const PacksPage = React.lazy(() => import('./pages/PacksPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
-const SongsPage = React.lazy(() => import('./pages/SongsPage'));
 const LegalPage = React.lazy(() => import('./pages/LegalPage'));
 const NotFound = React.lazy(() => import('./pages/NotFound')); // New NotFound componen
 
