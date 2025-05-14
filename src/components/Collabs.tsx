@@ -114,24 +114,6 @@ export const Collabs: React.FC = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <Link to="/songs">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex gap-2 items-center px-8 py-4 font-semibold text-white rounded-full transition-all bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
-            >
-              <Music2 size={20} />
-              Ver Todas las Colaboraciones
-            </motion.button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
