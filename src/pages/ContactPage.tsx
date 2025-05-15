@@ -19,18 +19,18 @@ const ContactPage: React.FC = () => {
     e.preventDefault();
 
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
+      name: formData.name,
+      email: formData.email,
       subject: formData.subject,
       message: formData.message
     };
   
     try {
       const result = await EmailJs.send(
-        'TU_SERVICE_ID',
-        'TU_TEMPLATE_ID',
+        'service_59v2mzb',
+        'template_fwetx9s',
         templateParams,
-        'TU_PUBLIC_KEY'
+        'cTt3_QbBja6cW0sk3'
       );
   
       console.log('SUCCESS:', result.text);
@@ -97,7 +97,7 @@ const ContactPage: React.FC = () => {
               <div className="p-6 rounded-2xl bg-bg-200">
                 <Phone className="w-6 h-6 mb-4 text-primary-200" />
                 <h3 className="mb-2 text-lg font-semibold text-text-100">Teléfono</h3>
-                <p className="text-sm text-text-200">+54 11 5333-8653</p>
+                <p className="text-sm text-text-200">+54 11 7060-7158</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
                 <Mail className="w-6 h-6 mb-4 text-primary-200" />

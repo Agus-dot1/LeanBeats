@@ -128,7 +128,7 @@ export const Footer: React.FC = () => {
                 whileHover={{ x: 1 }}
                 className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
               >
-                <a href="tel:+54 11 5333-8653">Tel: +54 11 5333-8653</a>
+                <a href="tel:+54 11 7060-7158">Tel: +54 11 7060-7158</a>
               </motion.li>
             </ul>
           </motion.div>

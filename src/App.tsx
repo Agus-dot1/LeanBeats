@@ -22,12 +22,12 @@ const item = {
 function App() {
 
   return (
-    <div className="min-h-screen mt-14 md:mt-0 bg-bg-100">
+    <div className="mt-14 min-h-screen md:mt-0 bg-bg-100">
       <SEO
         title="Inicio"
         description="Descubre la mejor música para tu proyecto."
       />
-      <div className="relative min-h-screen overflow-hidden bg-black">
+      <div className="overflow-hidden relative min-h-screen bg-black">
         <div className="absolute inset-0 z-0 bg-bg-100">
           <motion.div
             initial={{ scale: 1.3, opacity: 0 }}
@@ -70,7 +70,7 @@ function App() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-8 py-4 font-semibold text-white transition-all duration-300 rounded-full bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
+                    className="flex gap-2 items-center px-8 py-4 font-semibold text-white rounded-full transition-all duration-300 bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
                   >
                     <Play size={20} className="animate-pulse" />
                     <span>Escuchar Beats</span>
@@ -81,7 +81,7 @@ function App() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-2 px-8 py-4 font-semibold text-white transition-all duration-300 border rounded-full backdrop-blur-sm border-white/20 hover:bg-white/10 hover:shadow-lg hover:shadow-white/5"
+                    className="flex gap-2 items-center px-8 py-4 font-semibold text-white rounded-full border backdrop-blur-sm transition-all duration-300 border-white/20 hover:bg-white/10 hover:shadow-lg hover:shadow-white/5"
                   >
                     <Music size={20} />
                     <span>Explorar Librerías</span>
@@ -99,9 +99,9 @@ function App() {
             >
               <motion.div variants={container} className="grid grid-cols-2 gap-2 select-none sm:gap-3">
                 <motion.div
-                  className="p-4 space-y-3 transition-all duration-300 rounded-3xl backdrop-blur-md sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
+                  className="p-4 space-y-3 rounded-3xl backdrop-blur-md transition-all duration-300 sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
+                  <div className="flex justify-center items-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
                     <Waveform className="w-4 h-4 text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-white transition-colors sm:text-xl group-hover:text-primary-200">Producción Pro</h3>
@@ -109,9 +109,9 @@ function App() {
                 </motion.div>
 
                 <motion.div
-                  className="p-4 space-y-3 transition-all duration-300 rounded-3xl backdrop-blur-md sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
+                  className="p-4 space-y-3 rounded-3xl backdrop-blur-md transition-all duration-300 sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
+                  <div className="flex justify-center items-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
                     <Volume2 className="w-4 h-4 text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-white transition-colors sm:text-xl group-hover:text-primary-200">Mezcla & Master</h3>
@@ -119,9 +119,9 @@ function App() {
                 </motion.div>
 
                 <motion.div
-                  className="p-4 space-y-3 transition-all duration-300 rounded-3xl backdrop-blur-md sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
+                  className="p-4 space-y-3 rounded-3xl backdrop-blur-md transition-all duration-300 sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
+                  <div className="flex justify-center items-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
                     <Mic2 className="w-4 h-4 text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-white transition-colors sm:text-xl group-hover:text-primary-200">Grabación Pro</h3>
@@ -129,9 +129,9 @@ function App() {
                 </motion.div>
 
                 <motion.div
-                  className="p-4 space-y-3 transition-all duration-300 rounded-3xl backdrop-blur-md sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
+                  className="p-4 space-y-3 rounded-3xl backdrop-blur-md transition-all duration-300 sm:p-6 sm:space-y-4 group bg-white/10 hover:bg-white/15 hover:shadow-xl hover:shadow-white/5"
                 >
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
+                  <div className="flex justify-center items-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
                     <Download className="w-4 h-4 text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-lg font-semibold text-white transition-colors sm:text-xl group-hover:text-primary-200">Packs & Samples</h3>
@@ -139,9 +139,9 @@ function App() {
                 </motion.div>
               </motion.div>
 
-              <motion.div variants={item} transition={{ duration: .8 }} className="p-4 transition-colors select-none rounded-3xl backdrop-blur-md sm:p-6 bg-white/10 hover:bg-white/15">
-                <div className="flex items-center gap-3 mb-3 sm:gap-4 sm:mb-4">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
+              <motion.div variants={item} transition={{ duration: .8 }} className="p-4 rounded-3xl backdrop-blur-md transition-colors select-none sm:p-6 bg-white/10 hover:bg-white/15">
+                <div className="flex gap-3 items-center mb-3 sm:gap-4 sm:mb-4">
+                  <div className="flex justify-center items-center w-8 h-8 rounded-full sm:w-12 sm:h-12 bg-primary-200">
                     <Music className="w-4 h-4 text-white sm:w-6 sm:h-6" />
                   </div>
                   <div>
