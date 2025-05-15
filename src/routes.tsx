@@ -15,7 +15,6 @@ const App = React.lazy(() => import('./App'));
 const BeatsPage = React.lazy(() => import('./pages/BeatsPage'));
 const PacksPage = React.lazy(() => import('./pages/PacksPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
-const SongsPage = React.lazy(() => import('./pages/SongsPage'));
 const LegalPage = React.lazy(() => import('./pages/LegalPage'));
 const NotFound = React.lazy(() => import('./pages/NotFound')); // New NotFound componen
 
@@ -53,7 +52,6 @@ const RoutesApp = () => {
                     <Route path="/beats" element={<BeatsPage />} />
                     <Route path="/librerias" element={<PacksPage />} />
                     <Route path="/contacto" element={<ContactPage />} />
-                    <Route path="/songs" element={<SongsPage />} />
                     <Route path="/legal" element={<LegalPage />} />
                     {/* Catch-all route for 404 */}
                     <Route path="*" element={<NotFound />} />

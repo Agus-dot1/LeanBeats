@@ -3,6 +3,8 @@ import { Play, Music, AudioWaveform as Waveform, Volume2, Mic2, Download, ArrowR
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; // Change the import to get the beats array instead of the component
 import { SEO } from './components/SEO';
+import { Bio } from './components/Bio';
+import { Collabs } from './components/Collabs'
 
 const container = {
   hidden: { opacity: 0 },
@@ -162,6 +164,8 @@ function App() {
           </div>
         </div>
       </div>
+      <Bio />
+      <Collabs />
       <Footer />
     </div>
   );
