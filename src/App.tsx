@@ -167,6 +167,7 @@ function App() {
       </div>
       <Bio />
       <Collabs />
+      <Shows />
       <Footer />
     </div>
   );
