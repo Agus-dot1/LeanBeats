@@ -103,7 +103,7 @@ export const Shows: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative mb-12 overflow-hidden rounded-3xl bg-bg-200"
+            className="relative mb-12 overflow-hidden rounded-2xl bg-bg-200"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="relative h-[300px] lg:h-full min-h-[400px]">
@@ -112,10 +112,10 @@ export const Shows: React.FC = () => {
                   alt={featuredShow.title}
                   className="absolute inset-0 object-cover w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
+                <div className="absolute inset-0 bg-black/60" />
                 <div className="absolute inset-0 flex flex-col justify-center p-8">
                   <div className="space-y-4">
-                    <span className="inline-flex gap-2 items-center px-3 py-1 text-sm text-white rounded-full backdrop-blur-sm bg-white/10">
+                    <span className="inline-flex gap-2 items-center px-3 py-1 text-sm text-white rounded-full bg-primary-200/20">
                       Destacado
                     </span>
                     <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
@@ -134,17 +134,15 @@ export const Shows: React.FC = () => {
                         <span>{featuredShow.location}</span>
                       </div>
                     </div>
-                    <motion.a
+                    <a
                       href={featuredShow.ticketUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="inline-flex gap-2 items-center px-6 py-3 mt-4 font-medium text-white rounded-full bg-primary-200"
+                      className="inline-flex gap-2 items-center px-6 py-3 mt-4 font-medium text-white rounded-full transition-colors bg-primary-200 hover:bg-primary-300"
                     >
                       <span>Comprar Tickets</span>
                       <ArrowRight size={20} />
-                    </motion.a>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -154,7 +152,7 @@ export const Shows: React.FC = () => {
                   alt={featuredShow.title}
                   className="object-cover w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-l from-black/70 to-transparent" />
+                <div className="absolute inset-0 bg-black/60" />
               </div>
             </div>
           </motion.div>
@@ -169,15 +167,15 @@ export const Shows: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="overflow-hidden group rounded-2xl bg-bg-200"
+              className="overflow-hidden rounded-2xl bg-bg-200"
             >
               <div className="relative h-48">
                 <img
                   src={show.imageUrl}
                   alt={show.title}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full h-full"
                 />
-                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 bg-black/60" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <h3 className="mb-2 text-xl font-bold text-white">{show.title}</h3>
                   <div className="flex flex-wrap gap-3">
@@ -194,17 +192,15 @@ export const Shows: React.FC = () => {
               </div>
               <div className="p-4">
                 <p className="mb-4 text-sm text-text-200">{show.description}</p>
-                <motion.a
+                <a
                   href={show.ticketUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex gap-2 items-center px-4 py-2 text-sm font-medium text-white rounded-full bg-primary-200"
+                  className="inline-flex gap-2 items-center px-4 py-2 text-sm font-medium text-white rounded-full transition-colors bg-primary-200 hover:bg-primary-300"
                 >
                   <span>Ver Detalles</span>
                   <ArrowRight size={16} />
-                </motion.a>
+                </a>
               </div>
             </motion.div>
           ))}
