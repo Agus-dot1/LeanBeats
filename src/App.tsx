@@ -4,7 +4,8 @@ import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; // Change the import to get the beats array instead of the component
 import { SEO } from './components/SEO';
 import { Bio } from './components/Bio';
-import { Collabs } from './components/Collabs'
+import { Collabs } from './components/Collabs';
+import { Shows } from './components/Shows';
 
 const container = {
   hidden: { opacity: 0 },
