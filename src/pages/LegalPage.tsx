@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Shield, Lock, Cookie, ChevronRight, ChevronUp, FileText, Scale } from 'lucide-react';
+import { Shield, Lock, ChevronRight, ChevronUp, Cookie} from 'lucide-react';
 
 type LegalTab = 'terms' | 'privacy' | 'cookies';
 
@@ -37,38 +37,71 @@ const LegalPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+
+  const getCurrentSections = (): Section[] => {
+    switch (activeTab) {
+      case 'terms':
+        return termsSections;
+      case 'privacy':
+        return privacySections;
+      case 'cookies':
+        return cookiesSections;
+      default:
+        return [];
+    }
+  };
+
   const termsSections: Section[] = [
     {
       id: 'introduccion',
       title: 'Introducción',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Bienvenido a Lea in the Mix, su plataforma de producción musical.</li>
-          <li>Al usar este sitio, acepta cumplir con estos términos y condiciones.</li>
-          <li>Si no está de acuerdo, por favor absténgase de usar nuestros servicios.</li>
+          <li>Bienvenido al sitio oficial de Lea in the Mix. Al acceder o utilizar esta plataforma, usted acepta los presentes Términos y Condiciones.</li>
+          <li>Si no está de acuerdo con alguno de estos términos, le solicitamos abstenerse de utilizar nuestros servicios.</li>
+          <li>Estos términos podrán ser actualizados sin previo aviso. Se recomienda revisar esta sección periódicamente.</li>
         </ul>
       )
     },
     {
-      id: 'copyright',
+      id: 'uso-del-sitio',
+      title: 'Uso del Sitio',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Este sitio está destinado exclusivamente a la comercialización de contenido musical, incluyendo librerías de sonido y beats originales producidos por Lea in the Mix.</li>
+          <li>Queda prohibido el uso indebido del sitio, como intentos de acceso no autorizado, distribución automatizada de contenido o alteración del mismo.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'derechos-de-autor',
       title: 'Derechos de Autor',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Todo el contenido musical, incluyendo beats y samples, está protegido por derechos de autor © {new Date().getFullYear()} Lea in the Mix.</li>
-          <li>La compra de beats otorga una licencia específica de uso, no la propiedad de los derechos de autor.</li>
-          <li>No está permitida la redistribución, reventa o modificación no autorizada de nuestros productos.</li>
+          <li>Todo el contenido disponible en esta plataforma está protegido por derechos de autor © {new Date().getFullYear()} Lea in the Mix.</li>
+          <li>La adquisición de productos no implica la cesión de los derechos de propiedad intelectual sobre los mismos.</li>
+          <li>Está estrictamente prohibida la redistribución, reventa, copia o modificación no autorizada del material ofrecido.</li>
         </ul>
       )
     },
     {
-      id: 'licencia',
+      id: 'licencia-de-uso',
       title: 'Licencia de Uso',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Al adquirir un pack de sonidos, se otorga una licencia no exclusiva, intransferible y revocable para usar el contenido en proyectos personales o comerciales.</li>
-          <li>No se permite revender, sublicenciar o distribuir los archivos tal como fueron adquiridos, ni modificados con fines de reventa.</li>
-          <li>El cliente conserva la titularidad de sus creaciones que usen estos sonidos, pero no de los sonidos originales.</li>
-          <li>La licencia no implica cesión de derechos de autor.</li>
+          <li>Con cada compra, el usuario obtiene una licencia no exclusiva, intransferible y revocable para utilizar el contenido en proyectos personales o comerciales.</li>
+          <li>La licencia no autoriza la reventa, sublicenciamiento ni distribución directa de los archivos, ya sea en su forma original o modificada.</li>
+          <li>El comprador conserva los derechos sobre las obras que cree utilizando los productos, pero no adquiere derechos sobre los archivos originales.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'responsabilidad',
+      title: 'Limitación de Responsabilidad',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Lea in the Mix no será responsable por daños indirectos, incidentales o consecuentes derivados del uso o imposibilidad de uso del contenido adquirido.</li>
+          <li>El sitio se proporciona "tal cual", sin garantías explícitas o implícitas de funcionamiento ininterrumpido o libre de errores.</li>
         </ul>
       )
     }
@@ -77,86 +110,73 @@ const LegalPage: React.FC = () => {
   const privacySections: Section[] = [
     {
       id: 'datos-personales',
-      title: 'Uso de Datos Personales',
+      title: 'Recolección y Uso de Datos Personales',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>No compartimos ni vendemos datos personales a terceros.</li>
-          <li>Usamos los datos solo para procesar pedidos, brindar soporte y mejorar el sitio.</li>
-          <li>No recolectamos intencionalmente datos de menores de 13 años. Si se detecta tal caso, se eliminarán inmediatamente.</li>
+          <li>Actualmente, este sitio no recolecta datos personales de forma automática ni mediante formularios.</li>
+          <li>En caso de que en el futuro se incorporen formularios de contacto, suscripción u otros mecanismos de recopilación, los datos serán utilizados exclusivamente para brindar servicios, procesar pedidos o mantener contacto comercial.</li>
+          <li>En ningún caso se venderán ni compartirán datos personales con terceros sin consentimiento explícito.</li>
         </ul>
       )
     },
     {
-      id: 'cookies',
-      title: 'Política de Cookies',
+      id: 'proteccion',
+      title: 'Medidas de Seguridad',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Cookies esenciales: Necesarias para el funcionamiento del sitio.</li>
-          <li>Cookies analíticas: Análisis de uso y mejora del servicio.</li>
-          <li>Cookies de preferencias: Almacenan sus preferencias de usuario.</li>
-          <li>Cookies de marketing: Personalización de anuncios (opcional).</li>
+          <li>Se aplicarán medidas de seguridad administrativas y técnicas razonables para proteger la información eventualmente recopilada, conforme a la Ley 25.326 de Protección de Datos Personales (Argentina).</li>
+        </ul>
+      )
+    },
+    {
+      id: 'menores',
+      title: 'Datos de Menores',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>No se recopilan intencionalmente datos de menores de 13 años. Si se detecta dicha situación, los datos serán eliminados de forma inmediata.</li>
         </ul>
       )
     }
   ];
 
-  // Cookie Consent Component
-  const CookieConsent = () => {
-    const [showConsent, setShowConsent] = useState(true);
-
-    const acceptCookies = () => {
-      localStorage.setItem('cookieConsent', 'accepted');
-      setShowConsent(false);
-    };
-
-    const declineCookies = () => {
-      localStorage.setItem('cookieConsent', 'declined');
-      setShowConsent(false);
-    };
-
-    useEffect(() => {
-      const consent = localStorage.getItem('cookieConsent');
-      if (consent) {
-        setShowConsent(false);
-      }
-    }, []);
-
-    if (!showConsent) return null;
-
-    return (
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
-        className="fixed right-0 bottom-0 left-0 z-50 p-4 border-t bg-bg-200 border-bg-300"
-      >
-        <div className="container mx-auto max-w-4xl">
-          <div className="flex flex-col gap-4 justify-between items-center sm:flex-row">
-            <div className="text-sm text-text-200">
-              <p>Utilizamos cookies para mejorar su experiencia. Al continuar navegando, acepta nuestra política de cookies.</p>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={declineCookies}
-                className="px-4 py-2 text-sm font-medium rounded-lg bg-bg-300 text-text-200 hover:bg-bg-400"
-              >
-                Rechazar
-              </button>
-              <button
-                onClick={acceptCookies}
-                className="px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-200 hover:bg-primary-300"
-              >
-                Aceptar
-              </button>
-            </div>
-          </div>  
-        </div>
-      </motion.div>
-    );
-  };
+  const cookiesSections: Section[] = [
+    {
+      id: 'uso-de-cookies',
+      title: 'Uso de Cookies',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Este sitio utiliza cookies para mejorar la experiencia del usuario y facilitar el funcionamiento técnico de la plataforma.</li>
+          <li>Al navegar por el sitio, usted acepta el uso de cookies conforme a esta política.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'tipos-de-cookies',
+      title: 'Tipos de Cookies Utilizadas',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li><strong>Cookies esenciales:</strong> Permiten el funcionamiento básico del sitio.</li>
+          <li><strong>Cookies de análisis:</strong> Permiten evaluar métricas de uso para mejorar el servicio.</li>
+          <li><strong>Cookies de preferencias:</strong> Almacenan configuraciones seleccionadas por el usuario.</li>
+          <li><strong>Cookies de terceros:</strong> Si se incorporan servicios como reproductores externos o botones sociales, podrían usar cookies propias.</li>
+        </ul>
+      )
+    },
+    {
+      id: 'control-de-cookies',
+      title: 'Gestión y Control',
+      content: (
+        <ul className="pl-6 space-y-3 list-disc text-text-200">
+          <li>Usted puede aceptar o rechazar cookies mediante el banner de consentimiento al ingresar al sitio.</li>
+          <li>También puede administrar cookies desde la configuración de su navegador.</li>
+        </ul>
+      )
+    }
+  ];
+  
 
   return (
-    <div className="relative pt-28 pb-20 min-h-screen bg-bg-100">
+    <div className="relative pt-28 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
       <Helmet>
         <title>Legal | Lea in the Mix</title>
         <meta name="description" content="Términos y condiciones, política de privacidad y política de cookies de Lea in the Mix" />
@@ -182,6 +202,7 @@ const LegalPage: React.FC = () => {
             {[
               { id: 'terms', icon: Shield, text: 'Términos y Condiciones' },
               { id: 'privacy', icon: Lock, text: 'Política de Privacidad' },
+              { id: 'cookies', icon: Cookie, text: 'Política de Cookies' }
             ].map(({ id, icon: Icon, text }) => (
               <button
                 key={id}
@@ -217,7 +238,7 @@ const LegalPage: React.FC = () => {
             <div className="sticky top-28 p-4 rounded-xl bg-bg-200">
               <h3 className="mb-4 text-lg font-semibold text-text-100">Contenido</h3>
               <nav className="space-y-2">
-                {(activeTab === 'terms' ? termsSections : privacySections).map((section, index) => (
+                {getCurrentSections().map((section, index) => (
                   <button
                     key={section.id}
                     onClick={() => scrollToSection(section.id)}
@@ -227,21 +248,19 @@ const LegalPage: React.FC = () => {
                         : 'text-text-200 hover:text-text-100 hover:bg-bg-300'
                     }`}
                   >
-                    <ChevronRight 
-                      size={16} 
-                      className={activeSection === section.id ? 'text-primary-200' : ''} 
-                    />
+                    <ChevronRight size={16} className={activeSection === section.id ? 'text-primary-200' : ''} />
                     <span>{index + 1}. {section.title}</span>
                   </button>
                 ))}
               </nav>
+
             </div>
           </div>
 
           {/* Content Area */}
           <div className="lg:col-span-3">
-            <div className="space-y-12">
-              {(activeTab === 'terms' ? termsSections : privacySections).map((section) => (
+          <div className="space-y-12">
+              {getCurrentSections().map((section) => (
                 <motion.section
                   key={section.id}
                   id={section.id}
@@ -255,6 +274,7 @@ const LegalPage: React.FC = () => {
                 </motion.section>
               ))}
             </div>
+
           </div>
         </motion.div>
       </div>
@@ -273,7 +293,6 @@ const LegalPage: React.FC = () => {
           </motion.button>
         )}
       </AnimatePresence>
-      <CookieConsent />
     </div>
   );
 };

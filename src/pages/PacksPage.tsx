@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Package, Wand2, FileAudio, Folder, HardDrive, Plus, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
+import { Footer } from '../components/Footer';
 
 interface PackContent {
   [key: string]: number | undefined;
@@ -52,7 +53,7 @@ const ContentDialog: React.FC<DialogProps> = ({ isOpen, onClose, pack }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-2 backdrop-blur-md sm:p-4 bg-black/70"
+          className="flex fixed inset-0 z-50 justify-center items-center p-2 backdrop-blur-md sm:p-4 bg-black/70"
           onClick={onClose}
         >
           <motion.div
@@ -85,7 +86,7 @@ const ContentDialog: React.FC<DialogProps> = ({ isOpen, onClose, pack }) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="p-2 transition-colors rounded-xl sm:p-3 md:p-4 sm:rounded-2xl bg-bg-300/50 hover:bg-bg-300"
+                  className="p-2 rounded-xl transition-colors sm:p-3 md:p-4 sm:rounded-2xl bg-bg-300/50 hover:bg-bg-300"
                 >
                   <div className="flex gap-1.5 sm:gap-2 items-center mb-1 sm:mb-2">
                     <FileAudio size={14} className="sm:w-4 sm:h-4 text-primary-200" />
@@ -100,10 +101,10 @@ const ContentDialog: React.FC<DialogProps> = ({ isOpen, onClose, pack }) => {
               ))}
             </div>
 
-            <div className="flex items-center justify-end gap-2 pt-4 mt-4 border-t sm:gap-4 sm:pt-6 md:pt-8 sm:mt-6 md:mt-8 border-bg-300">
+            <div className="flex gap-2 justify-end items-center pt-4 mt-4 border-t sm:gap-4 sm:pt-6 md:pt-8 sm:mt-6 md:mt-8 border-bg-300">
               <button
                 onClick={onClose}
-                className="px-4 py-2 text-sm font-medium transition-colors rounded-full sm:px-6 sm:py-3 sm:text-base bg-bg-300 text-text-200 hover:bg-bg-300/70"
+                className="px-4 py-2 text-sm font-medium rounded-full transition-colors sm:px-6 sm:py-3 sm:text-base bg-bg-300 text-text-200 hover:bg-bg-300/70"
               >
                 Cerrar
               </button>
@@ -188,18 +189,18 @@ const PacksPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen pb-20 pt-28 bg-bg-100">
+    <div className="pt-28 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
         <title>Librerías | Lea in the Mix</title>
         <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
       </Helmet>
 
-      <div className="container max-w-6xl px-4 mx-auto">
+      <div className="container px-4 mx-auto max-w-6xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <Wand2 size={16} className="animate-pulse" />
             <span>Sonidos Premium</span>
@@ -227,7 +228,7 @@ const PacksPage: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3 p-4 mb-8 overflow-x-auto rounded-2xl bg-bg-200"
+          className="flex overflow-x-auto gap-3 items-center p-4 mb-8 rounded-2xl bg-bg-200"
         >
           {genres.map((genre) => (
             <button
@@ -251,19 +252,19 @@ const PacksPage: React.FC = () => {
               key={pack.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-12 overflow-hidden transition-shadow duration-300 rounded-3xl bg-bg-200 hover:shadow-xl"
+              className="overflow-hidden mb-12 rounded-3xl transition-shadow duration-300 bg-bg-200 hover:shadow-xl"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="relative h-[300px] lg:h-full min-h-[400px]">
                   <img
                     src={pack.imageUrl}
                     alt={pack.title}
-                    className="absolute inset-0 object-cover w-full h-full"
+                    className="object-cover absolute inset-0 w-full h-full"
                   />
                   <div className="absolute inset-0 bg-black/50 backdrop-blur-[3px]" />
-                  <div className="absolute inset-0 flex flex-col justify-between p-8">
+                  <div className="flex absolute inset-0 flex-col justify-between p-8">
                     <div className="space-y-4">
-                      <span className="inline-flex items-center gap-2 px-3 py-1 text-xs text-white rounded-full backdrop-blur-sm sm:text-sm bg-white/10">
+                      <span className="inline-flex gap-2 items-center px-3 py-1 text-xs text-white rounded-full backdrop-blur-sm sm:text-sm bg-white/10">
                         <Package size={14} />
                         {pack.category}
                       </span>
@@ -276,31 +277,31 @@ const PacksPage: React.FC = () => {
                 <div className="p-8 space-y-8">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <FileAudio className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                      <FileAudio className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
                       <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.samples}</div>
                       <div className="text-xs sm:text-sm text-text-200">Samples Totales</div>
                     </div>
                     <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <Folder className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                      <Folder className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
                       <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.formats.join(', ')}</div>
                       <div className="text-xs sm:text-sm text-text-200">Formatos</div>
                     </div>
                     <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <HardDrive className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                      <HardDrive className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
                       <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size}</div>
                       <div className="text-xs sm:text-sm text-text-200">Tamaño Total</div>
                     </div>
                   </div>
 
                   <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between items-center">
                       <h3 className="text-lg font-semibold sm:text-xl text-text-100">Contenido</h3>
                       <button
                         onClick={() => {
                           setSelectedPack(pack);
                           setIsDialogOpen(true);
                         }}
-                        className="flex items-center gap-2 px-3 py-1 text-sm rounded-full bg-bg-300/50 text-text-200 hover:bg-bg-300"
+                        className="flex gap-2 items-center px-3 py-1 text-sm rounded-full bg-bg-300/50 text-text-200 hover:bg-bg-300"
                       >
                         <Plus size={16} />
                         <span>Ver Todo</span>
@@ -308,7 +309,7 @@ const PacksPage: React.FC = () => {
                     </div>
                     <div className="space-y-3">
                       {pack.displayContents.map((key) => (
-                        <div key={key} className="flex items-center justify-between py-2 border-b border-bg-300">
+                        <div key={key} className="flex justify-between items-center py-2 border-b border-bg-300">
                           <span className="capitalize text-text-200">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
                           <span className="font-medium text-text-100">
                             {pack.contents[key as keyof PackContent] || 0} Archivos
@@ -318,13 +319,13 @@ const PacksPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4">
+                  <div className="flex justify-between items-center pt-4">
                     <div className="text-xl font-bold sm:text-2xl md:text-3xl text-text-100">${pack.price}</div>
                     <div className="flex gap-3">
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="flex items-center gap-2 px-4 py-2 font-medium text-white rounded-full bg-primary-200"
+                        className="flex gap-2 items-center px-4 py-2 font-medium text-white rounded-full bg-primary-200"
                         onClick={() => {
                           addItem({
                             id: pack.id,
@@ -344,6 +345,7 @@ const PacksPage: React.FC = () => {
               </div>
             </motion.div>
           ))}
+          <Footer />
         </div>
 
         {/* Empty State */}
@@ -351,7 +353,7 @@ const PacksPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center py-12 text-text-200"
+            className="flex flex-col justify-center items-center py-12 text-text-200"
           >
             <Package size={48} className="mb-4 opacity-50" />
             <h3 className="mb-2 text-xl font-semibold">No hay packs en esta categoría</h3>

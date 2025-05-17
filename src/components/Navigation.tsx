@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Music, Package, MessageSquare, ShoppingCart, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { useCart } from '../context/CartContext';
+import { useTheme } from '../hooks/useTheme';
 
 const navItems = [
   { path: '/', label: 'Inicio', icon: Home },
@@ -15,24 +16,29 @@ const navItems = [
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { items, setIsOpen: setIsCartOpen } = useCart();
+  const { theme } = useTheme();
 
   return (
     <>
       <motion.header
-                    initial={{ opacity: 0, y: -40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 1 }}
-        className="fixed top-0 right-0 left-0 z-50 bg-bg-100 border-bg-200"
+        initial={{ opacity: 0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 1 }}
+        className="fixed top-0 right-0 left-0 z-50 bg-bg-300 border-bg-200"
       >
         <nav className="container px-4 py-4 mx-auto">
           <div className="flex justify-between items-center">
             <NavLink
               to="/"
-              className="text-base font-bold transition-colors duration-300 md:text-2xl text-text-100 hover:text-primary-200"
+              className="flex gap-2 items-center text-base font-bold transition-colors duration-300 md:text-2xl text-text-100 hover:text-primary-200"
               aria-label="Home"
             >
-              Lea in the Mix
+              <img 
+                src={theme === 'light' ? '/icon-dark.svg' : '/icon-light.svg'} 
+                alt="Lea in the Mix Logo" 
+                className="w-8 h-8 md:w-12 md:h-12"
+              />
             </NavLink>
 
             <div className="hidden items-center space-x-6 md:flex">

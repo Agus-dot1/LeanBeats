@@ -2,10 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Music, Timer } from 'lucide-react';
+import { Footer } from '../components/Footer';
 
 const BeatsPage: React.FC = () => {
   return (
-    <div className="relative pt-24 pb-20 min-h-screen bg-bg-100">
+    <div className="relative pt-24 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
         <title>Beats | Lea in the Mix</title>
         <meta name="description" content="Nuestro catálogo de beats estará disponible próximamente. Mantente atento para instrumentales de alta calidad para tu próximo proyecto." />
@@ -51,6 +52,7 @@ const BeatsPage: React.FC = () => {
           </motion.div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

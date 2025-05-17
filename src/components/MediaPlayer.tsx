@@ -145,14 +145,13 @@ const Player: React.FC = () => {
 
   return (
     <motion.div 
-      className={`fixed ${isExpanded ? 'bottom-4 sm:bottom-8' : 'bottom-2  sm:bottom-3'} left-4 sm:left-6 transition-all duration-300 z-40`}
+      className={`fixed ${isExpanded ? 'bottom-4 sm:bottom-8' : 'bottom-2 sm:bottom-3'} left-4 sm:left-6 transition-all duration-300 z-40`}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 100 }}
-      transition={{ type: "spring", duration: 0.5, delay: 1 }}
     >
       <motion.div 
-        className={`bg-bg-200  rounded-lg sm:rounded-xl shadow-2xl ${isExpanded ? 'p-3 sm:p-4' : 'p-2 sm:p-3'}`}
+        className={`bg-bg-200  rounded-lg sm:rounded-xl shadow-2xl ${isExpanded ? 'p-3 sm:p-4' : 'p-2 sm:p-3'} transition-all duration-200`}
       >
         <audio
           ref={audioRef}
@@ -164,12 +163,12 @@ const Player: React.FC = () => {
         />
 
         <motion.div 
-          className={`flex items-center gap-1 sm:gap-4 ${isExpanded ? 'w-[250px] sm:w-[300px] md:w-[400px]' : 'w-[150px] sm:w-[170px] md:w-[300px]'}`}
+          className={`flex items-center transition-all duration-100 gap-1 sm:gap-4 ${isExpanded ? 'w-[250px] sm:w-[300px] md:w-[400px]' : 'w-[150px] sm:w-[170px] md:w-[300px]'}`}
         >
           {/* Song Info */}
           {isExpanded && (
             <motion.div 
-              className="flex-1 min-w-0 overflow-x-hidden"
+              className="overflow-x-hidden flex-1 min-w-0"
             >
               <h3
                 className="text-sm font-medium truncate text-text-100"
@@ -180,7 +179,7 @@ const Player: React.FC = () => {
               </h3>
               <Tooltip id="song-title-tooltip" place="top" />
               <p className="text-xs truncate text-text-100/60">{currentSong.artist}</p>
-              <div className="flex items-center gap-2 mt-1">
+              <div className="flex gap-2 items-center mt-1">
                 <span className="text-xs text-text-100/60">{currentSong.duration}</span>
                 <button
                   onClick={openYoutube}
@@ -194,7 +193,7 @@ const Player: React.FC = () => {
 
           {/* Controls */}
           <motion.div 
-            className="flex items-center gap-2"
+            className="flex gap-2 items-center"
           >
             <button
               onClick={handlePrevious}
@@ -204,13 +203,13 @@ const Player: React.FC = () => {
             </button>
             <button
               onClick={togglePlay}
-              className="p-2 transition-colors rounded-full bg-primary-200 hover:bg-bg-300 text-text-100"
+              className="p-2 rounded-full transition-colors bg-primary-200 hover:bg-bg-300 text-text-100"
             >
               {isPlaying ? <Pause size={20} /> : <Play size={20} />}
             </button>
             <button
               onClick={handleNext}
-              className="p-2 transition-colors rounded-full hover:bg-bg-300 text-text-100"
+              className="p-2 rounded-full transition-colors hover:bg-bg-300 text-text-100"
             >
               <SkipForward size={18} />
             </button>
@@ -218,7 +217,7 @@ const Player: React.FC = () => {
 
           {/* Volume Control */}
           <motion.div 
-            className="items-center hidden gap-2 group md:flex"
+            className="hidden gap-2 items-center group md:flex"
           >
             <Volume2 size={18} className="text-text-100/60" />
             <input
@@ -228,7 +227,7 @@ const Player: React.FC = () => {
               step="0.1"
               value={volume}
               onChange={handleVolumeChange}
-              className="w-20 h-1 bg-bg-300 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-text-100"
+              className="w-20 h-1 bg-text-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-text-100"
             />
           </motion.div>
 

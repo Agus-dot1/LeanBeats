@@ -24,7 +24,7 @@
     --text-200: #4b4848;
     --bg-100: #fbfbfb;
     --bg-200: #f1f1f1;
-    --bg-300: #c8c8c8;
+    --bg-300:#ffffff;
 
     /* Scrollbar colors for light theme */
     --scrollbar-track: var(--bg-200);
@@ -42,7 +42,7 @@
     --text-200:#e0e0e0;
     --bg-100:#1D1F21;
     --bg-200:#2c2e30;
-    --bg-300:#444648;
+    --bg-300: #101010;
 
     /* Scrollbar colors for dark theme */
     --scrollbar-track: var(--bg-300);
@@ -52,7 +52,7 @@
 
   /* Custom scrollbar styles */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
