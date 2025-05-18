@@ -20,16 +20,16 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
   onSortChange,
 }) => {
   const [showSort, setShowSort] = useState(false);
-  const genres = ['All', 'Trap', 'Hip Hop', 'RKT', 'Pop', 'Reggaeton', 'Electronic'];
+  const genres = ['Todos', 'Trap', 'Hip Hop', 'RKT', 'Pop', 'Reggaeton', 'Electronic'];
   const sortOptions = [
-    { value: 'recent', label: 'Most Recent' },
-    { value: 'popular', label: 'Most Popular' },
-    { value: 'price-low', label: 'Price: Low to High' },
-    { value: 'price-high', label: 'Price: High to Low' },
+    { value: 'recent', label: 'Más Recientes' },
+    { value: 'popular', label: 'Más Populares' },
+    { value: 'price-low', label: 'Precio: Menor a Mayor' },
+    { value: 'price-high', label: 'Precio: Mayor a Menor' },
   ];
 
   return (
-    <div className="mb-8 bg-bg-100/95">
+    <div className="mb-8 rounded-xl shadow-sm bg-bg-100/95">
       <div className="flex flex-col gap-3 p-4 sm:p-6 md:flex-row md:items-center">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 w-5 h-5 -translate-y-1/2 text-text-200" />
@@ -37,7 +37,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search by title or genre..."
+            placeholder="Buscar por título o género..."
             className="pr-4 pl-10 w-full h-12 text-base rounded-lg transition-shadow bg-bg-200 text-text-100 placeholder:text-text-200/70 focus:outline-none focus:ring-2 focus:ring-primary-200"
           />
         </div>
@@ -54,7 +54,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
             }`}
           >
             <SlidersHorizontal size={20} />
-            <span>Sort by</span>
+            <span>Ordenar por</span>
           </motion.button>
 
           <AnimatePresence>
@@ -64,7 +64,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.95 }}
                 transition={{ type: "spring", duration: 0.2 }}
-                className="overflow-hidden absolute right-0 z-50 mt-2 w-full md:w-56 rounded-lg shadow-xl backdrop-blur-3xl bg-bg-100/95"
+                className="overflow-hidden absolute right-0 z-50 mt-2 w-full rounded-lg shadow-xl backdrop-blur-3xl md:w-56 bg-bg-100/95"
               >
                 {sortOptions.map((option) => (
                   <button
@@ -88,8 +88,8 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
         </div>
       </div>
 
-      <div className="overflow-x-auto flex flex-wrap gap-2 p-4 sm:p-6 -mx-4 sm:mx-0">
-        <div className="flex gap-2 px-4 sm:px-0 min-w-max">
+      <div className="flex overflow-x-auto flex-wrap gap-2 p-4 -mx-4 sm:p-6 sm:mx-0">
+        <div className="flex gap-2 px-4 min-w-max sm:px-0">
           {genres.map((genre) => (
             <motion.button
               key={genre}

@@ -24,10 +24,10 @@ export const Navigation: React.FC = () => {
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 1 }}
-        className="fixed top-0 right-0 left-0 z-50 bg-bg-300 border-bg-200"
+        transition={{ duration: 0.5, delay: 1, ease: "easeInOut" }}
+        className="fixed top-0 right-0 left-0 z-50 bg-bg-300 border-bg-200 h-fit"
       >
-        <nav className="container px-4 py-4 mx-auto">
+        <nav className="container px-4 py-4 mx-auto h-full">
           <div className="flex justify-between items-center">
             <NavLink
               to="/"
@@ -80,7 +80,7 @@ export const Navigation: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200 md:hidden"
                 aria-expanded={isOpen}
-                aria-label="Toggle menu"
+                aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -95,7 +95,7 @@ export const Navigation: React.FC = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
             className="fixed inset-x-0 top-[73px] z-40 md:hidden"
           >
             <div className="p-4 mx-4 rounded-2xl border shadow-lg bg-bg-100 border-bg-200">

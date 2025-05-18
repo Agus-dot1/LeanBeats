@@ -145,13 +145,14 @@ const Player: React.FC = () => {
 
   return (
     <motion.div 
-      className={`fixed ${isExpanded ? 'bottom-4 sm:bottom-8' : 'bottom-2 sm:bottom-3'} left-4 sm:left-6 transition-all duration-300 z-40`}
+      className={`fixed ${isExpanded ? 'bottom-3 sm:bottom-6' : 'bottom-1 sm:bottom-2'} left-4 sm:left-6 transition-all duration-300 z-40`}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 1, ease: "anticipate" }} 
       exit={{ opacity: 0, y: 100 }}
     >
       <motion.div 
-        className={`bg-bg-200  rounded-lg sm:rounded-xl shadow-2xl ${isExpanded ? 'p-3 sm:p-4' : 'p-2 sm:p-3'} transition-all duration-200`}
+        className={`bg-bg-200  rounded-lg sm:rounded-xl shadow-2xl ${isExpanded ? 'p-2 sm:p-3' : 'p-1 sm:p-2'} transition-all duration-200`}
       >
         <audio
           ref={audioRef}
@@ -219,7 +220,7 @@ const Player: React.FC = () => {
           <motion.div 
             className="hidden gap-2 items-center group md:flex"
           >
-            <Volume2 size={18} className="text-text-100/60" />
+            <Volume2 size={18} className="text-text-100" />
             <input
               type="range"
               min="0"

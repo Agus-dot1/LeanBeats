@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Package, Wand2, FileAudio, Folder, HardDrive, Plus, X } from 'lucide-react';
@@ -118,10 +118,26 @@ const ContentDialog: React.FC<DialogProps> = ({ isOpen, onClose, pack }) => {
 
 const PacksPage: React.FC = () => {
   const { addItem } = useCart();
-  const { showToast } = useToast();
+  const { showToast, showDuplicateItemToast } = useToast();
   const [selectedGenre, setSelectedGenre] = useState<string>('todos');
   const [selectedPack, setSelectedPack] = useState<Pack | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleAddToCart = (pack: Pack) => {
+    const itemToAdd = {
+      id: pack.id,
+      type: 'pack' as const,
+      title: pack.title,
+      price: pack.price,
+      coverUrl: pack.imageUrl
+    };
+    try {
+      addItem(itemToAdd);
+      showToast('¡Pack añadido al carrito!','success');
+    }catch (error) {
+      showDuplicateItemToast(pack.title);
+    }
+  }
 
   const genres = ['todos', 'aleteo', 'remix drop'];
 
@@ -130,7 +146,7 @@ const PacksPage: React.FC = () => {
       id: 'p1',
       title: 'Esenciales de Aleteo Vol. 1',
       description: 'Este pack es una herramienta indispensable para cualquier productor de música electrónica que busque crear pistas con un sonido único y atractivo. Con sonidos inspirados en mis propias producciones y remixs, este pack te brinda la oportunidad de agregar un toque personal a tus creaciones.',
-      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1746479151/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_e9dzrx.png',
+      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593291/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_eexnof.png',
       price: 40,
       category: 'aleteo',
       features: {
@@ -158,7 +174,7 @@ const PacksPage: React.FC = () => {
       id: 'p2',
       title: 'Kit Remix Drop Vol. 1',
       description: 'Descubre una colección exclusiva de sonidos únicos, cuidadosamente elaborados a lo largo de mi carrera como DJ y productor. Cada sample refleja mi esencia creativa, listo para enriquecer tu música con un toque personal.',
-      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/D851250A-D700-4160-B0C3-5922A59BCB41_utr53y_phqsc8.png',
+      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593286/D851250A-D700-4160-B0C3-5922A59BCB41_ezwcz9.png',
       price: 40,
       category: 'remix drop',
       features: {
@@ -187,6 +203,16 @@ const PacksPage: React.FC = () => {
   const filteredPacks = packs.filter(pack =>
     selectedGenre === 'todos' || pack.category === selectedGenre
   );
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Add loading simulation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="pt-28 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
@@ -247,104 +273,123 @@ const PacksPage: React.FC = () => {
 
         {/* Packs Grid */}
         <div className="space-y-8">
-          {filteredPacks.map(pack => (
-            <motion.div
-              key={pack.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="overflow-hidden mb-12 rounded-3xl transition-shadow duration-300 bg-bg-200 hover:shadow-xl"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative h-[300px] lg:h-full min-h-[400px]">
-                  <img
-                    src={pack.imageUrl}
-                    alt={pack.title}
-                    className="object-cover absolute inset-0 w-full h-full"
-                  />
-                  <div className="absolute inset-0 bg-black/50 backdrop-blur-[3px]" />
-                  <div className="flex absolute inset-0 flex-col justify-between p-8">
-                    <div className="space-y-4">
-                      <span className="inline-flex gap-2 items-center px-3 py-1 text-xs text-white rounded-full backdrop-blur-sm sm:text-sm bg-white/10">
-                        <Package size={14} />
-                        {pack.category}
-                      </span>
-                      <h2 className="text-xl font-bold text-white sm:text-2xl md:text-3xl">{pack.title}</h2>
-                      <p className="text-sm sm:text-base text-white/80">{pack.description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 space-y-8">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <FileAudio className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
-                      <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.samples}</div>
-                      <div className="text-xs sm:text-sm text-text-200">Samples Totales</div>
-                    </div>
-                    <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <Folder className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
-                      <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.formats.join(', ')}</div>
-                      <div className="text-xs sm:text-sm text-text-200">Formatos</div>
-                    </div>
-                    <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
-                      <HardDrive className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
-                      <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size}</div>
-                      <div className="text-xs sm:text-sm text-text-200">Tamaño Total</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-semibold sm:text-xl text-text-100">Contenido</h3>
-                      <button
-                        onClick={() => {
-                          setSelectedPack(pack);
-                          setIsDialogOpen(true);
-                        }}
-                        className="flex gap-2 items-center px-3 py-1 text-sm rounded-full bg-bg-300/50 text-text-200 hover:bg-bg-300"
-                      >
-                        <Plus size={16} />
-                        <span>Ver Todo</span>
-                      </button>
-                    </div>
-                    <div className="space-y-3">
-                      {pack.displayContents.map((key) => (
-                        <div key={key} className="flex justify-between items-center py-2 border-b border-bg-300">
-                          <span className="capitalize text-text-200">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                          <span className="font-medium text-text-100">
-                            {pack.contents[key as keyof PackContent] || 0} Archivos
-                          </span>
+          {isLoading ? (
+            <div className="grid grid-cols-1 gap-8">
+              {[1, 2].map((i) => (
+                <div key={i} className="overflow-hidden rounded-3xl bg-bg-200">
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <div className="h-[300px] lg:h-[400px] animate-pulse bg-bg-300/50" />
+                    <div className="p-8 space-y-8">
+                      <div className="grid grid-cols-2 gap-4">
+                        {[1, 2, 3].map((j) => (
+                          <div key={j} className="h-24 rounded-2xl animate-pulse bg-bg-300/50" />
+                        ))}
+                      </div>
+                      <div className="space-y-4">
+                        <div className="w-1/3 h-8 rounded-lg animate-pulse bg-bg-300/50" />
+                        <div className="space-y-3">
+                          {[1, 2, 3, 4].map((j) => (
+                            <div key={j} className="h-6 rounded-lg animate-pulse bg-bg-300/50" />
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center pt-4">
-                    <div className="text-xl font-bold sm:text-2xl md:text-3xl text-text-100">${pack.price}</div>
-                    <div className="flex gap-3">
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="flex gap-2 items-center px-4 py-2 font-medium text-white rounded-full bg-primary-200"
-                        onClick={() => {
-                          addItem({
-                            id: pack.id,
-                            type: 'pack',
-                            title: pack.title,
-                            price: pack.price,
-                            coverUrl: pack.imageUrl,
-                          });
-                          showToast('!Librerías añadida al carrito!', 'success');
-                        }}
-                      >
-                        Añadir al carrito
-                      </motion.button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          ) : (
+            <>{filteredPacks.map(pack => (
+              <motion.div
+                key={pack.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="overflow-hidden mb-12 rounded-3xl transition-shadow duration-300 bg-bg-200 hover:shadow-xl group"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                  <div className="relative h-[300px] lg:h-full min-h-[400px]">
+                    <img
+                      src={pack.imageUrl}
+                      alt={pack.title}
+                      className="object-cover absolute inset-0 w-full h-full"
+                    />
+                    <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] transition-all duration-500 group-hover:bg-black/50 group-hover:backdrop-blur-[3px]" />
+                    <div className="flex absolute inset-0 flex-col justify-between p-8">
+                      <div className="space-y-4 opacity-0 transition-all duration-500 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                        <span className="inline-flex gap-2 items-center px-3 py-1 text-xs text-white rounded-full backdrop-blur-sm sm:text-sm bg-white/10">
+                          <Package size={14} />
+                          {pack.category}
+                        </span>
+                          <h2 className="text-xl font-bold text-white sm:text-2xl md:text-3xl">{pack.title}</h2>
+                          <p className="text-sm sm:text-base text-white/80">{pack.description}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-8 space-y-8">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
+                        <FileAudio className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
+                        <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.samples}</div>
+                        <div className="text-xs sm:text-sm text-text-200">Samples Totales</div>
+                      </div>
+                      <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
+                        <Folder className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
+                        <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.formats.join(', ')}</div>
+                        <div className="text-xs sm:text-sm text-text-200">Formatos</div>
+                      </div>
+                      <div className="p-3 rounded-2xl sm:p-4 bg-bg-300/50">
+                        <HardDrive className="mb-2 w-5 h-5 sm:w-6 sm:h-6 text-primary-200" />
+                        <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size}</div>
+                        <div className="text-xs sm:text-sm text-text-200">Tamaño Total</div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 sm:space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-lg font-semibold sm:text-xl text-text-100">Contenido</h3>
+                        <button
+                          onClick={() => {
+                            setSelectedPack(pack);
+                            setIsDialogOpen(true);
+                          }}
+                          className="flex gap-2 items-center px-3 py-1 text-sm rounded-full bg-bg-300/50 text-text-200 hover:bg-bg-300"
+                        >
+                          <Plus size={16} />
+                          <span>Ver Todo</span>
+                        </button>
+                      </div>
+                      <div className="space-y-3">
+                        {pack.displayContents.map((key) => (
+                          <div key={key} className="flex justify-between items-center py-2 border-b border-bg-300">
+                            <span className="capitalize text-text-200">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                            <span className="font-medium text-text-100">
+                              {pack.contents[key as keyof PackContent] || 0} Archivos
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center pt-4">
+                      <div className="text-xl font-bold sm:text-2xl md:text-3xl text-text-100">${pack.price}</div>
+                      <div className="flex gap-3">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex gap-2 items-center px-4 py-2 font-medium text-white rounded-full bg-primary-200"
+                          onClick={() => handleAddToCart(pack)}
+                        >
+                          Añadir al carrito
+                        </motion.button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </>
+          )}
           <Footer />
         </div>
 

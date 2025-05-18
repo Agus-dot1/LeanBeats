@@ -9,6 +9,7 @@
 @layer base {
   html {
     font-family: 'poppins', sans-serif;
+    height: 100%;
   }
   h1, h2 {
     font-family: 'inter', sans-serif;
@@ -35,7 +36,7 @@
   :root[data-theme="dark"] {
     --primary-100:#FF6600;
     --primary-200:#f95937;
-    --primary-300:#ffffa1;
+    --primary-300:#c2482e;
     --accent-100:#F5F5F5;
     --accent-200:#929292;
     --text-100:#FFFFFF;
@@ -78,8 +79,4 @@
   .bento-card {
     @apply p-6 rounded-2xl shadow-lg transition-all duration-300 bg-bg-200 hover:shadow-xl;
   }
-}
-
-body {
-  @apply transition-colors duration-300 bg-bg-100 text-text-100;
 }

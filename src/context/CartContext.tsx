@@ -44,9 +44,10 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, [items]);
 
   const addItem = (item: CartItem) => {
-    if (!items.some(existingItem => existingItem.id === item.id)) {
-      setItems(prev => [...prev, item]);
+    if (items.some(existingItem => existingItem.id === item.id)) {
+      throw new Error('Item already in cart');
     }
+    setItems(prev => [...prev, item]);
   };
 
   const removeItem = (id: string) => {

@@ -9,14 +9,6 @@ export interface Beat {
   price: number;
   coverUrl: string;
   audioUrl: string;
-  mood?: string[];
-  tags: string[];
   releaseDate: string;
-  createdAt: string;
-  plays: number;
-  ratings?: {
-    average: number;
-    count: number;
-  };
   featured?: boolean;
 }

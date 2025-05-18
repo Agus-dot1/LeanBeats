@@ -41,9 +41,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
       container: containerRef.current,
       waveColor: '#4A5568',
       progressColor: '#FD5732',
-      cursorColor: 'transparent',
-      barWidth: 2,
-      barGap: 2,
+      cursorColor: 'white',
+      barWidth: 3,
+      barGap: 3,
       height: 60,
       url,
     });
@@ -89,7 +89,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   return (
     <div className={`relative ${className}`}>
-      <div className="flex items-center gap-4">
+      <div className="flex gap-4 items-center">
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -99,7 +99,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
         >
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
         </motion.button>
-        <div className="text-sm text-text-200 font-medium">
+        <div className="text-sm font-medium text-text-200">
           {formatTime(currentTime)} / {formatTime(duration)}
         </div>
       </div>

@@ -179,12 +179,12 @@ export const OrderSummaryModal: React.FC<OrderSummaryModalProps> = ({ isOpen, on
                   </motion.span>
                 </motion.div>
 
-                <div className="flex gap-4">
+                <div className="flex gap-4 justify-between items-center h-12">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={onClose}
-                    className="px-5 rounded-xl border transition-all border-text-200 text-text-200 hover:bg-bg-200"
+                    className="flex-shrink px-5 h-full rounded-xl border transition-all border-text-200 text-text-200 hover:bg-bg-200"
                   >
                     Editar
                   </motion.button>
@@ -192,11 +192,11 @@ export const OrderSummaryModal: React.FC<OrderSummaryModalProps> = ({ isOpen, on
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleOrder}
-                    className="flex gap-1 justify-center items-center px-2 py-1 text-sm font-medium text-white rounded-xl transition-all bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
+                    className="flex flex-grow gap-1 justify-center items-center px-2 py-1 h-full text-sm font-medium text-white rounded-xl transition-all bg-primary-200 hover:shadow-lg hover:shadow-primary-200/20"
                   >
                     <ShoppingCart className="w-8 h-5" />
                     Hacer Pedido
-                    <ExternalLink className="w-8 h-4" />
+                    <ExternalLink className="w-8 h-5" />
                   </motion.button>
                 </div>
               </div>

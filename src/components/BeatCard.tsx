@@ -20,34 +20,48 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
 }) => {
   const { addItem } = useCart();
   const { showToast } = useToast();
+  const { showDuplicateItemToast } = useToast();
 
   const handleAddToCart = () => {
-    addItem({
+    const itemToAdd = {
       id: beat.id,
-      type: 'beat',
+      type: 'beat' as const,
       title: beat.title,
       price: beat.price,
       coverUrl: beat.coverUrl
-    });
-    showToast('¡Beat añadido al carrito!', 'success');
+    };
+  
+    try {
+      addItem(itemToAdd);
+      showToast('¡Beat añadido al carrito!', 'success');
+    } catch (error) {
+      showDuplicateItemToast(beat.title);
+    }
   };
 
   const handleShare = async () => {
     try {
       await navigator.share({
         title: beat.title,
-        text: `Check out this beat: ${beat.title} by ${beat.producer}`,
+        text: `Mira este beat: ${beat.title} por ${beat.producer}`,
         url: window.location.href
       });
     } catch (error) {
-      navigator.clipboard.writeText(window.location.href);
-      showToast('Link copiado al portapapeles', 'success');
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        showToast('Link copiado al portapapeles', 'success');
+      } catch (clipboardError) {
+        showToast('Error al compartir el beat', 'error');
+      }
     }
   };
 
   const handleDownloadDemo = async () => {
     try {
       const response = await fetch(beat.audioUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -59,13 +73,14 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
       window.URL.revokeObjectURL(url);
       showToast('Demo descargado exitosamente', 'success');
     } catch (error) {
+      console.error('Download error:', error);
       showToast('Error al descargar el demo', 'error');
     }
   };
 
   return (
     <div className={`relative rounded-xl ${beat.featured ? 'bg-gradient-to-br from-bg-200 to-bg-300 border-2 border-primary-200' : 'bg-bg-200'}`}>
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4">
+      <div className="flex flex-col gap-4 p-4 sm:flex-row sm:gap-6">
         {/* Cover Image Section */}
         <div className="relative w-full sm:w-[180px] aspect-square shrink-0">
           <img
@@ -76,20 +91,20 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
           />
           {beat.featured && (
             <div className="absolute -top-3 -right-3 px-4 py-1 text-sm font-bold text-white rounded-full shadow-lg bg-primary-200">
-              Featured
+              Destacado
             </div>
           )}
         </div>
 
         {/* Content Section */}
         <div className="flex flex-col flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-between items-start mb-3">
-            <div className="min-w-0 w-full sm:w-auto">
-              <h3 className="text-xl sm:text-2xl font-bold truncate text-text-100">{beat.title}</h3>
+          <div className="flex flex-col gap-2 justify-between items-start mb-3 sm:flex-row sm:gap-4">
+            <div className="w-full min-w-0 sm:w-auto">
+              <h3 className="text-xl font-bold truncate sm:text-2xl text-text-100">{beat.title}</h3>
               <p className="text-base sm:text-lg text-text-200">{beat.producer}</p>
             </div>
-            <div className="flex gap-2 items-center w-full sm:w-auto justify-end">
-              <span className="text-2xl sm:text-3xl font-bold text-primary-200">${beat.price}</span>
+            <div className="flex gap-2 justify-end items-center w-full sm:w-auto">
+              <span className="text-2xl font-bold sm:text-3xl text-primary-200">${beat.price}</span>
             </div>
           </div>
 
@@ -128,14 +143,14 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
             </button>
             <button
               onClick={handleDownloadDemo}
-              className="flex-1 sm:flex-none items-center gap-2 px-6 py-2.5 font-medium rounded-lg bg-bg-300 text-text-100 hover:bg-bg-400"
+              className="flex-auto sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 font-medium rounded-lg bg-bg-300 text-text-100 hover:bg-bg-400"
             >
               <Download size={18} />
-              <span>Demo</span>
+              <span className="inline-flex">Demo</span>
             </button>
             <button
               onClick={handleShare}
-              className="flex items-center gap-2 p-2.5 font-medium rounded-lg bg-bg-300 text-text-100 hover:bg-bg-400"
+              className="flex justify-center h-full items-center gap-2 p-2.5 font-medium rounded-lg bg-bg-300 text-text-100 hover:bg-bg-400"
             >
               <Share2 size={18} />
             </button>

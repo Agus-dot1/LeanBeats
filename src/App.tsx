@@ -24,7 +24,7 @@ const item = {
 function App() {
 
   return (
-    <div className="mt-14 min-h-screen md:mt-0 bg-bg-100">
+    <div className="min-h-screen bg-bg-100">
       <SEO
         title="Inicio"
         description="Descubre la mejor música para tu proyecto."

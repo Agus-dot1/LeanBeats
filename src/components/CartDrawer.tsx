@@ -41,7 +41,7 @@ export const CartDrawer: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 300 }}
               transition={{ duration: 0.5, ease: 'anticipate' }}
-              className="overflow-y-auto fixed top-0 right-0 bottom-0 z-50 p-6 w-full max-w-md border-l shadow-xl bg-bg-100 border-bg-200"
+              className="overflow-y-auto fixed top-0 right-0 bottom-0 z-[5000] p-6 w-full max-w-md border-l shadow-xl bg-bg-100 border-bg-200"
             >
               <div className="flex flex-col h-full">
                 <div className="flex justify-between items-center mb-6">
@@ -53,7 +53,7 @@ export const CartDrawer: React.FC = () => {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={handleClose}
-                    className="p-2 rounded-full hover:bg-bg-200"
+                    className="p-2 rounded-full text-text-100 hover:bg-bg-200"
                   >
                     <X size={20} />
                   </motion.button>
@@ -136,9 +136,9 @@ export const CartDrawer: React.FC = () => {
                     <ShoppingCart size={20} />
                     Proceder al pago
                   </motion.button>
-                  <p className='flex flex-col mt-2 text-xs text-center'>
+                  <p className="flex flex-col mt-2 text-xs text-center text-text-100">
                       * Los precios son en dólares estadounidenses (USD).<br />
-                      <span>* Clickeando en proceder al pago, estás aceptando los <Link className='block underline' to="/Legal">términos y condiciones</Link></span>
+                      <span>* Clickeando en proceder al pago, estás aceptando los <Link className='block underline text-primary-200' to="/Legal">términos y condiciones</Link></span>
                   </p>
                 </div>
               </div>
