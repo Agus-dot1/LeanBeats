@@ -20,7 +20,7 @@ export const BeatsFilter: React.FC<BeatsFilterProps> = ({
   onSortChange,
 }) => {
   const [showSort, setShowSort] = useState(false);
-  const genres = ['Todos', 'Trap', 'Hip Hop', 'RKT', 'Pop', 'Reggaeton', 'Electronic'];
+  const genres = ['Todos', 'Trap', 'Hip Hop', 'RKT', 'Pop', 'Reguetón', 'Electrónica'];
   const sortOptions = [
     { value: 'recent', label: 'Más Recientes' },
     { value: 'popular', label: 'Más Populares' },

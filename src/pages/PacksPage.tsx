@@ -221,7 +221,7 @@ const PacksPage: React.FC = () => {
         <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
       </Helmet>
 
-      <div className="container px-4 mx-auto max-w-6xl">
+      <div className="container px-4 mx-auto max-w-7xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

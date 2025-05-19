@@ -24,9 +24,9 @@ export const Navigation: React.FC = () => {
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 1, ease: "easeInOut" }}
+        transition={{ duration: 0.5, delay: .3, ease: "anticipate" }}
         className="fixed top-0 right-0 left-0 z-50 bg-bg-300 border-bg-200 h-fit"
-      >
+      > 
         <nav className="container px-4 py-4 mx-auto h-full">
           <div className="flex justify-between items-center">
             <NavLink

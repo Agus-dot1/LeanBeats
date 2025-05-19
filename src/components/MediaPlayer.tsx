@@ -148,7 +148,7 @@ const Player: React.FC = () => {
       className={`fixed ${isExpanded ? 'bottom-3 sm:bottom-6' : 'bottom-1 sm:bottom-2'} left-4 sm:left-6 transition-all duration-300 z-40`}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1, ease: "anticipate" }} 
+      transition={{ duration: 1, delay: .5, ease: "anticipate" }} 
       exit={{ opacity: 0, y: 100 }}
     >
       <motion.div 
@@ -179,14 +179,14 @@ const Player: React.FC = () => {
                 {currentSong.title}
               </h3>
               <Tooltip id="song-title-tooltip" place="top" />
-              <p className="text-xs truncate text-text-100/60">{currentSong.artist}</p>
+              <p className="text-xs truncate text-text-100">{currentSong.artist}</p>
               <div className="flex gap-2 items-center mt-1">
-                <span className="text-xs text-text-100/60">{currentSong.duration}</span>
+                <span className="text-xs text-text-100">{currentSong.duration}</span>
                 <button
                   onClick={openYoutube}
                   className="p-1 rounded-full hover:bg-bg-300"
                 >
-                  <Youtube size={14} className="text-text-100/60" />
+                  <Youtube size={14} className="text-text-100" />
                 </button>
               </div>
             </motion.div>

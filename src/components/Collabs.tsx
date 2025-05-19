@@ -119,7 +119,7 @@ export const Collabs: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-4 text-4xl font-bold text-white"
+            className="mb-4 text-4xl font-bold text-text-100"
           >
             Artistas Destacados
           </motion.h2>
@@ -127,7 +127,7 @@ export const Collabs: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mx-auto max-w-2xl text-lg text-white"
+            className="mx-auto max-w-2xl text-lg text-text-100"
           >
             Descubre las colaboraciones más exitosas y los artistas con los que he tenido el placer de trabajar.
           </motion.p>

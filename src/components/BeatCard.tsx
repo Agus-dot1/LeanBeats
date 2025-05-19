@@ -86,11 +86,11 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
           <img
             src={beat.coverUrl}
             alt={beat.title}
-            className="object-cover w-full h-full rounded-lg opacity-70"
+            className="object-cover w-full h-full rounded-lg"
             loading="lazy"
           />
           {beat.featured && (
-            <div className="absolute -top-3 -right-3 px-4 py-1 text-sm font-bold text-white rounded-full shadow-lg bg-primary-200">
+            <div className="absolute -top-3 -right-3 px-4 py-1 text-sm font-semibold text-white rounded-full shadow-lg bg-primary-200">
               Destacado
             </div>
           )}
