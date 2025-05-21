@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Play, Music, AudioWaveform as Waveform, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
-import { SEO } from './components/SEO';
 import { Collabs } from './components/Collabs';
 import ServiceCard from './components/ServiceCard';
 
@@ -17,6 +16,7 @@ const containerVariants = {
     }
   }
 };
+
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -58,10 +58,6 @@ function App() {
         variants={containerVariants}
         className="min-h-screen bg-bg-100"
       >
-        <SEO
-          title="Inicio"
-          description="Descubre la mejor música para tu proyecto."
-        />
         
         <div className="overflow-hidden relative pt-24 pb-16 w-full min-h-screen bg-bg-100 md:pt-60 md:pb-24">
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
