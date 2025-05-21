@@ -82,7 +82,6 @@ const RoutesApp = () => {
       // Clean up prefetch if needed
     };
   }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
