@@ -96,7 +96,7 @@ const BeatsPage: React.FC = () => {
     const timer = setTimeout(() => {
       setBeats(sampleBeats);
       setIsLoading(false);
-    }, 1000);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
@@ -249,7 +249,7 @@ const BeatsPage: React.FC = () => {
        
       </div>
        {/* Volume Control */}
-       <div className="flex sticky bottom-2 justify-end md:mr-14 z-15">
+       <div className="bottom-2 justify-end md:flex md:sticky md:mr-14 z-15">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

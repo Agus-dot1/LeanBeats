@@ -210,7 +210,7 @@ const PacksPage: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 

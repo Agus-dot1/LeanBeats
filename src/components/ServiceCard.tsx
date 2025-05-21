@@ -9,7 +9,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, color }) => {
   return (
-    <div className="overflow-hidden relative p-5 rounded-xl border backdrop-blur-sm transition-all duration-200 transform select-none group bg-gray-800/50 border-gray-700/50 hover:bg-[#1D1F21] hover:-translate-y-1 hover:shadow-lg">
+    <div className="overflow-hidden relative p-5 rounded-3xl border backdrop-blur-sm transition-all duration-200 transform select-none group bg-gray-800/50 border-gray-700/50 hover:bg-[#1D1F21] hover:-translate-y-1 hover:shadow-lg">
 
       <div className={`absolute -top-24 -right-24 w-40 h-40 bg-gradient-to-br rounded-full opacity-0 blur-xl transition-opacity duration-500 ${color} group-hover:opacity-40`}></div>
       

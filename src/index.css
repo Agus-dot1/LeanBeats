@@ -9,10 +9,11 @@
 @layer base {
   html {
     font-family: 'poppins', sans-serif;
+    background: linear-gradient(to bottom, var(--bg-100), var(--bg-200));
     height: 100%;
   }
   h1, h2 {
-    font-family: 'inter', sans-serif;
+    font-family: 'inter', sans-serif; 
   }
 
   :root {

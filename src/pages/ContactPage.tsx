@@ -15,15 +15,56 @@ const ContactPage: React.FC = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): boolean => {
+    if (!formData.name.trim() || formData.name.length < 2) {
+      showToast('El nombre debe tener al menos 2 caracteres', 'error');
+      return false;
+    }
+
+    if (!validateEmail(formData.email)) {
+      showToast('Por favor, ingresa un email válido', 'error');
+      return false;
+    }
+
+    if (!formData.subject) {
+      showToast('Por favor, selecciona un asunto', 'error');
+      return false;
+    }
+
+    if (!formData.message.trim() || formData.message.length < 10) {
+      showToast('El mensaje debe tener al menos 10 caracteres', 'error');
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const now = Date.now();
+    if (now - lastSubmissionTime < 60000) {
+      showToast('Por favor, espera un minuto antes de enviar otro mensaje', 'warning');
+      return;
+    }
+
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
     const templateParams = {
-      name: formData.name,
-      email: formData.email,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
       subject: formData.subject,
-      message: formData.message
+      message: formData.message.trim()
     };
   
     try {
@@ -35,13 +76,14 @@ const ContactPage: React.FC = () => {
       );
   
       console.log('SUCCESS:', result.text);
-
+      setLastSubmissionTime(now);
       showToast('Mensaje enviado correctamente', 'success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('FAILED...', error);
-
-      showToast('Hubo un problema al enviar el mensaje', 'error');
+      showToast('Hubo un problema al enviar el mensaje', 'info');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -59,7 +101,7 @@ const ContactPage: React.FC = () => {
         <meta name="description" content="Contáctanos para producción musical, reservas de estudio o cualquier consulta." />
       </Helmet>
 
-      <div className="container px-4 mx-auto max-w-6xl">
+      <div className="container px-4 mx-auto max-w-7xl">
         <div className="mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -193,10 +235,11 @@ const ContactPage: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="flex gap-2 justify-center items-center px-8 py-4 w-full font-medium text-white rounded-xl bg-primary-200"
+                disabled={isSubmitting}
+                className="flex gap-2 justify-center items-center px-8 py-4 w-full font-medium text-white rounded-xl bg-primary-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send size={20} />
-                Enviar Mensaje
+                <Send size={20} className={isSubmitting ? 'animate-pulse' : ''} />
+                {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
               </motion.button>
             </form>
           </motion.div>
