@@ -114,7 +114,6 @@ const ContactPage: React.FC = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
             className="mb-4 text-4xl font-bold md:text-6xl text-text-100"
           >
             Atención <span className="text-primary-200">al Cliente</span>
@@ -122,7 +121,6 @@ const ContactPage: React.FC = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
             className="max-w-2xl text-lg text-text-200"
           >
             Para cualquier consulta o asistencia, nuestro equipo de atención al cliente está disponible para garantizar que cada interacción sea satisfactoria. Si encuentras algún problema, estamos aquí para ayudarte a resolverlo.

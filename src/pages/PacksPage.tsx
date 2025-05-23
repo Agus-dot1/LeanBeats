@@ -234,7 +234,6 @@ const PacksPage: React.FC = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
             className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-6xl text-text-100"
           >
             Packs de Samples & <span className="text-primary-200">Librerías</span>
@@ -242,7 +241,6 @@ const PacksPage: React.FC = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
             className="max-w-2xl text-base sm:text-lg text-text-200"
           >
             Samples, loops y kits de calidad profesional creados para la producción musical moderna.

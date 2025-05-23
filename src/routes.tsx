@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, lazy } from 'react';
+import { Suspense, useState, useEffect, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigation } from './components/Navigation';
@@ -32,7 +32,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 // Simple loading component
 const LoadingFallback = () => (
   <div className="flex justify-center items-center min-h-screen bg-bg-100">
-    <div className="w-10 h-10 border-3 border-primary-200 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-10 h-10 rounded-full animate-spin border-3 border-primary-200 border-t-transparent"></div>
   </div>
 );
 

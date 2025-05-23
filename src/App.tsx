@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Play, Music, AudioWaveform as Waveform, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
-import { Collabs } from './components/Collabs';
 import ServiceCard from './components/ServiceCard';
 
 const containerVariants = {
@@ -69,7 +68,7 @@ function App() {
               className="hidden absolute inset-0 bg-center bg-cover scale-100 md:rounded-3xl bg-bg-100 md:block"
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
-                filter: 'brightness(0.6)',
+                filter: 'brightness(0.8)',
               }}
             />
             <div
@@ -89,10 +88,10 @@ function App() {
               >
                 <motion.div 
                   variants={itemVariants}
-                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-orange-400 rounded-full bg-orange-500/10"
+                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
                 >
                   <Music className="mr-2 w-4 h-4" />
-                  <span>Producción Musical</span>
+                  <span>Productor Musical</span>
                 </motion.div>
                 
                 <motion.h1 
@@ -105,7 +104,7 @@ function App() {
                 
                 <motion.p 
                   variants={itemVariants}
-                  className="mx-auto max-w-xl text-lg text-white/90 lg:mx-0"
+                  className="mx-auto max-w-xl text-lg text-white lg:mx-0"
                 >
                   Catálogo oficial de Lea In The Mix. Encuentra una amplia variedad de beats y librerías para tus proyectos musicales.
                 </motion.p>
@@ -114,26 +113,27 @@ function App() {
                   variants={itemVariants}
                   className="flex flex-wrap gap-4 justify-center pt-4 lg:justify-start"
                 >
-                  <Link to="/beats">
+                                    <Link to="/librerias">
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="flex items-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-lg transition-all transform shadow-orange-500/20"
                     >
-                      <Play className="mr-2 w-5 h-5" />
-                      Explorar Beats
-                    </motion.button>
-                  </Link>
-                  <Link to="/librerias">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center px-6 py-3 font-medium text-white rounded-full border border-gray-700 transition-all transform bg-gray-800/50 hover:bg-gray-800"
-                    >
                       <Music className="mr-2 w-5 h-5" />
                       Explorar Librerías
                     </motion.button>
                   </Link>
+                  <Link to="/beats">
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center px-6 py-3 font-medium text-white rounded-full border transition-all transform border-gray-700/50 bg-gray-800/50 hover:bg-gray-800"
+                    >
+                      <Play className="mr-2 w-5 h-5" />
+                      Explorar Beats
+                    </motion.button>
+                  </Link>
+
                 </motion.div>
               </motion.div>
               
@@ -141,7 +141,7 @@ function App() {
                 variants={containerVariants}
                 className="w-full lg:w-1/2"
               >
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6">
                   <motion.div
                     variants={itemVariants}
                   >
@@ -164,43 +164,11 @@ function App() {
                   </motion.div>
                 </div>
 
-                <motion.div 
-                  variants={itemVariants}
-                  className="mt-6"
-                >
-                  <div className="overflow-hidden p-6 rounded-3xl transition-all duration-300 transform  group hover:-translate-y-1 border backdrop-blur-sm select-none bg-gray-800/50 border-gray-700/50 hover:bg-[#1D1F21] group">
-                    <motion.div 
-                      className="absolute -top-24 -right-24 w-40 h-40 rounded-full blur-xl"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.4 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <div className={`absolute -top-24 -right-24 w-40 h-40 bg-gradient-to-br from-purple-500 to-orange-500 rounded-full opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-40`}></div>
-      
-                    <div className="flex flex-col items-start">
-                      <div className="flex justify-center items-center mb-4 w-12 h-12 text-white bg-gradient-to-br from-orange-500 to-red-500 rounded-xl">
-                        <Waveform className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">Catálogo de beats</h3>
-                        <p className="text-sm text-white/90">Próximamente una amplia selección de beats premium</p>
-                      </div>
-                    </div>
-                    <div className="mt-4 h-2 bg-gray-700 rounded-full">
-                      <motion.div 
-                        className="h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: "66%" }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                
               </motion.div>
             </div>
           </div>
         </div>
-        <Collabs />
         <Footer />
       </motion.div>
     </>

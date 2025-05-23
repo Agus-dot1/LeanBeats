@@ -102,7 +102,14 @@ const Player: React.FC = () => {
         }
       };
     }
-  }, [currentSong, isPlaying, volume]); // Add volume to dependency array
+  }, [currentSong, isPlaying]); // Remove volume from dependency array
+  
+  // Add a separate effect to handle volume changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -145,7 +152,7 @@ const Player: React.FC = () => {
 
   return (
     <motion.div 
-      className={`fixed ${isExpanded ? 'bottom-3 sm:bottom-6' : 'bottom-1 sm:bottom-2'} left-4 sm:left-6 transition-all duration-300 z-40`}
+      className={`fixed ${isExpanded ? 'bottom-6 sm:bottom-9' : 'bottom-4 sm:bottom-6'} left-4 sm:left-6 transition-all duration-300 z-40`}
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: .5, ease: "anticipate" }} 

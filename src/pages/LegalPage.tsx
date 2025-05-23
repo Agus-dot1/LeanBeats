@@ -110,7 +110,6 @@ const LegalPage: React.FC = () => {
       title: 'Pagos y Transacciones',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-                    <li>Los datos de pago son procesados y almacenados de forma segura por Paddle (paddle.com), nuestro procesador de pagos autorizado.</li>
           <li>Aceptamos pagos internacionales mediante tarjetas de crédito/débito y otros métodos de pago disponibles en su región.</li>
           <li>Los precios mostrados son en USD y pueden estar sujetos a impuestos según su jurisdicción.</li>
           <li>Las transacciones son procesadas de forma segura y encriptada.</li>
@@ -123,7 +122,6 @@ const LegalPage: React.FC = () => {
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
           <li>Las solicitudes de reembolso deben realizarse dentro de los 14 días posteriores a la compra.</li>
-          <li>Los reembolsos serán procesados a través de Paddle utilizando el mismo método de pago original.</li>
           <li>No se aceptarán solicitudes de reembolso para contenido que ya haya sido descargado o utilizado.</li>
           <li>Nos reservamos el derecho de denegar reembolsos en caso de uso indebido o descarga del contenido.</li>
         </ul>
