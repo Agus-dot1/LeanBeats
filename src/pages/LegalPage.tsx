@@ -70,6 +70,8 @@ const LegalPage: React.FC = () => {
         <ul className="pl-6 space-y-3 list-disc text-text-200">
           <li>Este sitio está destinado exclusivamente a la comercialización de contenido musical, incluyendo librerías de sonido y beats originales producidos por Lea in the Mix.</li>
           <li>Queda prohibido el uso indebido del sitio, como intentos de acceso no autorizado, distribución automatizada de contenido o alteración del mismo.</li>
+          <li>Las transacciones y comunicación comercial se realizan mediante WhatsApp. El sitio web funciona como catálogo informativo.</li>
+          <li>El contacto comercial oficial es únicamente a través del WhatsApp autorizado. Desconfíe de otros números que se hagan pasar por Lea in the Mix.</li>
         </ul>
       )
     },
@@ -110,9 +112,10 @@ const LegalPage: React.FC = () => {
       title: 'Pagos y Transacciones',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Aceptamos pagos internacionales mediante tarjetas de crédito/débito y otros métodos de pago disponibles en su región.</li>
-          <li>Los precios mostrados son en USD y pueden estar sujetos a impuestos según su jurisdicción.</li>
-          <li>Las transacciones son procesadas de forma segura y encriptada.</li>
+          <li>Los pagos se procesan mediante WhatsApp a través de transferencias bancarias, servicios de pago digital (PayPal, Mercado Pago, etc.) según disponibilidad en su región.</li>
+          <li>Proceso de compra: Contactar vía WhatsApp → Confirmar productos → Realizar pago → Recibir comprobante → Entrega del contenido.</li>
+          <li>Es responsabilidad del comprador enviar el comprobante de pago válido para procesar la entrega.</li>
+          <li>Los archivos serán entregados únicamente después de la confirmación del pago.</li>
         </ul>
       )
     },
@@ -121,9 +124,10 @@ const LegalPage: React.FC = () => {
       title: 'Política de Reembolsos',
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Las solicitudes de reembolso deben realizarse dentro de los 14 días posteriores a la compra.</li>
-          <li>No se aceptarán solicitudes de reembolso para contenido que ya haya sido descargado o utilizado.</li>
-          <li>Nos reservamos el derecho de denegar reembolsos en caso de uso indebido o descarga del contenido.</li>
+          <li><strong>TODAS LAS VENTAS SON FINALES</strong>. No se ofrecen reembolsos, devoluciones, ni intercambios bajo ninguna circunstancia.</li>
+          <li>Debido a la naturaleza digital del contenido (beats, samples, loops) y la imposibilidad de "devolver" archivos digitales una vez descargados, no procesamos solicitudes de reembolso.</li>
+          <li>Esta política se aplica independientemente del método de pago utilizado.</li>
+          <li>Al realizar la compra, usted acepta expresamente esta política de "sin reembolsos".</li>
         </ul>
       )
     }

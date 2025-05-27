@@ -65,7 +65,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
           setTimeout(() => {
             setIsComplete(true);
             setTimeout(onLoadingComplete, 600); // Delay before triggering the completion callback
-          }, 300);
+          }, 200);
         }
         
         return nextProgress;
@@ -99,7 +99,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
           >
             <div className="relative mb-8">
               <motion.div
-                className="w-32 h-32 rounded-full bg-gradient-to-r from-orange-500 to-red-500 opacity-20 blur-xl absolute"
+                className="absolute w-32 h-32 bg-gradient-to-r from-orange-500 to-red-500 rounded-full opacity-20 blur-xl"
                 animate={{ 
                   scale: [1, 1.2, 1],
                   opacity: [0.2, 0.3, 0.2]
@@ -111,7 +111,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
                 }}
               />
               <motion.div 
-                className="relative z-10 flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-orange-500 to-red-500"
+                className="flex relative z-10 justify-center items-center w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
                 animate={{ 
                   rotate: 360,
                 }}
@@ -126,7 +126,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
             </div>
             
             <motion.h1 
-              className="text-4xl font-bold mb-2 text-text-100"
+              className="mb-2 text-4xl font-bold text-text-100"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -137,7 +137,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
             
             <motion.div
               key={loadingMessage}
-              className="text-text-200 mb-8 h-6 text-center"
+              className="mb-8 h-6 text-center text-text-200"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -146,7 +146,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
               {loadingMessage}
             </motion.div>
             
-            <div className="w-64 h-2 bg-bg-300 rounded-full overflow-hidden">
+            <div className="overflow-hidden w-64 h-2 rounded-full bg-bg-300">
               <motion.div 
                 className="h-full bg-gradient-to-r from-orange-500 to-red-500"
                 initial={{ width: 0 }}

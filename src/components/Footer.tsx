@@ -25,8 +25,8 @@ const beatTypes = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="relative pt-20 pb-10 overflow-hidden bg-bg-100">
-      <div className="container max-w-6xl px-4 mx-auto">
+    <footer className="overflow-hidden relative pt-20 pb-10 bg-bg-100">
+      <div className="container px-4 mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2 lg:grid-cols-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
           >
             <h3 className="mb-6 text-2xl font-bold text-text-100">Lea in the Mix</h3>
             <p className="mb-6 text-text-200">
-              Creando sonidos innecesariamente buenos, desde Buenos Aires para el mundo.
+            DJ/Productor musical de Buenos Aires, Argentina
             </p>
             <div className="flex gap-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-2 transition-colors duration-300 rounded-full bg-bg-200 text-text-100 hover:bg-primary-200 hover:text-white"
+                  className="p-2 rounded-full transition-colors duration-300 bg-bg-200 text-text-100 hover:bg-primary-200 hover:text-white"
                   aria-label={label}
                 >
                   <Icon size={20} />
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
                       whileHover={{ x: 1 }}
                       className="flex items-center transition-colors group text-text-200 hover:text-primary-200"
                     >
-                      <ArrowRight className="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-0" />
+                      <ArrowRight className="-ml-4 w-4 h-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0" />
                       <span>{name}</span>
                     </motion.div>
                   </Link>
@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
                       whileHover={{ x: 3 }}
                       className="flex items-center transition-colors group text-text-200 hover:text-primary-200"
                     >
-                      <ArrowRight className="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-0" />
+                      <ArrowRight className="-ml-4 w-4 h-4 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0" />
                       <span>{name}</span>
                     </motion.div>
                   </Link>
@@ -114,19 +114,19 @@ export const Footer: React.FC = () => {
             <ul className="space-y-4">
               <motion.li 
                 whileHover={{ x: 1 }}
-                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+                className="flex gap-3 items-center transition-colors text-text-200 hover:text-primary-200"
               >
                 <a href="mailto:leainthemix.c@hotmail.com">leainthemix.c@hotmail.com</a>
               </motion.li>
               <motion.li 
                 whileHover={{ x: 1 }}
-                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+                className="flex gap-3 items-center transition-colors text-text-200 hover:text-primary-200"
               >
                 <span>Buenos Aires, Argentina</span>
               </motion.li>
               <motion.li 
                 whileHover={{ x: 1 }}
-                className="flex items-center gap-3 transition-colors text-text-200 hover:text-primary-200"
+                className="flex gap-3 items-center transition-colors text-text-200 hover:text-primary-200"
               >
                 <a href="tel:+54 11 7060-7158">Tel: +54 11 7060-7158</a>
               </motion.li>
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="pt-8 border-t border-bg-300"
         >
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <div className="flex flex-col gap-4 justify-between items-center md:flex-row">
             <p className="text-sm text-text-200">
               © {new Date().getFullYear()} Lea in the Mix. Todos los derechos reservados.
             </p>

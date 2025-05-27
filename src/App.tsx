@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Music, AudioWaveform as Waveform, Headphones } from 'lucide-react';
+import { Play, Music, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
@@ -58,21 +58,21 @@ function App() {
         className="min-h-screen bg-bg-100"
       >
         
-        <div className="overflow-hidden relative pt-24 pb-16 w-full min-h-screen bg-bg-100 md:pt-60 md:pb-24">
+        <div className="relative w-full min-h-screen pt-24 pb-16 overflow-hidden bg-bg-100 md:pt-60 md:pb-24">
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
             <motion.div
               initial={{ scale: 1.3, opacity: 0 }}
               viewport={{ once: true }}
               animate={isLoading ? { scale: 1.3, opacity: 0 } : { scale: 0.8, opacity: 1 }}
               transition={{ duration: .8, ease:'anticipate', repeat: 0 }} 
-              className="hidden absolute inset-0 bg-center bg-cover scale-100 md:rounded-3xl bg-bg-100 md:block"
+              className="absolute inset-0 hidden scale-100 bg-center bg-cover md:rounded-3xl bg-bg-100 md:block"
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.8)',
               }}
             />
             <div
-              className="absolute inset-0 bg-center bg-cover scale-100 xl:hidden bg-bg-100"
+              className="absolute inset-0 scale-100 bg-center bg-cover xl:hidden bg-bg-100"
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.6)',
@@ -81,16 +81,16 @@ function App() {
           </div>
           
           <div className="container relative z-10 px-4 mx-auto max-w-7xl">
-            <div className="flex flex-col gap-8 items-center lg:flex-row lg:gap-12">
+            <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
               <motion.div 
-                className="space-y-6 w-full text-center lg:w-1/2 lg:text-left"
+                className="w-full space-y-6 text-center lg:w-1/2 lg:text-left"
                 variants={containerVariants}
               >
                 <motion.div 
                   variants={itemVariants}
-                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
+                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-orange-500 to-red-500"
                 >
-                  <Music className="mr-2 w-4 h-4" />
+                  <Music className="w-4 h-4 mr-2" />
                   <span>Productor Musical</span>
                 </motion.div>
                 
@@ -104,22 +104,22 @@ function App() {
                 
                 <motion.p 
                   variants={itemVariants}
-                  className="mx-auto max-w-xl text-lg text-white lg:mx-0"
+                  className="max-w-xl mx-auto text-lg text-white lg:mx-0"
                 >
                   Catálogo oficial de Lea In The Mix. Encuentra una amplia variedad de beats y librerías para tus proyectos musicales.
                 </motion.p>
                 
                 <motion.div 
                   variants={itemVariants}
-                  className="flex flex-wrap gap-4 justify-center pt-4 lg:justify-start"
+                  className="flex flex-wrap justify-center gap-4 pt-4 lg:justify-start"
                 >
                                     <Link to="/librerias">
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center px-6 py-3 font-medium text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-full shadow-lg transition-all transform shadow-orange-500/20"
+                      className="flex items-center px-6 py-3 font-medium text-white transition-all transform rounded-full shadow-lg bg-gradient-to-r from-orange-500 to-red-500 shadow-orange-500/20"
                     >
-                      <Music className="mr-2 w-5 h-5" />
+                      <Music className="w-5 h-5 mr-2" />
                       Explorar Librerías
                     </motion.button>
                   </Link>
@@ -127,9 +127,9 @@ function App() {
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center px-6 py-3 font-medium text-white rounded-full border transition-all transform border-gray-700/50 bg-gray-800/50 hover:bg-gray-800"
+                      className="flex items-center px-6 py-3 font-medium text-white transition-all transform border rounded-full border-gray-700/50 bg-gray-800/50 hover:bg-gray-800"
                     >
-                      <Play className="mr-2 w-5 h-5" />
+                      <Play className="w-5 h-5 mr-2" />
                       Explorar Beats
                     </motion.button>
                   </Link>
