@@ -6,6 +6,13 @@ import { Package, Wand2, FileAudio, HardDrive, Plus, X, Star, Crown } from 'luci
 // import { useToast } from '../context/ToastContext';
 import { Footer } from '../components/Footer';
 
+
+const CONTENT_LABELS: Record<string, string> = {
+  bassSnareBass: "BASS + SNARE BASS",
+  // add more custom labels if needed
+};
+
+
 // Update the PackContent interface first
 interface PackContent {
   [key: string]: number | undefined;
@@ -188,7 +195,7 @@ const ContentDialog: React.FC<DialogProps> = ({ isOpen, onClose, pack }) => {
                 <div className="flex gap-1.5 sm:gap-2 items-center mb-1 sm:mb-2">
                   <FileAudio size={14} className={`sm:w-4 sm:h-4 ${getIconColor()}`} />
                   <div className="text-xs font-medium uppercase sm:text-sm text-text-100">
-                    {key.replace(/([A-Z])/g, ' $1').trim()}
+                    {CONTENT_LABELS[key] || key.replace(/([A-Z])/g, ' $1').trim()}
                   </div>
                 </div>
                 <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">
@@ -220,6 +227,7 @@ const PacksPage: React.FC = () => {
   const [selectedGenre, setSelectedGenre] = useState<string>('todos');
   const [selectedPack, setSelectedPack] = useState<Pack | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
 
   // Comment out cart functionality
   // const handleAddToCart = (pack: Pack) => {
@@ -338,7 +346,7 @@ const PacksPage: React.FC = () => {
           contents: {
             bases: 19,
             claps: 10,
-            bass: 13,
+            bassSnareBass: 13,
             complementos: 15,
             fxs: 28,
             kicks: 15,
@@ -348,7 +356,6 @@ const PacksPage: React.FC = () => {
             punteos: 20,
             repiques: 11,
             snares: 19,
-            snareBass: 13,
             vocales: 16
           }
         },
@@ -364,7 +371,7 @@ const PacksPage: React.FC = () => {
           contents: {
             bases: 32,
             claps: 21,
-            bass: 20,
+            bassSnareBass: 20,
             complementos: 27,
             fxs: 33,
             kicks: 28,
@@ -374,7 +381,6 @@ const PacksPage: React.FC = () => {
             punteos: 33,
             repiques: 20,
             snares: 26,
-            snareBass: 20,
             vocales: 19
           }
         }
