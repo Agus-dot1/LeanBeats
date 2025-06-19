@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, AudioWaveform } from 'lucide-react';
+import { Music } from 'lucide-react';
 import { useImagePreloader } from '../hooks/useImagePreloader';
+
+const VISIT_KEY = 'has_visited_leanbeats';
 
 interface LoaderProps {
   onLoadingComplete: () => void;
@@ -14,7 +16,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
   const [loadingMessage, setLoadingMessage] = useState("Cargando experiencia musical...");
 
   // Array of dynamic loading messages
-  const loadingMessages = [
+  const loadingMessages = React.useMemo(() => [
     "Cargando experiencia musical...",
     "Masterizando samples...",
     "Probando sonidos...",
@@ -25,7 +27,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
     "Mezclando pistas...",
     "Afinando instrumentos...",
     "Amplificando bajos..."
-  ];
+  ], []);
 
   // Update loading message based on progress
   useEffect(() => {
@@ -34,7 +36,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
       loadingMessages.length - 1
     );
     setLoadingMessage(loadingMessages[messageIndex]);
-  }, [progress]);
+  }, [progress, loadingMessages]);
 
   // Prevent scrolling while loader is active
   useEffect(() => {
@@ -50,30 +52,46 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
     };
   }, []);
 
+  const hasVisitedBefore = React.useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem(VISIT_KEY) === 'true';
+  }, []);
+
+  // Store visit after first load
+  useEffect(() => {
+    if (!hasVisitedBefore) {
+      localStorage.setItem(VISIT_KEY, 'true');
+    }
+  }, [hasVisitedBefore]);
+
   useEffect(() => {
     // Simulate asset loading with incremental progress
     const interval = setInterval(() => {
       setProgress(prev => {
-        // Accelerate progress as it gets closer to 100
-        const increment = Math.max(1, Math.floor((100 - prev) / 10));
+        const increment = hasVisitedBefore 
+          ? Math.max(5, Math.floor((100 - prev) / 5))  // Fast increment for returning visitors
+          : Math.max(1, Math.floor((100 - prev) / 10)); // Original increment for first visit
+        
         const nextProgress = Math.min(prev + increment, 100);
         
         if (nextProgress === 100 && imagesPreloaded) {
           clearInterval(interval);
           
-          // Add a small delay before completing to show 100%
+          const transitionDelay = hasVisitedBefore ? 100 : 200;
+          const completionDelay = hasVisitedBefore ? 400 : 600;
+          
           setTimeout(() => {
             setIsComplete(true);
-            setTimeout(onLoadingComplete, 600); // Delay before triggering the completion callback
-          }, 200);
+            setTimeout(onLoadingComplete, completionDelay);
+          }, transitionDelay);
         }
         
         return nextProgress;
       });
-    }, 100);
+    }, hasVisitedBefore ? 50 : 100);
 
     return () => clearInterval(interval);
-  }, [onLoadingComplete, imagesPreloaded]);
+  }, [onLoadingComplete, imagesPreloaded, hasVisitedBefore]);
 
   return (
     <AnimatePresence>
@@ -99,7 +117,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
           >
             <div className="relative mb-8">
               <motion.div
-                className="absolute w-32 h-32 bg-gradient-to-r from-orange-500 to-red-500 rounded-full opacity-20 blur-xl"
+                className="absolute w-32 h-32 rounded-full bg-gradient-to-r from-orange-500 to-red-500 opacity-20 blur-xl"
                 animate={{ 
                   scale: [1, 1.2, 1],
                   opacity: [0.2, 0.3, 0.2]
@@ -111,7 +129,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
                 }}
               />
               <motion.div 
-                className="flex relative z-10 justify-center items-center w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"
+                className="relative z-10 flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-orange-500 to-red-500"
                 animate={{ 
                   rotate: 360,
                 }}
@@ -137,7 +155,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
             
             <motion.div
               key={loadingMessage}
-              className="mb-8 h-6 text-center text-text-200"
+              className="h-6 mb-8 text-center text-text-200"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -146,7 +164,7 @@ export const Loader: React.FC<LoaderProps> = ({ onLoadingComplete }) => {
               {loadingMessage}
             </motion.div>
             
-            <div className="overflow-hidden w-64 h-2 rounded-full bg-bg-300">
+            <div className="w-64 h-2 overflow-hidden rounded-full bg-bg-300">
               <motion.div 
                 className="h-full bg-gradient-to-r from-orange-500 to-red-500"
                 initial={{ width: 0 }}

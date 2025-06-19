@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Tag, Clock, Music, Download, ShoppingCart, Share2, Play, Pause } from 'lucide-react';
 import { Beat } from '../types/beat';
 import { AudioPlayer } from './AudioPlayer';
-import { useCart } from '../context/CartContext';
+// import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 
 interface BeatCardProps {
@@ -18,24 +18,34 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
   onPlay,   
   globalVolume = 0.5  
 }) => {
-  const { addItem } = useCart();
+  // const { addItem } = useCart();
   const { showToast } = useToast();
-  const { showDuplicateItemToast } = useToast();
+  // const { showDuplicateItemToast } = useToast();
 
-  const handleAddToCart = () => {
-    const itemToAdd = {
-      id: beat.id,
-      type: 'beat' as const,
-      title: beat.title,
-      price: beat.price,
-      coverUrl: beat.coverUrl
-    };
-  
-    try {
-      addItem(itemToAdd);
-      showToast('¡Beat añadido al carrito!', 'success');
-    } catch (error) {
-      showDuplicateItemToast(beat.title);
+  // Comment out cart functionality
+  // const handleAddToCart = () => {
+  //   const itemToAdd = {
+  //     id: beat.id,
+  //     type: 'beat' as const,
+  //     title: beat.title,
+  //     price: beat.price,
+  //     coverUrl: beat.coverUrl
+  //   };
+  // 
+  //   try {
+  //     addItem(itemToAdd);
+  //     showToast('¡Beat añadido al carrito!', 'success');
+  //   } catch (error) {
+  //     showDuplicateItemToast(beat.title);
+  //   }
+  // };
+
+  // Add Gumroad purchase function
+  const handlePurchase = () => {
+    if (beat.gumroadUrl) {
+      window.open(beat.gumroadUrl, '_blank', 'width=800,height=600');
+    } else {
+      showToast('URL de compra no disponible', 'error');
     }
   };
 
@@ -135,11 +145,11 @@ export const BeatCard: React.FC<BeatCardProps> = memo(({
 
           <div className="flex flex-wrap gap-2 items-center mt-auto">
             <button
-              onClick={handleAddToCart}
+              onClick={handlePurchase}
               className="flex-1 min-w-[200px] flex justify-center items-center gap-2 px-6 py-2.5 font-medium text-white rounded-lg bg-primary-200 hover:bg-primary-300"
             >
               <ShoppingCart size={18} />
-              <span>Añadir al carrito</span>
+              <span>Comprar ahora</span>
             </button>
             <button
               onClick={handleDownloadDemo}

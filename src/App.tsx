@@ -72,7 +72,7 @@ function App() {
               }}
             />
             <div
-              className="absolute inset-0 scale-100 bg-center bg-cover xl:hidden bg-bg-100"
+              className="absolute inset-0 scale-100 bg-center bg-cover 2xl:hidden bg-bg-100"
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.6)',
