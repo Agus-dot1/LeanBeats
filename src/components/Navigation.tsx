@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Music, Package, MessageSquare, ShoppingCart, Menu, X } from 'lucide-react';
+import { Home, Music, Package, MessageSquare, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
-import { useCart } from '../context/CartContext';
+// import { useCart } from '../context/CartContext';
 import { useTheme } from '../hooks/useTheme';
 
 const navItems = [
@@ -15,7 +15,7 @@ const navItems = [
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, setIsOpen: setIsCartOpen } = useCart();
+  // const { items, setIsOpen: setIsCartOpen } = useCart();
   const { theme } = useTheme();
 
   // Memoize the toggle function to prevent unnecessary re-renders
@@ -25,12 +25,12 @@ export const Navigation: React.FC = () => {
 
   return (
     <>
-      <header className="fixed top-0 right-0 left-0 z-50 bg-bg-300 border-bg-200">
-        <nav className="container px-2 py-2 mx-auto h-full">
-          <div className="flex justify-between items-center">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-bg-300 border-bg-200">
+        <nav className="container h-full px-2 py-2 mx-auto">
+          <div className="flex items-center justify-between">
             <NavLink
               to="/"
-              className="flex gap-2 items-center text-base font-bold transition-colors duration-300 md:text-2xl text-text-100 hover:text-primary-200"
+              className="flex items-center gap-2 text-base font-bold transition-colors duration-300 md:text-2xl text-text-100 hover:text-primary-200"
               aria-label="Home"
             >
               <img 
@@ -40,7 +40,7 @@ export const Navigation: React.FC = () => {
               />
             </NavLink>
 
-            <div className="hidden items-center space-x-6 md:flex">
+            <div className="items-center hidden space-x-6 md:flex">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <NavLink
                   key={path}
@@ -61,23 +61,24 @@ export const Navigation: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4">
+              {/* 
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="flex relative gap-2 items-center px-4 py-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200"
+                className="relative flex items-center gap-2 px-4 py-2 transition-colors duration-300 rounded-full text-text-100 hover:bg-bg-200"
                 aria-label="Shopping Cart"
               >
                 <ShoppingCart size={20} aria-hidden="true" />
                 <span className="hidden sm:inline">Carrito</span>
-                <span className="flex absolute -top-1 -right-1 justify-center items-center w-5 h-5 text-xs font-bold text-white rounded-full bg-primary-200">
+                <span className="absolute flex items-center justify-center w-5 h-5 text-xs font-bold text-white rounded-full -top-1 -right-1 bg-primary-200">
                   {items.length}
                 </span>
               </button>
-
+              */}
               <ThemeToggle />
 
               <button
                 onClick={toggleMenu}
-                className="p-2 rounded-full transition-colors duration-300 text-text-100 hover:bg-bg-200 md:hidden"
+                className="p-2 transition-colors duration-300 rounded-full text-text-100 hover:bg-bg-200 md:hidden"
                 aria-expanded={isOpen}
                 aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
               >
@@ -97,7 +98,7 @@ export const Navigation: React.FC = () => {
             transition={{ duration: 0.15, ease: "easeInOut" }}
             className="fixed inset-x-0 top-[73px] z-40 md:hidden"
           >
-            <div className="p-4 mx-4 rounded-2xl border shadow-lg bg-bg-100 border-bg-200">
+            <div className="p-4 mx-4 border shadow-lg rounded-2xl bg-bg-100 border-bg-200">
               {navItems.map(({ path, label, icon: Icon }) => (
                 <NavLink
                   key={path}

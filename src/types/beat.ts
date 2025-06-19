@@ -11,4 +11,6 @@ export interface Beat {
   audioUrl: string;
   releaseDate: string;
   featured?: boolean;
+  // Add Gumroad URL
+  gumroadUrl: string;
 }

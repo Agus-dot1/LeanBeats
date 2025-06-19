@@ -1,3 +1,4 @@
+/* */
 import React, { useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ShoppingCart, Trash2 } from 'lucide-react';

@@ -9,10 +9,12 @@ export interface Product {
     key?: string;
     tags: string[];
     createdAt: string;
-  }
-  
-  export interface ProductGridProps {
+    // Add Gumroad URL
+    gumroadUrl: string;
+}
+
+export interface ProductGridProps {
     products: Product[];
     onEdit: (product: Product) => void;
     onDelete: (productId: string) => void;
-  }
+}
