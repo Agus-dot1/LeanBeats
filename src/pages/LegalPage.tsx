@@ -202,20 +202,20 @@ const LegalPage: React.FC = () => {
   
 
   return (
-    <div className="relative pt-28 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
+    <div className="relative min-h-screen pb-20 pt-28 bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
       <Helmet>
         <title>Legal | Lea in the Mix</title>
         <meta name="description" content="Términos y condiciones, política de privacidad y política de cookies de Lea in the Mix" />
       </Helmet>
 
-      <div className="container px-4 mx-auto max-w-4xl">
+      <div className="container max-w-4xl px-4 mx-auto">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <div className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200">
             <Shield size={16} className="animate-pulse" />
             <span>Legal</span>
           </div>
@@ -239,7 +239,7 @@ const LegalPage: React.FC = () => {
                     : 'bg-bg-200 text-text-200 hover:bg-bg-300'
                 }`}
               >
-                <Icon className="inline-block mr-2 w-4 h-4" />
+                <Icon className="inline-block w-4 h-4 mr-2" />
                 {text}
               </button>
             ))}
@@ -247,7 +247,7 @@ const LegalPage: React.FC = () => {
 
           <div className="p-4 mb-8 text-sm rounded-xl bg-bg-200">
             <p className="text-text-200">
-              Última actualización: {new Date().toLocaleDateString()}
+              Última actualización: 19/06/2025
             </p>
           </div>
         </motion.div>
@@ -261,7 +261,7 @@ const LegalPage: React.FC = () => {
         >
           {/* Sidebar Navigation */}
           <div className="lg:col-span-1">
-            <div className="sticky top-28 p-4 rounded-xl bg-bg-200">
+            <div className="sticky p-4 top-28 rounded-xl bg-bg-200">
               <h3 className="mb-4 text-lg font-semibold text-text-100">Contenido</h3>
               <nav className="space-y-2">
                 {getCurrentSections().map((section, index) => (
@@ -313,7 +313,7 @@ const LegalPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="fixed right-8 bottom-8 p-3 text-white rounded-full shadow-lg transition-colors bg-primary-200 hover:bg-primary-300"
+            className="fixed p-3 text-white transition-colors rounded-full shadow-lg right-8 bottom-8 bg-primary-200 hover:bg-primary-300"
           >
             <ChevronUp size={24} />
           </motion.button>
