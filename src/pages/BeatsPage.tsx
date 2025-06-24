@@ -156,9 +156,9 @@ const BeatsPage: React.FC = () => {
   };
 
   return (
-    <div className="relative pt-24 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
+    <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
-        <title>Beats | Lea in the Mix</title>
+        <title>Beats | Lea In The Mix</title>
         <meta name="description" content="Explora nuestro catálogo de beats de alta calidad. Encuentra el sonido perfecto para tu próximo proyecto musical." />
       </Helmet>
 
@@ -167,7 +167,7 @@ const BeatsPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <Music size={16} className="animate-pulse" />
             <span>Catálogo de Beats</span>
@@ -186,7 +186,7 @@ const BeatsPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-8 max-w-2xl text-lg text-text-200"
+            className="max-w-2xl mb-8 text-lg text-text-200"
           >
             Explora nuestra colección de beats de alta calidad. Todos los beats incluyen licencia de uso y están listos para tu próximo proyecto.
           </motion.p>
@@ -237,7 +237,7 @@ const BeatsPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex flex-col justify-center items-center py-16 text-text-200"
+              className="flex flex-col items-center justify-center py-16 text-text-200"
             >
               <Filter size={48} className="mb-4 opacity-50" />
               <h3 className="mb-2 text-xl font-semibold">No se encontraron beats</h3>
@@ -249,13 +249,13 @@ const BeatsPage: React.FC = () => {
        
       </div>
        {/* Volume Control */}
-       <div className="bottom-2 justify-end md:flex md:sticky md:mr-14 z-15">
+       <div className="justify-end bottom-2 md:flex md:sticky md:mr-14 z-15">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="p-4 rounded-full shadow-lg bg-bg-200"
           >
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <span className="text-sm font-medium text-text-200">Volumen</span>
               <input
                 type="range"

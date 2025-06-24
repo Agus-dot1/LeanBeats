@@ -95,9 +95,9 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="pt-28 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
+    <div className="min-h-screen pb-20 pt-28 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
-        <title>Contacto | Lea in the Mix</title>
+        <title>Contacto | Lea In The Mix</title>
         <meta name="description" content="Contáctanos para producción musical, reservas de estudio o cualquier consulta." />
       </Helmet>
 
@@ -106,7 +106,7 @@ const ContactPage: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex gap-2 items-center px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
           >
             <MessageSquare size={16} className="animate-pulse" />
             <span>Contáctanos</span>
@@ -136,17 +136,17 @@ const ContactPage: React.FC = () => {
           >
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="p-6 rounded-2xl bg-bg-200">
-                <Phone className="mb-4 w-6 h-6 text-primary-200" />
+                <Phone className="w-6 h-6 mb-4 text-primary-200" />
                 <h3 className="mb-2 text-lg font-semibold text-text-100">Teléfono</h3>
                 <p className="text-sm text-text-200">+54 11 7060-7158</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
-                <Mail className="mb-4 w-6 h-6 text-primary-200" />
+                <Mail className="w-6 h-6 mb-4 text-primary-200" />
                 <h3 className="mb-2 text-lg font-semibold text-text-100">Correo</h3>
                 <p className="text-sm text-text-200">leainthemix.c@hotmail.com</p>
               </div>
               <div className="p-6 rounded-2xl bg-bg-200">
-                <MapPin className="mb-4 w-6 h-6 text-primary-200" />
+                <MapPin className="w-6 h-6 mb-4 text-primary-200" />
                 <h3 className="mb-2 text-lg font-semibold text-text-100">Ubicación</h3>
                 <p className="text-sm text-text-200">Buenos Aires, Argentina</p>
               </div>
@@ -171,7 +171,7 @@ const ContactPage: React.FC = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                    className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
                     placeholder="Tu nombre"
                     required
                   />
@@ -186,7 +186,7 @@ const ContactPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                    className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
                     placeholder="tu@email.com"
                     required
                   />
@@ -202,7 +202,7 @@ const ContactPage: React.FC = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                  className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 focus:outline-none focus:ring-2 focus:ring-primary-200"
                   required
                 >
                   <option value="">Selecciona un asunto</option>
@@ -223,7 +223,7 @@ const ContactPage: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="px-4 py-3 w-full rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
+                  className="w-full px-4 py-3 rounded-xl bg-bg-200 text-text-100 placeholder-text-200 focus:outline-none focus:ring-2 focus:ring-primary-200"
                   placeholder="Cuéntanos sobre tu problema..."
                   required
                 />
@@ -234,7 +234,7 @@ const ContactPage: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="flex gap-2 justify-center items-center px-8 py-4 w-full font-medium text-white rounded-xl bg-primary-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center w-full gap-2 px-8 py-4 font-medium text-white rounded-xl bg-primary-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send size={20} className={isSubmitting ? 'animate-pulse' : ''} />
                 {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}

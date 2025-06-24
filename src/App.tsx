@@ -4,6 +4,7 @@ import { Play, Music, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
+import { Helmet } from 'react-helmet-async';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -51,6 +52,11 @@ function App() {
 
   return (
     <>
+          <Helmet>
+            <title>Lea In The Mix</title>
+            <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+          </Helmet>
+    
       <motion.div 
         initial="hidden"
         animate={isLoading ? "hidden" : "visible"}

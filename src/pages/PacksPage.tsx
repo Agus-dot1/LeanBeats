@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { Package, Wand2, FileAudio, HardDrive, Plus, X, Star, Crown } from 'lucide-react';
+import { Package, Wand2, FileAudio, HardDrive, Plus, X, Star, Crown, ShoppingBag } from 'lucide-react';
 // import { useCart } from '../context/CartContext';
 // import { useToast } from '../context/ToastContext';
 import { Footer } from '../components/Footer';
@@ -12,8 +12,6 @@ const CONTENT_LABELS: Record<string, string> = {
   // add more custom labels if needed
 };
 
-
-// Update the PackContent interface first
 interface PackContent {
   [key: string]: number | undefined;
   bases?: number;
@@ -35,17 +33,16 @@ interface PackContent {
   bass?: number;
 }
 
-// Update PricingOption to include contents
+
 interface PricingOption {
   name: string;
   price: number;
   features: string[];
   gumroadUrl: string;
   badge?: string;
-  contents: PackContent;  // Add contents to each version
+  contents: PackContent;  
 }
 
-// Update Pack interface to remove the single contents
 interface Pack {
   id: string;
   title: string;
@@ -58,7 +55,7 @@ interface Pack {
   features: {
     samples: number;
     formats: string[];
-    size: string;
+    size: string[];
   };
   displayContents: string[];
   pricing: {
@@ -252,7 +249,7 @@ const PacksPage: React.FC = () => {
   const packs: Pack[] = [
     {
       id: 'p1',
-      title: 'Esenciales de Aleteo Vol. 1',
+      title: 'SAMPLE PACK ALETEO Vol. 1',
       color: 'bg-gradient-to-br from-orange-500 to-yellow-500',
       description: 'Este pack es una herramienta indispensable para cualquier productor de música electrónica que busque crear pistas con un sonido único y atractivo. Con sonidos inspirados en mis propias producciones y remixs, este pack te brinda la oportunidad de agregar un toque personal a tus creaciones.',
       imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593291/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_eexnof.png',
@@ -262,12 +259,12 @@ const PacksPage: React.FC = () => {
       features: {
         samples: 250,
         formats: ['WAV'],
-        size: '289 MB',
+        size: ['384 MB', '241 MB'],
       },
       displayContents: ['kicks', 'snares', 'fxs', 'bases'],
       pricing: {
         classic: {
-          name: 'Versión Clásica',
+          name: 'Versión Clasic',
           price: 27,
           features: [
             'Acceso a samples básicos',
@@ -292,7 +289,7 @@ const PacksPage: React.FC = () => {
           }
         },
         full: {
-          name: 'Versión Completa',
+          name: 'Versión Full',
           price: 40,
           features: [
             'Todos los samples',
@@ -321,22 +318,22 @@ const PacksPage: React.FC = () => {
     },
     {
       id: 'p2',
-      title: 'Kit Remix Drop Vol. 1',
+      title: 'SAMPLE PACK TURREO - RKT - REMIXDROP Vol. 1',
       description: 'Descubre una colección exclusiva de sonidos únicos, cuidadosamente elaborados a lo largo de mi carrera como DJ y productor. Cada sample refleja mi esencia creativa, listo para enriquecer tu música con un toque personal.',
       color: 'bg-gradient-to-br from-purple-500 to-pink-500',
-      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593286/D851250A-D700-4160-B0C3-5922A59BCB41_ezwcz9.png',
+      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1750768510/SAMPLE_PACK_TURREO_RKT_REMIXDROP_VOL_1_lp5ql6.jpg',
       price: 40,
       category: 'remix drop',
       gumroadUrl: 'https://leainthemix.gumroad.com/l/sptrrvol1', // Add your Gumroad URL
       features: {
         samples: 250,
         formats: ['WAV'],
-        size: '205 MB',
+        size: ['295 MB', '180 MB'],
       },
       displayContents: ['kicks', 'snares', 'fxs', 'bases'],
       pricing: {
         classic: {
-          name: 'Versión Clásica',
+          name: 'Versión Clasic',
           price: 27,
           features: [
             'Acceso a samples básicos',
@@ -360,7 +357,7 @@ const PacksPage: React.FC = () => {
           }
         },
         full: {
-          name: 'Versión Completa',
+          name: 'Versión Full',
           price: 40,
           features: [
             'Todos los samples',
@@ -406,7 +403,7 @@ const PacksPage: React.FC = () => {
     <>
     <div className="min-h-screen pb-16 lg:pb-48 pt-28 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-200">
       <Helmet>
-        <title>Librerías | Lea in the Mix</title>
+        <title>Librerías | Lea In The Mix</title>
         <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
       </Helmet>
 
@@ -520,11 +517,26 @@ const PacksPage: React.FC = () => {
                         <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.samples}</div>
                         <div className="text-xs sm:text-sm text-text-200">Samples Totales</div>
                       </div>
-                      <div className="p-3 rounded-2xl sm:p-4 bg-bg-100">
-                        <HardDrive className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
-                        <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size}</div>
-                        <div className="text-xs sm:text-sm text-text-200">Tamaño Total</div>
-                      </div>
+                      {pack.features.size.length === 2 ? (
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="flex flex-col items-center p-3 rounded-2xl sm:p-4 bg-bg-100">
+                            <HardDrive className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                            <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size[1]}</div>
+                            <div className="text-xs sm:text-sm text-text-200">Clasic</div>
+                          </div>
+                          <div className="flex flex-col items-center p-3 rounded-2xl sm:p-4 bg-bg-100">
+                            <HardDrive className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                            <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size[0]}</div>
+                            <div className="text-xs sm:text-sm text-text-200">Full</div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="p-3 rounded-2xl sm:p-4 bg-bg-100">
+                          <HardDrive className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
+                          <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.size[0]}</div>
+                          <div className="text-xs sm:text-sm text-text-200">Tamaño Total</div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="space-y-2 sm:space-y-3">
@@ -572,15 +584,15 @@ const PacksPage: React.FC = () => {
                           </ul>
                       </div>
                           <a href={pack.pricing.classic.gumroadUrl} target="_blank" rel="noopener noreferrer" className="block w-full h-full lg:w-1/2">
-                            <button className="w-full h-full px-4 py-2 text-lg font-medium text-text-100 transition-all duration-200 transform bg-bg-200 rounded-xl border-slate-600/50 hover:border-slate-500 hover:scale-[1.02] hover:shadow-lg ">
-                              Comprar Classic
+                            <button className="w-full h-full flex items-center justify-center gap-2 px-4 py-2 text-lg font-medium text-text-100 transition-all duration-200 transform bg-bg-200 rounded-xl border-slate-600/50 hover:border-slate-500 hover:scale-[1.02] hover:shadow-lg ">
+                              Comprar Clasic <ShoppingBag />
                             </button>
                           </a>
                         </div>
 
                         {/* Full Version */}
                         <div
-                          className={`relative flex flex-col justify-between p-4 transition-all duration-200 border lg:items-center lg:flex-row rounded-2xl
+                          className={`relative flex  flex-col justify-between p-4 transition-all duration-200 border lg:items-center lg:flex-row rounded-2xl
                           ${
                             pack.color === 'bg-gradient-to-br from-purple-500 to-pink-500'
                             ? 'bg-gradient-to-br from-purple-600/20 to-pink-600/20 border-purple-500/50 hover:border-purple-400'
@@ -627,8 +639,8 @@ const PacksPage: React.FC = () => {
                           rel="noopener noreferrer"
                           className="block w-full h-full lg:w-1/2"
                           >
-                          <button
-                            className={`w-full h-full px-4 py-2 text-lg font-medium text-white transition-all duration-200 transform shadow-lg rounded-xl hover:scale-[1.02]
+                            <button
+                            className={`w-full flex items-center justify-center gap-2 h-full px-4 py-2 text-lg font-medium text-white transition-all duration-200 transform shadow-lg rounded-xl hover:scale-[1.02]
                             ${
                               pack.color === 'bg-gradient-to-br from-purple-500 to-pink-500'
                               ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
@@ -637,9 +649,9 @@ const PacksPage: React.FC = () => {
                               : 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
                             }`
                             }
-                          >
-                            Comprar Full
-                          </button>
+                            >
+                            Comprar Full <ShoppingBag />
+                            </button>
                           </a>
                         </div>
                       </div>
