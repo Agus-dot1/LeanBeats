@@ -158,7 +158,7 @@ const BeatsPage: React.FC = () => {
   return (
     <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
-        <title>Beats | Lea In The Mix</title>
+        <title>BEATS | LEA IN THE MIX</title>
         <meta name="description" content="Explora nuestro catálogo de beats de alta calidad. Encuentra el sonido perfecto para tu próximo proyecto musical." />
       </Helmet>
 

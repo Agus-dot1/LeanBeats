@@ -26,11 +26,11 @@ export const Navigation: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-bg-300 border-bg-200">
-        <nav className="container h-full px-2 py-5 mx-auto">
+        <nav className="container h-full px-2 py-3 mx-auto lg:py-5">
           <div className="flex items-center justify-between">
             <NavLink
               to="/"
-              className="flex items-center w-8 h-8 gap-2 text-base font-bold transition-colors duration-300 md:w-24 md:h-10 md:text-2xl text-text-100 hover:text-primary-200"
+              className="flex items-center w-20 h-5 gap-2 text-base font-bold transition-colors duration-300 md:w-24 md:h-10 md:text-2xl text-text-100 hover:text-primary-200"
               aria-label="Home"
             >
               <img 

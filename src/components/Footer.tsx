@@ -19,7 +19,7 @@ const navLinks = [
 const beatTypes = [
   { name: 'Aleteo', path: '/beats?genre=trap-soul' },
   { name: 'Remix Drop', path: '/beats?genre=latin-house' },
-  { name: 'Reggaetón', path: '/beats?genre=reggaeton' },
+  { name: 'Reggaeton', path: '/beats?genre=reggaeton' },
   { name: 'RKT', path: '/beats?genre=pop' },
 ];
 

@@ -204,7 +204,7 @@ const LegalPage: React.FC = () => {
   return (
     <div className="relative min-h-screen pb-20 pt-28 bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
       <Helmet>
-        <title>Legal | Lea in the Mix</title>
+        <title>TERMINOS Y CONDICIONES | LEA IN THE MIX</title>
         <meta name="description" content="Términos y condiciones, política de privacidad y política de cookies de Lea in the Mix" />
       </Helmet>
 

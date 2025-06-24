@@ -33,9 +33,9 @@ const BeatsUnavailablePage: React.FC = () => {
   };
 
   return (
-    <div className="relative pt-24 pb-20 min-h-screen bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
+    <div className="relative min-h-screen pt-24 pb-20 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
-        <title>Beats | Lea in the Mix</title>
+        <title>BEATS | LEA IN THE MIX</title>
         <meta name="description" content="Próximamente, beats de alta calidad para tu próximo proyecto musical." />
       </Helmet>
 
@@ -43,13 +43,13 @@ const BeatsUnavailablePage: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center text-center py-20"
+          className="flex flex-col items-center justify-center py-20 text-center"
         >
           <Music size={64} className="mb-6 text-primary-200 animate-pulse" />
-          <h1 className="text-4xl md:text-6xl font-bold text-text-100 mb-4">
+          <h1 className="mb-4 text-4xl font-bold md:text-6xl text-text-100">
             Próximamente
           </h1>
-          <p className="text-lg text-text-200 max-w-2xl mb-8">
+          <p className="max-w-2xl mb-8 text-lg text-text-200">
             Estamos preparando una increíble colección de beats para vos. 
             Volvé pronto para descubrir nuestro catálogo completo.
           </p>
