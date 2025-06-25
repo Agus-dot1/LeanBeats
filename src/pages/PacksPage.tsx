@@ -243,7 +243,7 @@ const PacksPage: React.FC = () => {
   //   }
   // }
 
-  const genres = ['todos', 'aleteo', 'remix drop'];
+  const genres = ['todos', 'ALETEO', 'RKT'];
 
   // Example pack object with pricing
   const packs: Pack[] = [
@@ -254,7 +254,7 @@ const PacksPage: React.FC = () => {
       description: 'Este pack es una herramienta indispensable para cualquier productor de música electrónica que busque crear pistas con un sonido único y atractivo. Con sonidos inspirados en mis propias producciones y remixs, este pack te brinda la oportunidad de agregar un toque personal a tus creaciones.',
       imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593291/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_eexnof.png',
       price: 40,
-      category: 'aleteo',
+      category: 'ALETEO',
       gumroadUrl: 'https://agustory06.gumroad.com/l/your-pack-1-url', // Add your Gumroad URL
       features: {
         samples: 250,
@@ -323,7 +323,7 @@ const PacksPage: React.FC = () => {
       color: 'bg-gradient-to-br from-purple-500 to-pink-500',
       imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1750768510/SAMPLE_PACK_TURREO_RKT_REMIXDROP_VOL_1_lp5ql6.jpg',
       price: 40,
-      category: 'remix drop',
+      category: 'RKT',
       gumroadUrl: 'https://leainthemix.gumroad.com/l/sptrrvol1', // Add your Gumroad URL
       features: {
         samples: 250,
@@ -450,7 +450,7 @@ const PacksPage: React.FC = () => {
                   : 'bg-bg-200 text-text-200 hover:bg-bg-100'
               }`}
             >
-              {genre.charAt(0).toUpperCase() + genre.slice(1)}
+              {genre.toUpperCase()}
             </button>
           ))}
         </motion.div>
@@ -511,7 +511,7 @@ const PacksPage: React.FC = () => {
                   </div>
 
                   <div className="p-8 space-y-6">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                       <div className="p-3 rounded-2xl sm:p-4 bg-bg-100">
                         <FileAudio className="w-5 h-5 mb-2 sm:w-6 sm:h-6 text-primary-200" />
                         <div className="text-lg font-bold sm:text-xl md:text-2xl text-text-100">{pack.features.samples}</div>
