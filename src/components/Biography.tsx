@@ -239,7 +239,7 @@ export const Biography: React.FC = () => {
           {/* Enhanced Collaborations Card */}
           <motion.div
             variants={itemVariants}
-            className="relative md:col-span-5 p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border border-bg-300"
+            className="relative md:col-span-5 p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border-2 border-primary-200"
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
