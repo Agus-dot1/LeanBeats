@@ -70,21 +70,21 @@ const collaborationsData = [
     genre: "Trap/Hip Hop",
     status: "featured",
     streams: "100M+",
-    image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134113/bio_duki_spchco.jpg"
   },
   {
     name: "Tiago PZK",
     genre: "RKT/Trap",
     status: "featured",
     streams: "80M+",
-    image: "https://images.pexels.com/photos/1699161/pexels-photo-1699161.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134114/bio_tiagopzk_a41eke.jpg"
   },
   {
     name: "Callejero Fino",
     genre: "RKT",
     status: "regular",
     streams: "50M+",
-    image: "https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134116/Bio_callejero_fino_folwzb.jpg"
   },
   {
     name: "L-Gante",
