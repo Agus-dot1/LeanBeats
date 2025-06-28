@@ -170,7 +170,7 @@ export const Biography: React.FC = () => {
                   Lea in the mix es DJ y productor musical argentino, reconocido inicialmente por remixar canciones y más recientemente como creador de instrumentales para artistas destacados.
                 </p>
                 <p className="text-text-200 leading-relaxed">
-                  Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus primeros sets llamados "After Party", que rápidamente se viralizaron y hoy superan los 16 millones de reproducciones en plataformas digitales.
+                  Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus primeros sets llamados "After Party", que rápidamente se viralizaron y hoy superan las <strong>16 millones de reproducciones</strong> en plataformas digitales.
                 </p>
               </div>
             </div>
