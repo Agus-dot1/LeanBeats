@@ -250,9 +250,6 @@ export const Biography: React.FC = () => {
             <div className="relative">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-full bg-primary-200">
-                    <Users className="w-5 h-5 text-primary-200" />
-                  </div>
                   <div>
                     <span className="text-sm font-medium text-primary-200">Colaboraciones</span>
                     <div className="text-xs text-text-200">Artistas de renombre</div>
