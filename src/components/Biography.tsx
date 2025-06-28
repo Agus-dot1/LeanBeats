@@ -77,7 +77,7 @@ const collaborationsData = [
     genre: "RKT/Trap",
     status: "featured",
     streams: "80M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134114/bio_tiagopzk_a41eke.jpg"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134809/bio_tiago_pzk_ifjzio.jpg"
   },
   {
     name: "Callejero Fino",
@@ -91,21 +91,21 @@ const collaborationsData = [
     genre: "Cumbia 420",
     status: "featured",
     streams: "200M+",
-    image: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135525/lgante_bio_mqdgjw.jpg"
   },
   {
     name: "J Rei",
     genre: "Trap",
     status: "regular",
     streams: "30M+",
-    image: "https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135526/bio_Rei_ktirkm.jpg"
   },
   {
     name: "Ecko",
     genre: "Trap/Hip Hop",
     status: "regular",
     streams: "40M+",
-    image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135527/bio_ecko_hkk6yj.jpg"
   }
 ];
 
@@ -280,9 +280,9 @@ export const Biography: React.FC = () => {
                           <img
                             src={artist.image}
                             alt={artist.name}
-                            className="object-cover w-10 h-10 rounded-full"
+                            className="w-10 h-10 rounded-full object-fit"
                           />
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-200/20 to-transparent" />
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-stone-900/90 to-transparent" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium truncate text-text-100">{artist.name}</div>
