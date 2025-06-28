@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Users, TrendingUp, Award, Music2, Calendar, Star, ExternalLink, Youtube, Headphones } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Play, Users, TrendingUp, Award, Music2, Calendar } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -110,8 +110,6 @@ const collaborationsData = [
 ];
 
 export const Biography: React.FC = () => {
-  const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
-
   return (
     <section className="py-12 sm:py-24 bg-bg-100">
       <div className="container px-4 mx-auto max-w-7xl">
@@ -166,10 +164,10 @@ export const Biography: React.FC = () => {
                   <span className="text-sm font-medium text-primary-200">Desde 2020</span>
                 </div>
                 <h3 className="mb-4 text-2xl font-bold text-text-100">El Comienzo</h3>
-                <p className="mb-4 text-text-200 leading-relaxed">
+                <p className="mb-4 leading-relaxed text-text-200">
                   Lea in the mix es DJ y productor musical argentino, reconocido inicialmente por remixar canciones y más recientemente como creador de instrumentales para artistas destacados.
                 </p>
-                <p className="text-text-200 leading-relaxed">
+                <p className="leading-relaxed text-text-200">
                   Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus primeros sets llamados "After Party", que rápidamente se viralizaron y hoy superan las <strong>16 millones de reproducciones</strong> en plataformas digitales.
                 </p>
               </div>
@@ -182,7 +180,7 @@ export const Biography: React.FC = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative overflow-hidden p-6 rounded-2xl bg-bg-200 hover:bg-bg-300 transition-colors duration-300"
+                className="relative p-6 overflow-hidden transition-colors duration-300 rounded-2xl bg-bg-200 hover:bg-bg-300"
               >
                 <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${stat.color} opacity-10 rounded-full -translate-y-4 translate-x-4`} />
                 <div className="relative">
@@ -239,12 +237,12 @@ export const Biography: React.FC = () => {
           {/* Enhanced Collaborations Card */}
           <motion.div
             variants={itemVariants}
-            className="relative md:col-span-5 p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border-2 border-primary-200"
+            className="relative p-6 border-2 md:col-span-5 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border-primary-200"
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-200 to-orange-500 rounded-full -translate-y-16 translate-x-16" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full translate-y-12 -translate-x-12" />
+              <div className="absolute top-0 right-0 w-32 h-32 translate-x-16 -translate-y-16 rounded-full bg-gradient-to-br from-primary-200 to-orange-500" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 -translate-x-12 translate-y-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
             </div>
 
             <div className="relative">
@@ -274,56 +272,24 @@ export const Biography: React.FC = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    onHoverStart={() => setHoveredArtist(artist.name)}
-                    onHoverEnd={() => setHoveredArtist(null)}
-                    className={`relative group ${hoveredArtist === artist.name ? 'z-50' : 'z-10'}`}
+                    className="relative group"
                   >
                     <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg">
-                      
                       <div className="flex items-center gap-3">
                         <div className="relative">
                           <img
                             src={artist.image}
                             alt={artist.name}
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="object-cover w-10 h-10 rounded-full"
                           />
                           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-200/20 to-transparent" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-medium text-text-100 text-sm truncate">{artist.name}</div>
-                          <div className="text-xs text-text-200 truncate">{artist.genre}</div>
+                          <div className="text-sm font-medium truncate text-text-100">{artist.name}</div>
+                          <div className="text-xs truncate text-text-200">{artist.genre}</div>
                         </div>
                       </div>
                     </div>
-
-                    {/* Hover Details - Fixed positioning */}
-                    <AnimatePresence>
-                      {hoveredArtist === artist.name && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 right-0 top-full mt-1 p-3 rounded-xl bg-bg-100 shadow-2xl border border-bg-300 z-[100]"
-                          style={{
-                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-                          }}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs font-medium text-primary-200">Reproducciones</span>
-                            <div className="flex items-center gap-1">
-                              <Headphones className="w-3 h-3 text-text-200" />
-                              <span className="text-xs font-semibold text-text-100">{artist.streams}</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Youtube className="w-3 h-3 text-red-500" />
-                            <span className="text-xs text-text-200">Ver colaboración</span>
-                            <ExternalLink className="w-3 h-3 text-text-200" />
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
                   </motion.div>
                 ))}
               </div>
