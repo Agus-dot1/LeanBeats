@@ -311,7 +311,7 @@ export const Biography: React.FC = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute left-0 right-0 top-full p-3 rounded-xl bg-bg-100 shadow-2xl border border-bg-300 z-[100]"
+                          className="absolute left-0 right-0 top-full mt-1 p-3 rounded-xl bg-bg-100 shadow-2xl border border-bg-300 z-[100]"
                           style={{
                             boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
                           }}
