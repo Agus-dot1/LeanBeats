@@ -258,10 +258,6 @@ export const Biography: React.FC = () => {
                     <div className="text-xs text-text-200">Artistas de renombre</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                  <span className="text-sm font-medium text-text-100">Top Tier</span>
-                </div>
               </div>
 
               <h3 className="mb-4 text-2xl font-bold text-text-100">Artistas Destacados</h3>
@@ -283,9 +279,6 @@ export const Biography: React.FC = () => {
                     className={`relative group ${hoveredArtist === artist.name ? 'z-50' : 'z-10'}`}
                   >
                     <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg hover:scale-105">
-                      {artist.status === 'featured' && (
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full border-2 border-bg-100" />
-                      )}
                       
                       <div className="flex items-center gap-3">
                         <div className="relative">
