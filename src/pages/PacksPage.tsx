@@ -53,7 +53,7 @@ interface Pack {
   category: string;
   gumroadUrl: string;
   features: {
-    samples: number;
+    samples: string;
     formats: string[];
     size: string[];
   };
@@ -257,7 +257,7 @@ const PacksPage: React.FC = () => {
       category: 'ALETEO',
       gumroadUrl: 'https://agustory06.gumroad.com/l/your-pack-1-url', // Add your Gumroad URL
       features: {
-        samples: 250,
+        samples: '191- 288',
         formats: ['WAV'],
         size: ['384 MB', '241 MB'],
       },
@@ -326,7 +326,7 @@ const PacksPage: React.FC = () => {
       category: 'RKT',
       gumroadUrl: 'https://leainthemix.gumroad.com/l/sptrrvol1', // Add your Gumroad URL
       features: {
-        samples: 250,
+        samples: '150 - 248',
         formats: ['WAV'],
         size: ['295 MB', '180 MB'],
       },
@@ -576,7 +576,7 @@ const PacksPage: React.FC = () => {
                             <Star className="w-4 h-4 text-text-100" />
                             <h4 className="font-semibold text-text-200">{pack.pricing.classic.name}</h4>
                           </div>
-                          <div className="mb-3 text-2xl font-bold text-text-100">${pack.pricing.classic.price}</div>
+                          <div className="mb-3 text-2xl font-bold text-text-100">${pack.pricing.classic.price} USD</div>
                           <ul className="mb-4 space-y-1">
                             {pack.pricing.classic.features.map((feature, idx) => (
                               <li key={idx} className="text-xs text-text-200">• {feature}</li>
@@ -626,7 +626,7 @@ const PacksPage: React.FC = () => {
                             )}
                             <h4 className="font-semibold text-text-100">{pack.pricing.full.name}</h4>
                           </div>
-                          <div className="mb-3 text-2xl font-bold text-text-100">${pack.pricing.full.price}</div>
+                          <div className="mb-3 text-2xl font-bold text-text-100">${pack.pricing.full.price} USD</div>
                           <ul className="mb-4 space-y-1">
                             {pack.pricing.full.features.map((feature, idx) => (
                             <li key={idx} className="text-xs text-text-200">• {feature}</li>
