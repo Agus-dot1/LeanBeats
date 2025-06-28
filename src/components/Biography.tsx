@@ -270,15 +270,15 @@ export const Biography: React.FC = () => {
                 {collaborationsData.map((artist, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     onHoverStart={() => setHoveredArtist(artist.name)}
                     onHoverEnd={() => setHoveredArtist(null)}
                     className={`relative group ${hoveredArtist === artist.name ? 'z-50' : 'z-10'}`}
                   >
-                    <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg hover:scale-105">
+                    <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg">
                       
                       <div className="flex items-center gap-3">
                         <div className="relative">
