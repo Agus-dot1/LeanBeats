@@ -269,8 +269,8 @@ export const Biography: React.FC = () => {
                 A lo largo de su carrera ha colaborado con grandes referentes del género, dejando su huella en cada beat.
               </p>
 
-              {/* Artists Grid */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
+              {/* Artists Grid - Fixed positioning and z-index */}
+              <div className="relative grid grid-cols-2 gap-3 mb-6">
                 {collaborationsData.map((artist, index) => (
                   <motion.div
                     key={index}
@@ -280,7 +280,7 @@ export const Biography: React.FC = () => {
                     transition={{ delay: index * 0.1 }}
                     onHoverStart={() => setHoveredArtist(artist.name)}
                     onHoverEnd={() => setHoveredArtist(null)}
-                    className="relative group"
+                    className={`relative group ${hoveredArtist === artist.name ? 'z-50' : 'z-10'}`}
                   >
                     <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg hover:scale-105">
                       {artist.status === 'featured' && (
@@ -301,32 +301,36 @@ export const Biography: React.FC = () => {
                           <div className="text-xs text-text-200 truncate">{artist.genre}</div>
                         </div>
                       </div>
-
-                      {/* Hover Details */}
-                      <AnimatePresence>
-                        {hoveredArtist === artist.name && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            className="absolute inset-x-0 top-full mt-2 p-3 rounded-xl bg-bg-100 shadow-xl border border-bg-300 z-10"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs font-medium text-primary-200">Reproducciones</span>
-                              <div className="flex items-center gap-1">
-                                <Headphones className="w-3 h-3 text-text-200" />
-                                <span className="text-xs text-text-100">{artist.streams}</span>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Youtube className="w-3 h-3 text-red-500" />
-                              <span className="text-xs text-text-200">Ver colaboración</span>
-                              <ExternalLink className="w-3 h-3 text-text-200" />
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
                     </div>
+
+                    {/* Hover Details - Fixed positioning */}
+                    <AnimatePresence>
+                      {hoveredArtist === artist.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 right-0 top-full mt-2 p-3 rounded-xl bg-bg-100 shadow-2xl border border-bg-300 z-[100]"
+                          style={{
+                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                          }}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-medium text-primary-200">Reproducciones</span>
+                            <div className="flex items-center gap-1">
+                              <Headphones className="w-3 h-3 text-text-200" />
+                              <span className="text-xs font-semibold text-text-100">{artist.streams}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Youtube className="w-3 h-3 text-red-500" />
+                            <span className="text-xs text-text-200">Ver colaboración</span>
+                            <ExternalLink className="w-3 h-3 text-text-200" />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 ))}
               </div>
