@@ -5,6 +5,8 @@ import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
 import { Helmet } from 'react-helmet-async';
+import { Biography } from '../components/Biography';
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -175,6 +177,7 @@ function App() {
             </div>
           </div>
         </div>
+        <Biography />
         <Footer />
       </motion.div>
     </>
