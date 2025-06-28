@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Play, Users, TrendingUp, Award, Music2, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Users, TrendingUp, Award, Music2, Calendar, Star, ExternalLink, Youtube, Headphones } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,11 +64,54 @@ const achievements = [
   }
 ];
 
-const collaborations = [
-  "Duki", "Tiago PZK", "J Rei", "Ecko", "Callejero Fino", "L-Gante"
+const collaborationsData = [
+  {
+    name: "Duki",
+    genre: "Trap/Hip Hop",
+    status: "featured",
+    streams: "100M+",
+    image: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  },
+  {
+    name: "Tiago PZK",
+    genre: "RKT/Trap",
+    status: "featured",
+    streams: "80M+",
+    image: "https://images.pexels.com/photos/1699161/pexels-photo-1699161.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  },
+  {
+    name: "Callejero Fino",
+    genre: "RKT",
+    status: "regular",
+    streams: "50M+",
+    image: "https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  },
+  {
+    name: "L-Gante",
+    genre: "Cumbia 420",
+    status: "featured",
+    streams: "200M+",
+    image: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  },
+  {
+    name: "J Rei",
+    genre: "Trap",
+    status: "regular",
+    streams: "30M+",
+    image: "https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  },
+  {
+    name: "Ecko",
+    genre: "Trap/Hip Hop",
+    status: "regular",
+    streams: "40M+",
+    image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+  }
 ];
 
 export const Biography: React.FC = () => {
+  const [hoveredArtist, setHoveredArtist] = useState<string | null>(null);
+
   return (
     <section className="py-12 sm:py-24 bg-bg-100">
       <div className="container px-4 mx-auto max-w-7xl">
@@ -193,32 +236,112 @@ export const Biography: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Collaborations Card */}
+          {/* Enhanced Collaborations Card */}
           <motion.div
             variants={itemVariants}
-            className="md:col-span-5 p-6 lg:p-8 rounded-3xl bg-bg-200"
+            className="relative md:col-span-5 p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border border-bg-300"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-primary-200" />
-              <span className="text-sm font-medium text-primary-200">Colaboraciones</span>
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-200 to-orange-500 rounded-full -translate-y-16 translate-x-16" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full translate-y-12 -translate-x-12" />
             </div>
-            <h3 className="mb-6 text-2xl font-bold text-text-100">Artistas Destacados</h3>
-            <p className="mb-6 text-text-200">
-              A lo largo de su carrera ha colaborado con grandes referentes del género, dejando su huella en cada beat.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {collaborations.map((artist, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="px-3 py-1.5 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200 hover:bg-primary-200/20 transition-colors"
-                >
-                  {artist}
-                </motion.span>
-              ))}
+
+            <div className="relative">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-full bg-primary-200/10">
+                    <Users className="w-5 h-5 text-primary-200" />
+                  </div>
+                  <div>
+                    <span className="text-sm font-medium text-primary-200">Colaboraciones</span>
+                    <div className="text-xs text-text-200">Artistas de renombre</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                  <span className="text-sm font-medium text-text-100">Top Tier</span>
+                </div>
+              </div>
+
+              <h3 className="mb-4 text-2xl font-bold text-text-100">Artistas Destacados</h3>
+              <p className="mb-6 text-text-200">
+                A lo largo de su carrera ha colaborado con grandes referentes del género, dejando su huella en cada beat.
+              </p>
+
+              {/* Artists Grid */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {collaborationsData.map((artist, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    onHoverStart={() => setHoveredArtist(artist.name)}
+                    onHoverEnd={() => setHoveredArtist(null)}
+                    className="relative group"
+                  >
+                    <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg hover:scale-105">
+                      {artist.status === 'featured' && (
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full border-2 border-bg-100" />
+                      )}
+                      
+                      <div className="flex items-center gap-3">
+                        <div className="relative">
+                          <img
+                            src={artist.image}
+                            alt={artist.name}
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-200/20 to-transparent" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-text-100 text-sm truncate">{artist.name}</div>
+                          <div className="text-xs text-text-200 truncate">{artist.genre}</div>
+                        </div>
+                      </div>
+
+                      {/* Hover Details */}
+                      <AnimatePresence>
+                        {hoveredArtist === artist.name && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="absolute inset-x-0 top-full mt-2 p-3 rounded-xl bg-bg-100 shadow-xl border border-bg-300 z-10"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-xs font-medium text-primary-200">Reproducciones</span>
+                              <div className="flex items-center gap-1">
+                                <Headphones className="w-3 h-3 text-text-200" />
+                                <span className="text-xs text-text-100">{artist.streams}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Youtube className="w-3 h-3 text-red-500" />
+                              <span className="text-xs text-text-200">Ver colaboración</span>
+                              <ExternalLink className="w-3 h-3 text-text-200" />
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Summary Stats */}
+              <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-gradient-to-r from-primary-200/10 to-orange-500/10">
+                <div className="text-center">
+                  <div className="text-lg font-bold text-text-100">6+</div>
+                  <div className="text-xs text-text-200">Artistas Top</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-bold text-text-100">500M+</div>
+                  <div className="text-xs text-text-200">Streams Totales</div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
