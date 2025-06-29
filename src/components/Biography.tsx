@@ -162,7 +162,7 @@ export const Biography: React.FC = () => {
           </div>
         </motion.div>
 
-        LatestRelease
+        <LatestRelease />
       </div>
     </section>
   );
