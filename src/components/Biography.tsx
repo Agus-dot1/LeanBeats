@@ -162,7 +162,7 @@ export const Biography: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Latest Release Section */}
+        {/* Latest Release Section - Simplified */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -179,69 +179,39 @@ export const Biography: React.FC = () => {
 
           <motion.div
             variants={itemVariants}
-            className="relative overflow-hidden rounded-2xl bg-bg-200"
+            className="flex items-center gap-6 p-6 rounded-2xl bg-bg-200"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              {/* Cover Image */}
-              <div className="relative h-[300px] md:h-[400px]">
-                <img
-                  src={latestRelease.coverUrl}
-                  alt={latestRelease.title}
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                
-                {/* Play Button Overlay */}
-                <motion.a
-                  href={latestRelease.youtubeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 flex items-center justify-center group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div className="p-6 rounded-full bg-primary-200 group-hover:bg-primary-300 transition-colors shadow-lg">
-                    <Play size={32} className="text-white ml-1" />
-                  </div>
-                </motion.a>
-              </div>
-
-              {/* Song Info */}
-              <div className="p-8 flex flex-col justify-center">
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-text-100 mb-2">
-                      {latestRelease.title}
-                    </h3>
-                    <p className="text-lg text-text-200">{latestRelease.artist}</p>
-                  </div>
-                  
-                  <div className="flex items-center gap-6">
-                    <div>
-                      <div className="text-2xl font-bold text-primary-200">{latestRelease.views}</div>
-                      <div className="text-sm text-text-200">Reproducciones</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-text-100">{latestRelease.releaseDate}</div>
-                      <div className="text-sm text-text-200">Lanzamiento</div>
-                    </div>
-                  </div>
-                  
-                  <motion.a
-                    href={latestRelease.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary-200 text-white rounded-full font-medium hover:bg-primary-300 transition-colors"
-                  >
-                    <Play size={20} />
-                    Ver en YouTube
-                    <ExternalLink size={16} />
-                  </motion.a>
-                </div>
-              </div>
+            {/* Cover Image */}
+            <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+              <img
+                src={latestRelease.coverUrl}
+                alt={latestRelease.title}
+                className="object-cover w-full h-full"
+              />
             </div>
+
+            {/* Song Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl font-bold text-text-100 truncate">
+                {latestRelease.title}
+              </h3>
+              <p className="text-text-200 mb-1">{latestRelease.artist}</p>
+              <p className="text-sm text-text-200">
+                {latestRelease.views} reproducciones • {latestRelease.releaseDate}
+              </p>
+            </div>
+
+            {/* Play Button */}
+            <motion.a
+              href={latestRelease.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full bg-primary-200 text-white hover:bg-primary-300 transition-colors flex-shrink-0"
+            >
+              <Play size={20} className="ml-0.5" />
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>
