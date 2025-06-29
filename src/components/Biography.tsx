@@ -1,347 +1,223 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Play, Users, TrendingUp, Award, Music2, Calendar } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Music2, Play, ExternalLink, Calendar } from 'lucide-react';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
+const images = [
+  {
+    url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131607/Bio_1_r7jm2i.webp",
+    alt: "Lea in the Mix en estudio"
+  },
+  {
+    url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp",
+    alt: "Lea in the Mix produciendo"
+  },
+  {
+    url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131610/Bio_3_gyubvc.webp",
+    alt: "Lea in the Mix en concierto"
   }
+];
+
+const latestRelease = {
+  title: "RETUMBA LA BOCINA",
+  artist: "Lea in the Mix",
+  releaseDate: "2023",
+  description: "Su producción más popular con más de 390 millones de reproducciones en YouTube.",
+  coverUrl: "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg",
+  youtubeUrl: "https://www.youtube.com/watch?v=wobsp7AxcH8",
+  audioUrl: "https://res.cloudinary.com/do17gdc0b/video/upload/v1746488263/retumba-la-bocina-lea-in-the-mix_8onfZJsH_zq5afn.mp3",
+  stats: "390M+ reproducciones"
 };
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut"
-    }
-  }
-};
-
-const stats = [
-  {
-    icon: Play,
-    value: "16M+",
-    label: "Reproducciones After Party",
-    color: "from-blue-500 to-cyan-500"
-  },
-  {
-    icon: TrendingUp,
-    value: "390M+",
-    label: "Reproducciones en YouTube",
-    color: "from-green-500 to-emerald-500"
-  },
-  {
-    icon: Users,
-    value: "5M+",
-    label: "Videos en TikTok",
-    color: "from-purple-500 to-pink-500"
-  }
-];
-
-const achievements = [
-  {
-    title: "Retumba la bocina",
-    description: "23M+ reproducciones en YouTube",
-    year: "2023"
-  },
-  {
-    title: "Esta vida me encanta",
-    description: "8M+ reproducciones en YouTube",
-    year: "2023"
-  },
-  {
-    title: "After Party Sets",
-    description: "Serie viral durante cuarentena",
-    year: "2020"
-  }
-];
-
-const collaborationsData = [
-  {
-    name: "Duki",
-    genre: "Trap/Hip Hop",
-    status: "featured",
-    streams: "100M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134113/bio_duki_spchco.jpg"
-  },
-  {
-    name: "Tiago PZK",
-    genre: "RKT/Trap",
-    status: "featured",
-    streams: "80M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134809/bio_tiago_pzk_ifjzio.jpg"
-  },
-  {
-    name: "Callejero Fino",
-    genre: "RKT",
-    status: "regular",
-    streams: "50M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751134116/Bio_callejero_fino_folwzb.jpg"
-  },
-  {
-    name: "L-Gante",
-    genre: "Cumbia 420",
-    status: "featured",
-    streams: "200M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135525/lgante_bio_mqdgjw.jpg"
-  },
-  {
-    name: "J Rei",
-    genre: "Trap",
-    status: "regular",
-    streams: "30M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135526/bio_Rei_ktirkm.jpg"
-  },
-  {
-    name: "Ecko",
-    genre: "Trap/Hip Hop",
-    status: "regular",
-    streams: "40M+",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751135527/bio_ecko_hkk6yj.jpg"
-  }
-];
 
 export const Biography: React.FC = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <section className="py-12 sm:py-24 bg-bg-100">
+    <section className="py-16 sm:py-24 bg-bg-100">
       <div className="container max-w-6xl px-4 mx-auto">
+        {/* Biography Section */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={containerVariants}
-          className="mb-12"
+          className="mb-20"
         >
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200"
-          >
-            <Music2 size={16} className="animate-pulse" />
-            <span>Biografía</span>
-          </motion.div>
-          
-          <motion.h2
-            variants={itemVariants}
-            className="mb-6 text-4xl font-bold md:text-6xl text-text-100"
-          >
-            La Historia de <span className="text-primary-200">Lea in the Mix</span>
-          </motion.h2>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+            {/* Image Carousel */}
+            <div className="relative">
+              <div className="relative overflow-hidden aspect-square rounded-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentImageIndex}
+                    src={images[currentImageIndex].url}
+                    alt={images[currentImageIndex].alt}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 object-cover w-full h-full"
+                  />
+                </AnimatePresence>
+                
+                {/* Navigation Buttons */}
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                >
+                  <ChevronRight size={20} />
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-colors ${
+                        index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Biography Text */}
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200">
+                <Music2 size={16} />
+                <span>Biografía</span>
+              </div>
+              
+              <h2 className="text-3xl font-bold sm:text-4xl text-text-100">
+                Lea in the Mix
+              </h2>
+              
+              <div className="space-y-4 text-text-200">
+                <p>
+                  DJ y productor musical argentino, reconocido inicialmente por remixar canciones 
+                  y más recientemente como creador de instrumentales para artistas destacados.
+                </p>
+                <p>
+                  Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus 
+                  primeros sets llamados "After Party", que rápidamente se viralizaron y hoy 
+                  superan las <span className="font-semibold text-primary-200">16 millones de reproducciones</span> en plataformas digitales.
+                </p>
+                <p>
+                  Su producción más popular acumula más de <span className="font-semibold text-primary-200">390 millones de reproducciones</span> en YouTube.
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Bento Grid Layout */}
+        {/* Latest Release Section */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={containerVariants}
-          className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-6"
+          className="relative"
         >
-          {/* Main Story Card */}
-          <motion.div
-            variants={itemVariants}
-            className="relative overflow-hidden md:col-span-8 rounded-3xl bg-bg-200"
-          >
-            <div className="grid h-full grid-cols-1 lg:grid-cols-2">
-              <div className="relative h-[300px] lg:h-full">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium rounded-full bg-primary-200/10 text-primary-200">
+            <Calendar size={16} />
+            <span>Último Lanzamiento</span>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl bg-bg-200">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Cover Image */}
+              <div className="relative aspect-square md:aspect-auto">
                 <img
-                  src="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131607/Bio_1_r7jm2i.webp"
-                  alt="Lea in the Mix"
+                  src={latestRelease.coverUrl}
+                  alt={latestRelease.title}
                   className="absolute inset-0 object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </div>
-              <div className="p-6 lg:p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <Calendar className="w-5 h-5 text-primary-200" />
-                  <span className="text-sm font-medium text-primary-200">Desde 2020</span>
-                </div>
-                <h3 className="mb-4 text-2xl font-bold text-text-100">El Comienzo</h3>
-                <p className="mb-4 text-sm leading-relaxed text-text-200">
-                  Lea in the mix es DJ y productor musical argentino, reconocido inicialmente por remixar canciones y más recientemente como creador de instrumentales para artistas destacados.
-                </p>
-                <br />
-                <p className="text-sm leading-relaxed text-text-200">
-                  Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus primeros sets llamados "After Party", que rápidamente se viralizaron y hoy superan las <strong>16 millones de reproducciones</strong> en plataformas digitales.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Stats Cards */}
-          <div className="space-y-4 md:col-span-4 md:space-y-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="relative p-6 overflow-hidden transition-colors duration-300 rounded-2xl bg-bg-200 hover:bg-bg-300"
-              >
-                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${stat.color} opacity-10 rounded-full -translate-y-4 translate-x-4`} />
-                <div className="relative">
-                  <stat.icon className={`w-6 h-6 mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} />
-                  <div className="text-2xl font-bold text-text-100">{stat.value}</div>
-                  <div className="text-sm text-text-200">{stat.label}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Viral Hits Section */}
-          <motion.div
-            variants={itemVariants}
-            className="relative overflow-hidden md:col-span-7 rounded-3xl bg-bg-200"
-          >
-            <div className="absolute inset-0">
-              <img
-                src="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp"
-                alt="Lea in the Mix produciendo"
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-            </div>
-            <div className="relative p-6 lg:p-8">
-              <div className="flex items-center gap-2 mb-4">
-                <Award className="w-5 h-5 text-primary-200" />
-                <span className="text-sm font-medium text-primary-200">Hits Virales</span>
-              </div>
-              <h3 className="mb-6 text-2xl font-bold text-white">Éxitos de 2023</h3>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="p-4 rounded-xl bg-white/10 backdrop-blur-sm"
+                
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => window.open(latestRelease.youtubeUrl, '_blank')}
+                    className="p-4 text-white transition-colors rounded-full bg-primary-200 hover:bg-primary-300"
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-semibold text-white">{achievement.title}</h4>
-                      <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-primary-200">
-                        {achievement.year}
-                      </span>
-                    </div>
-                    <p className="text-sm text-white/80">{achievement.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Enhanced Collaborations Card */}
-          <motion.div
-            variants={itemVariants}
-            className="relative p-6 border-2 md:col-span-5 lg:p-8 rounded-3xl bg-gradient-to-br from-bg-200 via-bg-200 to-bg-300 border-primary-200"
-          >
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-0 right-0 w-32 h-32 translate-x-16 -translate-y-16 rounded-full bg-gradient-to-br from-primary-200 to-orange-500" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 -translate-x-12 translate-y-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
-            </div>
-
-            <div className="relative">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-full">
-                    <Users className="w-5 h-5 text-primary-200" />
-                  </div>
-                  <div>
-                    <span className="text-sm font-medium text-primary-200">Colaboraciones</span>
-                    <div className="text-xs text-text-200">Artistas de renombre</div>
-                  </div>
+                    <Play size={32} fill="currentColor" />
+                  </motion.button>
                 </div>
               </div>
 
-              <h3 className="mb-4 text-2xl font-bold text-text-100">Artistas Destacados</h3>
-              <p className="mb-6 text-text-200">
-                A lo largo de su carrera ha colaborado con grandes referentes del género, dejando su huella en cada beat.
-              </p>
-
-              {/* Artists Grid - Fixed positioning and z-index */}
-              <div className="relative grid grid-cols-2 gap-3 mb-6">
-                {collaborationsData.map((artist, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="relative group"
-                  >
-                    <div className="relative p-3 transition-all duration-300 rounded-xl bg-bg-100 hover:bg-bg-300 hover:shadow-lg">
-                      <div className="flex items-center gap-3">
-                        <div className="relative">
-                          <img
-                            src={artist.image}
-                            alt={artist.name}
-                            className="w-10 h-10 rounded-full object-fit"
-                          />
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-stone-900/90 to-transparent" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium truncate text-text-100">{artist.name}</div>
-                          <div className="text-xs truncate text-text-200">{artist.genre}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Summary Stats */}
-              <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-gradient-to-r from-primary-200/10 to-orange-500/10">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-text-100">6+</div>
-                  <div className="text-xs text-text-200">Artistas Top</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-text-100">500M+</div>
-                  <div className="text-xs text-text-200">Streams Totales</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Current Success Card */}
-          <motion.div
-            variants={itemVariants}
-            className="relative overflow-hidden md:col-span-12 rounded-3xl bg-gradient-to-r from-primary-200 to-orange-600"
-          >
-            <div className="absolute inset-0 opacity-20">
-              <img
-                src="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131610/Bio_3_gyubvc.webp"
-                alt="Lea in the Mix en concierto"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="relative p-6 lg:p-8">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-center">
+              {/* Release Info */}
+              <div className="p-8 space-y-6">
                 <div>
-                  <h3 className="mb-4 text-2xl font-bold text-white lg:text-3xl">
-                    Producción Más Popular
+                  <h3 className="mb-2 text-2xl font-bold text-text-100">
+                    {latestRelease.title}
                   </h3>
-                  <p className="text-lg text-white/90">
-                    En paralelo, Lea comenzó a producir música para artistas de la nueva escena urbana. 
-                    Su producción más popular acumula más de <span className="font-bold">390 millones de reproducciones</span> en YouTube.
-                  </p>
+                  <p className="text-lg text-text-200">{latestRelease.artist}</p>
+                  <p className="text-sm text-text-200">{latestRelease.releaseDate}</p>
                 </div>
-                <div className="flex justify-center lg:justify-end">
-                  <div className="p-6 text-center rounded-2xl bg-white/10 backdrop-blur-sm">
-                    <div className="text-3xl font-bold text-white lg:text-4xl">390M+</div>
-                    <div className="text-white/80">Reproducciones</div>
-                    <div className="text-sm text-white/60">YouTube</div>
+
+                <p className="text-text-200">
+                  {latestRelease.description}
+                </p>
+
+                <div className="p-4 rounded-xl bg-bg-100">
+                  <div className="text-2xl font-bold text-primary-200">
+                    {latestRelease.stats}
                   </div>
+                  <div className="text-sm text-text-200">en YouTube</div>
+                </div>
+
+                <div className="flex gap-4">
+                  <motion.a
+                    href={latestRelease.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-6 py-3 font-medium text-white rounded-xl bg-primary-200 hover:bg-primary-300"
+                  >
+                    <Play size={20} />
+                    Ver en YouTube
+                  </motion.a>
+                  
+                  <motion.a
+                    href={latestRelease.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-6 py-3 font-medium transition-colors rounded-xl bg-bg-100 text-text-100 hover:bg-bg-300"
+                  >
+                    <ExternalLink size={20} />
+                    Compartir
+                  </motion.a>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
