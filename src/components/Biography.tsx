@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Music2, ChevronLeft, ChevronRight, Play, ExternalLink } from 'lucide-react';
-import LatestRelease from './LatestRelease'
+import LatestRelease from './LatestRelease';
 
 const containerVariants = {
   hidden: { opacity: 0 },
