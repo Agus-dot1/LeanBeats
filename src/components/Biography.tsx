@@ -112,7 +112,7 @@ const collaborationsData = [
 export const Biography: React.FC = () => {
   return (
     <section className="py-12 sm:py-24 bg-bg-100">
-      <div className="container px-4 mx-auto max-w-7xl">
+      <div className="container max-w-6xl px-4 mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -149,11 +149,11 @@ export const Biography: React.FC = () => {
             variants={itemVariants}
             className="relative overflow-hidden md:col-span-8 rounded-3xl bg-bg-200"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="grid h-full grid-cols-1 lg:grid-cols-2">
               <div className="relative h-[300px] lg:h-full">
                 <img
                   src="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131607/Bio_1_r7jm2i.webp"
-                  alt="Lea in the Mix en estudio"
+                  alt="Lea in the Mix"
                   className="absolute inset-0 object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -164,10 +164,11 @@ export const Biography: React.FC = () => {
                   <span className="text-sm font-medium text-primary-200">Desde 2020</span>
                 </div>
                 <h3 className="mb-4 text-2xl font-bold text-text-100">El Comienzo</h3>
-                <p className="mb-4 leading-relaxed text-text-200">
+                <p className="mb-4 text-sm leading-relaxed text-text-200">
                   Lea in the mix es DJ y productor musical argentino, reconocido inicialmente por remixar canciones y más recientemente como creador de instrumentales para artistas destacados.
                 </p>
-                <p className="leading-relaxed text-text-200">
+                <br />
+                <p className="text-sm leading-relaxed text-text-200">
                   Su carrera empezó a despegar durante la cuarentena de 2020, cuando subió sus primeros sets llamados "After Party", que rápidamente se viralizaron y hoy superan las <strong>16 millones de reproducciones</strong> en plataformas digitales.
                 </p>
               </div>
