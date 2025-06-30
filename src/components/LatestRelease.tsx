@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Play, ExternalLink, Music2 } from 'lucide-react';
 
 interface Release {
+  id: string;
   title: string;
   artist: string;
   videoUrl: string;
@@ -17,12 +18,13 @@ interface LatestReleaseProps {
 }
 
 const defaultRelease: Release = {
-  title: "RETUMBA LA BOCINA",
+  id: 'retumba-la-bocina',
+  title: "LA PRESIÓN",
   artist: "Lea in the Mix",
   videoUrl: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp",
-  youtubeUrl: "https://www.youtube.com/watch?v=wobsp7AxcH8",
-  views: "23M+",
-  releaseDate: "2023"
+  youtubeUrl: "https://www.youtube.com/watch?v=KcdNDoIfGbs",
+  views: "1M+",
+  releaseDate: "2025"
 };
 
 export const LatestRelease: React.FC<LatestReleaseProps> = ({ 
