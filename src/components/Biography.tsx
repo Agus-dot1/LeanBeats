@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Music2, ChevronLeft, ChevronRight, Play, ExternalLink } from 'lucide-react';
+import { Music2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LatestRelease } from './LatestRelease';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -39,15 +40,6 @@ const biographyImages = [
     alt: "Lea in the Mix en concierto"
   }
 ];
-
-const latestRelease = {
-  title: "RETUMBA LA BOCINA",
-  artist: "Lea in the Mix",
-  coverUrl: "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg",
-  youtubeUrl: "https://www.youtube.com/watch?v=wobsp7AxcH8",
-  views: "23M+",
-  releaseDate: "2023"
-};
 
 export const Biography: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -133,20 +125,20 @@ export const Biography: React.FC = () => {
                 {/* Navigation Buttons */}
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                  className="absolute p-2 text-white transition-colors -translate-y-1/2 rounded-full left-4 top-1/2 bg-black/50 hover:bg-black/70"
                 >
                   <ChevronLeft size={20} />
                 </button>
                 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                  className="absolute p-2 text-white transition-colors -translate-y-1/2 rounded-full right-4 top-1/2 bg-black/50 hover:bg-black/70"
                 >
                   <ChevronRight size={20} />
                 </button>
                 
                 {/* Dots Indicator */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                <div className="absolute flex gap-2 -translate-x-1/2 bottom-4 left-1/2">
                   {biographyImages.map((_, index) => (
                     <button
                       key={index}
@@ -161,8 +153,8 @@ export const Biography: React.FC = () => {
             </motion.div>
           </div>
         </motion.div>
-
-      </div>
+        <LatestRelease />
+      </div>  
     </section>
   );
 };
