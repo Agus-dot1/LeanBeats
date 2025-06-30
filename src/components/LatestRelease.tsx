@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Play, ExternalLink, Music2 } from 'lucide-react';
 
 interface Release {
-  id: string;
   title: string;
   artist: string;
   videoUrl: string;
@@ -18,7 +17,6 @@ interface LatestReleaseProps {
 }
 
 const defaultRelease: Release = {
-  id: 'retumba-la-bocina',
   title: "RETUMBA LA BOCINA",
   artist: "Lea in the Mix",
   videoUrl: "https://res.cloudinary.com/do17gdc0b/video/upload/v1746488269/intro-x-plosivo_qoozuj.mp4",
