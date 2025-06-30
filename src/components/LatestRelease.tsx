@@ -67,12 +67,12 @@ export const LatestRelease: React.FC<LatestReleaseProps> = ({
               muted
               loop
               playsInline
-              poster="https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg"
+              poster="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp"
             >
               <source src={release.videoUrl} type="video/mp4" />
               {/* Fallback image if video fails to load */}
               <img 
-                src="https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg"
+                src="https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp"
                 alt={release.title}
                 className="absolute inset-0 object-cover w-full h-full"
               />
