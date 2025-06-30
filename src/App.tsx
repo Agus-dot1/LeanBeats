@@ -77,6 +77,8 @@ function App() {
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.8)',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
               }}
             />
             <div
@@ -84,6 +86,8 @@ function App() {
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.6)',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
               }}
             />
           </div>

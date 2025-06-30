@@ -257,7 +257,7 @@ const PacksPage: React.FC = () => {
       category: 'ALETEO',
       gumroadUrl: 'https://agustory06.gumroad.com/l/your-pack-1-url', // Add your Gumroad URL
       features: {
-        samples: '191- 288',
+        samples: '191 - 288',
         formats: ['WAV'],
         size: ['384 MB', '241 MB'],
       },
