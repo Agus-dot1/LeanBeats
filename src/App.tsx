@@ -78,7 +78,6 @@ function App() {
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.8)',
                 backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
               }}
             />
             <div
@@ -87,7 +86,6 @@ function App() {
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.6)',
                 backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
               }}
             />
           </div>
@@ -154,6 +152,16 @@ function App() {
                 className="w-full lg:w-1/2"
               >
                 <div className="grid grid-cols-1 gap-6">
+                                    <motion.div
+                    variants={itemVariants}
+                  >
+                    <ServiceCard 
+                      icon={<Headphones className="w-6 h-6" />}
+                      title="Packs & Samples"
+                      description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
+                      color="from-purple-500 to-indigo-500"
+                    />
+                  </motion.div>
                   <motion.div
                     variants={itemVariants}
                   >
@@ -162,16 +170,6 @@ function App() {
                       title="Beats"
                       description="Beats profesionales y únicos para tus proyectos musicales. Encontrá el sonido perfecto para tu próximo hit."
                       color="from-orange-500 to-red-500"
-                    />
-                  </motion.div>
-                  <motion.div
-                    variants={itemVariants}
-                  >
-                    <ServiceCard 
-                      icon={<Headphones className="w-6 h-6" />}
-                      title="Packs & Samples"
-                      description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
-                      color="from-purple-500 to-indigo-500"
                     />
                   </motion.div>
                 </div>
