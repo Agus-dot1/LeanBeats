@@ -19,7 +19,7 @@ interface LatestReleaseProps {
 const defaultRelease: Release = {
   title: "RETUMBA LA BOCINA",
   artist: "Lea in the Mix",
-  videoUrl: "https://res.cloudinary.com/do17gdc0b/video/upload/v1746488269/intro-x-plosivo_qoozuj.mp4",
+  videoUrl: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp",
   youtubeUrl: "https://www.youtube.com/watch?v=wobsp7AxcH8",
   views: "23M+",
   releaseDate: "2023"
