@@ -84,22 +84,7 @@ export const LatestRelease: React.FC<LatestReleaseProps> = ({
             {/* Content Overlay */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
-                {/* Play Button */}
-                <motion.div
-                  className="mb-8"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <a
-                    href={release.youtubeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary-200 text-white shadow-2xl hover:bg-primary-300 transition-colors"
-                  >
-                    <Play size={32} className="ml-1" />
-                  </a>
-                </motion.div>
-
+              
                 {/* Title and Info */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
