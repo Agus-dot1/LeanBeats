@@ -67,12 +67,12 @@ const LegalPage: React.FC = () => {
       id: 'uso-del-sitio',
       title: 'Uso del Sitio',
       content: (
-        <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Este sitio está destinado exclusivamente a la comercialización de contenido musical, incluyendo librerías de sonido y beats originales producidos por Lea in the Mix.</li>
-          <li>Queda prohibido el uso indebido del sitio, como intentos de acceso no autorizado, distribución automatizada de contenido o alteración del mismo.</li>
-          <li>Las transacciones y comunicación comercial se realizan mediante WhatsApp. El sitio web funciona como catálogo informativo.</li>
-          <li>El contacto comercial oficial es únicamente a través del WhatsApp autorizado. Desconfíe de otros números que se hagan pasar por Lea in the Mix.</li>
-        </ul>
+      <ul className="pl-6 space-y-3 list-disc text-text-200">
+        <li>Este sitio está destinado exclusivamente a la comercialización de contenido musical, incluyendo librerías de sonido producidas por Lea in the Mix.</li>
+        <li>Queda prohibido el uso indebido del sitio, como intentos de acceso no autorizado, distribución automatizada de contenido o alteración del mismo.</li>
+        <li>Las transacciones se realizan exclusivamente a través de la plataforma Gumroad. El sitio web funciona como catálogo informativo y punto de acceso a la tienda oficial.</li>
+        <li>El contacto comercial directo, para consultas u otros temas no relacionados con pagos, sigue siendo a través del WhatsApp oficial. Desconfíe de otros números que se hagan pasar por Lea in the Mix.</li>
+      </ul>
       )
     },
     {
@@ -111,12 +111,12 @@ const LegalPage: React.FC = () => {
       id: 'pagos',
       title: 'Pagos y Transacciones',
       content: (
-        <ul className="pl-6 space-y-3 list-disc text-text-200">
-          <li>Los pagos se procesan mediante WhatsApp a través de transferencias bancarias, servicios de pago digital (PayPal, Mercado Pago, etc.) según disponibilidad en su región.</li>
-          <li>Proceso de compra: Contactar vía WhatsApp → Confirmar productos → Realizar pago → Recibir comprobante → Entrega del contenido.</li>
-          <li>Es responsabilidad del comprador enviar el comprobante de pago válido para procesar la entrega.</li>
-          <li>Los archivos serán entregados únicamente después de la confirmación del pago.</li>
-        </ul>
+          <ul className="pl-6 space-y-3 list-disc text-text-200">
+            <li>Los pagos se procesan exclusivamente a través de la plataforma Gumroad.</li>
+            <li>Proceso de compra: Seleccionar el producto → Realizar el pago desde Gumroad → Recibir automáticamente el enlace de descarga.</li>
+            <li>No es necesario contactar por WhatsApp ni enviar comprobantes manuales.</li>
+            <li>La entrega del contenido es inmediata tras la confirmación del pago por parte de Gumroad.</li>
+          </ul>
       )
     },
     {
@@ -125,7 +125,7 @@ const LegalPage: React.FC = () => {
       content: (
         <ul className="pl-6 space-y-3 list-disc text-text-200">
           <li><strong>TODAS LAS VENTAS SON FINALES</strong>. No se ofrecen reembolsos, devoluciones, ni intercambios bajo ninguna circunstancia.</li>
-          <li>Debido a la naturaleza digital del contenido (beats, samples, loops) y la imposibilidad de "devolver" archivos digitales una vez descargados, no procesamos solicitudes de reembolso.</li>
+          <li>Debido a la naturaleza digital del contenido (samples, loops) y la imposibilidad de "devolver" archivos digitales una vez descargados, no procesamos solicitudes de reembolso.</li>
           <li>Esta política se aplica independientemente del método de pago utilizado.</li>
           <li>Al realizar la compra, usted acepta expresamente esta política de "sin reembolsos".</li>
         </ul>
@@ -247,7 +247,7 @@ const LegalPage: React.FC = () => {
 
           <div className="p-4 mb-8 text-sm rounded-xl bg-bg-200">
             <p className="text-text-200">
-              Última actualización: 19/06/2025
+              Última actualización: 02/07/2025
             </p>
           </div>
         </motion.div>

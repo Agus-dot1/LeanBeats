@@ -29,15 +29,15 @@ const itemVariants = {
 const biographyImages = [
   {
     url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131607/Bio_1_r7jm2i.webp",
-    alt: "Lea in the Mix en estudio"
+    alt: "Lea in the Mix"
   },
   {
     url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp",
-    alt: "Lea in the Mix produciendo"
+    alt: "Lea in the Mix grabando La Presion"
   },
   {
     url: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131610/Bio_3_gyubvc.webp",
-    alt: "Lea in the Mix en concierto"
+    alt: "Lea in the Mix"
   }
 ];
 

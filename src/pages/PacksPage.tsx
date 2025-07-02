@@ -404,7 +404,7 @@ const PacksPage: React.FC = () => {
     <div className="min-h-screen pb-16 lg:pb-48 pt-28 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-200">
       <Helmet>
         <title>LIBRERÍAS | LEA IN THE MIX</title>
-        <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+        <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
       </Helmet>
 
       <div className="container px-4 mx-auto max-w-7xl">

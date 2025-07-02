@@ -206,7 +206,7 @@ const ContactPage: React.FC = () => {
                   required
                 >
                   <option value="">Selecciona un asunto</option>
-                  <option value="beats">Compra de Beat</option>
+                  <option value="libreria">Compra de librerias</option>
                   <option value="atention">Atencion al cliente</option>
                   <option value="website">Error en la página</option>
                   <option value="other">Otro</option>

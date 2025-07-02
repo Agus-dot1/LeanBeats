@@ -22,8 +22,6 @@ const queryClient = new QueryClient({
 
 // Lazy load components with prefetch
 const App = lazy(() => import('./App'));
-const BeatsPage = lazy(() => import('./pages/BeatsPage'));
-const BeatsUnavailable = lazy(() => import('./pages/BeatsUnavailablePage'));
 const PacksPage = lazy(() => import('./pages/PacksPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
@@ -31,7 +29,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Simple loading component
 const LoadingFallback = () => (
-  <div className="flex justify-center items-center min-h-screen bg-bg-100">
+  <div className="flex items-center justify-center min-h-screen bg-bg-100">
     <div className="w-10 h-10 rounded-full animate-spin border-3 border-primary-200 border-t-transparent"></div>
   </div>
 );
@@ -70,18 +68,6 @@ const RoutesApp = () => {
     };
   }, []);
 
-  // Prefetch important routes
-  useEffect(() => {
-    // Prefetch the home page
-    const prefetchHome = import('./App');
-    
-    // Prefetch the most commonly visited page
-    const prefetchLibraries = import('./pages/PacksPage');
-    
-    return () => {
-      // Clean up prefetch if needed
-    };
-  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
@@ -94,7 +80,6 @@ const RoutesApp = () => {
               <Routes>
                 <Route element={<Layout />}>
                   <Route path="/" element={<App />} />
-                  <Route path="/beats" element={<BeatsUnavailable />} />
                   <Route path="/librerias" element={<PacksPage />} />
                   <Route path="/contacto" element={<ContactPage />} />
                   <Route path="/legal" element={<LegalPage />} />

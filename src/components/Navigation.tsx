@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Music, Package, MessageSquare, Menu, X } from 'lucide-react';
+import { Home, Package, MessageSquare, Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 // import { useCart } from '../context/CartContext';
 import { useTheme } from '../hooks/useTheme';
@@ -9,7 +9,6 @@ import { useTheme } from '../hooks/useTheme';
 const navItems = [
   { path: '/', label: 'Inicio', icon: Home },
   { path: '/librerias', label: 'Librerías', icon: Package },
-  { path: '/beats', label: 'Beats', icon: Music },
   { path: '/contacto', label: 'Contacto', icon: MessageSquare },
 ];
 
