@@ -180,7 +180,7 @@ function App() {
                     <Play className="w-5 h-5 mr-2" />
                     Escuchar Demos
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
               
               <motion.div 
