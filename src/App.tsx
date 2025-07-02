@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ServiceCard from './components/ServiceCard';
 import { Helmet } from 'react-helmet-async';
 import { Biography } from './components/Biography';
-
+import Player from './components/MediaPlayer';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,6 +34,7 @@ const itemVariants = {
 function App() {
   const heroImageUrl = "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg";
   const [isLoading, setIsLoading] = useState(false);
+  const [isPlayerSticky, setIsPlayerSticky] = useState(false);
   
   // Check if the site is currently loading (controlled by routes.tsx)
   useEffect(() => {
@@ -54,11 +55,11 @@ function App() {
 
   return (
     <>
-          <Helmet>
-            <title>LEA IN THE MIX</title>
-            <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
-          </Helmet>
-    
+      <Helmet>
+        <title>LEA IN THE MIX</title>
+        <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+      </Helmet>
+
       <motion.div 
         initial="hidden"
         animate={isLoading ? "hidden" : "visible"}
@@ -139,15 +140,27 @@ function App() {
                 className="w-full lg:w-1/2"
               >
                 <div className="grid grid-cols-1 gap-6">
+                  {/* Media Player - Hero Version */}
                   <motion.div
                     variants={itemVariants}
                   >
-                    <ServiceCard 
-                      icon={<Headphones className="w-6 h-6" />}
-                      title="Packs & Samples"
-                      description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
-                      color="from-purple-500 to-indigo-500"
-                    />
+                    <Player isInHero={true} />
+                  </motion.div>
+
+                  {/* Service Card */}
+                  <motion.div
+                    variants={itemVariants}
+                  >
+                    <Link to="/librerias" className="block">
+                      <div className="transition-transform duration-300 hover:scale-105">
+                        <ServiceCard 
+                          icon={<Headphones className="w-6 h-6" />}
+                          title="Packs & Samples"
+                          description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
+                          color="from-purple-500 to-indigo-500"
+                        />
+                      </div>
+                    </Link>
                   </motion.div>
                 </div>
               </motion.div>
@@ -157,6 +170,14 @@ function App() {
         <Biography />
         <Footer />
       </motion.div>
+
+      {/* Sticky Player for other pages/scroll */}
+      {!isPlayerSticky && (
+        <Player 
+          isInHero={false} 
+          onStickyChange={setIsPlayerSticky}
+        />
+      )}
     </>
   );
 }

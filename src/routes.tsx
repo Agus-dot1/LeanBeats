@@ -75,7 +75,9 @@ const RoutesApp = () => {
           <Router>
             {initialLoading && <Loader onLoadingComplete={handleInitialLoadingComplete} />}
             
+            {/* Global sticky player - only show on non-home pages */}
             <Player />
+            
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
                 <Route element={<Layout />}>
