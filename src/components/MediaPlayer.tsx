@@ -435,7 +435,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
               >
                 {isExpanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
               </motion.button>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       )}
