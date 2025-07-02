@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Play, Pause, Volume2, Maximize2, Minimize2, SkipBack, SkipForward, Youtube } from 'lucide-react';
-import { Tooltip } from 'react-tooltip';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
 
 interface Song {
   id: string;
@@ -66,7 +64,7 @@ interface PlayerProps {
   onStickyChange?: (isSticky: boolean) => void;
 }
 
-const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => {
+const Player: React.FC<PlayerProps> = ({ onStickyChange }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -75,7 +73,6 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
   const [scrollY, setScrollY] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
 
   const currentSong = songs[currentSongIndex];
 
@@ -85,16 +82,15 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
       
-      if (!isInHero) {
-        // For sticky player: only show when scrolled down AND not on home page
+
         const shouldShow = currentScrollY > 200;
         onStickyChange?.(shouldShow);
-      }
+      
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isInHero, isHomePage, onStickyChange]);
+  }, [onStickyChange]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -184,7 +180,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (isInHero) {
+  if (scrollY < 300) {
     // Hero version - smaller and with scroll animation
     const scrollProgress = Math.min(scrollY / 300, 1); // Normalize scroll to 0-1
     
@@ -202,7 +198,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
         transition={{ duration: 0.8, delay: 0.3 }}
         className="w-full"
       >
-        <div className="overflow-hidden rounded-2xl shadow-xl bg-bg-200">
+        <div className="overflow-hidden shadow-xl rounded-2xl bg-bg-200">
           <audio
             ref={audioRef}
             onEnded={handleNext}
@@ -338,7 +334,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
       {shouldShow && (
         <motion.div 
           ref={playerRef}
-          className="fixed bottom-6 left-6 z-40"
+          className="fixed z-40 bottom-6 left-6"
           initial={{ opacity: 0, y: 100, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
@@ -372,7 +368,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
                 />
                 <button
                   onClick={togglePlay}
-                  className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/50 rounded-lg opacity-0 hover:opacity-100"
+                  className="absolute inset-0 flex items-center justify-center transition-opacity rounded-lg opacity-0 bg-black/50 hover:opacity-100"
                 >
                   {isPlaying ? <Pause size={16} className="text-white" /> : <Play size={16} className="text-white" />}
                 </button>
