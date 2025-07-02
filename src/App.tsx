@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Music, Headphones, Package, Play } from 'lucide-react';
+import { Music, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
 import { Helmet } from 'react-helmet-async';
 import { Biography } from './components/Biography';
+
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -53,10 +54,10 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <title>LEA IN THE MIX</title>
-        <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
-      </Helmet>
+          <Helmet>
+            <title>LEA IN THE MIX</title>
+            <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+          </Helmet>
     
       <motion.div 
         initial="hidden"
@@ -65,7 +66,7 @@ function App() {
         className="min-h-screen bg-bg-100"
       >
         
-        <div className="relative w-full min-h-screen pt-24 pb-16 overflow-hidden bg-bg-100 md:pt-32 md:pb-24">
+        <div className="relative w-full min-h-screen pt-24 pb-16 overflow-hidden bg-bg-100 md:pt-60 md:pb-24">
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-bg-300 via-bg-300 to-bg-100">
             <motion.div
               initial={{ scale: 1.3, opacity: 0 }}
@@ -88,95 +89,75 @@ function App() {
           </div>
           
           <div className="container relative z-10 px-4 mx-auto max-w-7xl">
-            <div className="flex flex-col items-center justify-center min-h-[80vh] text-center space-y-8">
-              
+            <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
               <motion.div 
-                variants={itemVariants}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-orange-500 to-red-500"
+                className="w-full space-y-6 text-center lg:w-1/2 lg:text-left"
+                variants={containerVariants}
               >
-                <Package className="w-4 h-4 mr-2" />
-                <span>Sample Packs Premium</span>
-              </motion.div>
-              
-              <motion.h1 
-                variants={itemVariants}
-                className="text-6xl font-bold tracking-tighter md:text-7xl lg:text-8xl xl:text-9xl"
-              >
-                <span className="text-white">LEA IN </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">THE MIX</span>
-              </motion.h1>
-              
-              <motion.p 
-                variants={itemVariants}
-                className="max-w-3xl mx-auto text-xl text-white md:text-2xl lg:text-3xl font-light leading-relaxed"
-              >
-                Librerías de samples que definen el sonido de la nueva generación.
-                <br />
-                <span className="text-white/80">Creadas para productores que buscan la excelencia.</span>
-              </motion.p>
-              
-              <motion.div 
-                variants={itemVariants}
-                className="flex flex-col gap-4 pt-8 sm:flex-row sm:gap-6"
-              >
-                <Link to="/librerias">
-                  <motion.button 
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center px-10 py-5 text-lg font-medium text-white transition-all transform rounded-full shadow-2xl bg-gradient-to-r from-orange-500 to-red-500 shadow-orange-500/30 hover:shadow-orange-500/50"
-                  >
-                    <Package className="w-6 h-6 mr-3" />
-                    Explorar Catálogo
-                  </motion.button>
-                </Link>
-                
-                <motion.button 
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center px-10 py-5 text-lg font-medium text-white transition-all transform border-2 border-white/30 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20 hover:border-white/50"
+                <motion.div 
+                  variants={itemVariants}
+                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-orange-500 to-red-500"
                 >
-                  <Play className="w-6 h-6 mr-3" />
-                  Escuchar Demos
-                </motion.button>
-              </motion.div>
-
-              {/* Floating Elements */}
-              <motion.div
-                variants={itemVariants}
-                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden lg:block"
-              >
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-white/60"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5V19M12 19L7 14M12 19L17 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <Music className="w-4 h-4 mr-2" />
+                  <span>Productor Musical</span>
                 </motion.div>
+                
+                <motion.h1 
+                  variants={itemVariants}
+                  className="text-5xl font-bold tracking-tighter md:text-6xl lg:text-7xl"
+                >
+                  <span className="text-white">LEA IN </span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">THE MIX</span>
+                </motion.h1>
+                
+                <motion.p 
+                  variants={itemVariants}
+                  className="max-w-xl mx-auto text-lg text-white lg:mx-0"
+                >
+                  Catálogo oficial de Lea In The Mix. Encuentra una amplia variedad de librerías para tus proyectos musicales.
+                </motion.p>
+                
+                <motion.div 
+                  variants={itemVariants}
+                  className="flex flex-wrap justify-center gap-4 pt-4 lg:justify-start"
+                >
+                  <Link to="/librerias">
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center px-6 py-3 font-medium text-white transition-all transform rounded-full shadow-lg bg-gradient-to-r from-orange-500 to-red-500 shadow-orange-500/20"
+                    >
+                      <Music className="w-5 h-5 mr-2" />
+                      Explorar Librerías
+                    </motion.button>
+                  </Link>
+                </motion.div>
+              </motion.div>
+              
+              <motion.div 
+                variants={containerVariants}
+                className="w-full lg:w-1/2"
+              >
+                <div className="grid grid-cols-1 gap-6">
+                  <motion.div
+                    variants={itemVariants}
+                  >
+                    <Link to="/librerias" className="block">
+                      <div className="transition-transform duration-300 hover:scale-105">
+                        <ServiceCard 
+                          icon={<Headphones className="w-6 h-6" />}
+                          title="Packs & Samples"
+                          description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
+                          color="from-purple-500 to-indigo-500"
+                        />
+                      </div>
+                    </Link>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </div>
         </div>
-
-        {/* Single Service Card Section */}
-        <motion.div 
-          variants={containerVariants}
-          className="container px-4 mx-auto max-w-7xl -mt-20 relative z-20"
-        >
-          <motion.div
-            variants={itemVariants}
-            className="max-w-md mx-auto"
-          >
-            <ServiceCard 
-              icon={<Headphones className="w-6 h-6" />}
-              title="Packs & Samples"
-              description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
-              color="from-purple-500 to-indigo-500"
-            />
-          </motion.div>
-        </motion.div>
-
         <Biography />
         <Footer />
       </motion.div>
