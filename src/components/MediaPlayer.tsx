@@ -63,7 +63,6 @@ const songs: Song[] = [
 ];
 
 interface PlayerProps {
-  isInHero?: boolean;
   onStickyChange?: (isSticky: boolean) => void;
 }
 
@@ -79,7 +78,6 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
   const location = useLocation();
 
   const currentSong = songs[currentSongIndex];
-  const isHomePage = location.pathname === '/';
 
   // Handle scroll for sticky behavior and hero animation
   useEffect(() => {
@@ -89,7 +87,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
       
       if (!isInHero) {
         // For sticky player: only show when scrolled down AND not on home page
-        const shouldShow = currentScrollY > 200 && !isHomePage;
+        const shouldShow = currentScrollY > 200;
         onStickyChange?.(shouldShow);
       }
     };
