@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Music, Headphones, Package, Play, Star, Download } from 'lucide-react';
+import { Music, Headphones, Package, Play } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
@@ -29,28 +29,6 @@ const itemVariants = {
     }
   }
 };
-
-// Featured drum kits data
-const featuredKits = [
-  {
-    id: 1,
-    title: "ALETEO Vol. 1",
-    category: "Electronic",
-    samples: "250+ Samples",
-    size: "384 MB",
-    price: "$40",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1747593291/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_eexnof.png"
-  },
-  {
-    id: 2,
-    title: "TURREO RKT Vol. 1",
-    category: "Urban",
-    samples: "250+ Samples", 
-    size: "295 MB",
-    price: "$40",
-    image: "https://res.cloudinary.com/do17gdc0b/image/upload/v1750768510/SAMPLE_PACK_TURREO_RKT_REMIXDROP_VOL_1_lp5ql6.jpg"
-  }
-];
 
 function App() {
   const heroImageUrl = "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg";
@@ -110,161 +88,95 @@ function App() {
           </div>
           
           <div className="container relative z-10 px-4 mx-auto max-w-7xl">
-            <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-12">
-              <motion.div 
-                className="w-full space-y-6 text-center lg:w-1/2 lg:text-left"
-                variants={containerVariants}
-              >
-                <motion.div 
-                  variants={itemVariants}
-                  className="inline-flex items-center px-3 py-1 mb-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-orange-500 to-red-500"
-                >
-                  <Package className="w-4 h-4 mr-2" />
-                  <span>Sample Packs Premium</span>
-                </motion.div>
-                
-                <motion.h1 
-                  variants={itemVariants}
-                  className="text-5xl font-bold tracking-tighter md:text-6xl lg:text-7xl"
-                >
-                  <span className="text-white">LEA IN </span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">THE MIX</span>
-                </motion.h1>
-                
-                <motion.p 
-                  variants={itemVariants}
-                  className="max-w-xl mx-auto text-lg text-white lg:mx-0"
-                >
-                  Librerías de samples profesionales creadas para productores que buscan sonidos únicos. 
-                  Cada pack incluye drums, efectos y elementos exclusivos para elevar tus producciones.
-                </motion.p>
-
-                {/* Stats */}
-                <motion.div 
-                  variants={itemVariants}
-                  className="flex flex-wrap justify-center gap-6 pt-4 lg:justify-start"
-                >
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">500+</div>
-                    <div className="text-sm text-white/80">Samples Únicos</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">100%</div>
-                    <div className="text-sm text-white/80">Libres de Regalías</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">WAV</div>
-                    <div className="text-sm text-white/80">Alta Calidad</div>
-                  </div>
-                </motion.div>
-                
-                <motion.div 
-                  variants={itemVariants}
-                  className="flex flex-wrap justify-center gap-4 pt-6 lg:justify-start"
-                >
-                  <Link to="/librerias">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center px-8 py-4 font-medium text-white transition-all transform rounded-full shadow-lg bg-gradient-to-r from-orange-500 to-red-500 shadow-orange-500/20"
-                    >
-                      <Package className="w-5 h-5 mr-2" />
-                      Explorar Librerías
-                    </motion.button>
-                  </Link>
-                  <motion.button 
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center px-8 py-4 font-medium text-white transition-all transform border border-white/20 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20"
-                  >
-                    <Play className="w-5 h-5 mr-2" />
-                    Escuchar Demos
-                  </motion.button>
-                </motion.div>
-              </motion.div>
+            <div className="flex flex-col items-center justify-center min-h-[80vh] text-center space-y-8">
               
               <motion.div 
-                variants={containerVariants}
-                className="w-full lg:w-1/2"
+                variants={itemVariants}
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-orange-500 to-red-500"
               >
-                {/* Featured Drum Kits Preview */}
-                <div className="space-y-4">
-                  <motion.h3
-                    variants={itemVariants}
-                    className="text-xl font-semibold text-center text-white lg:text-left"
+                <Package className="w-4 h-4 mr-2" />
+                <span>Sample Packs Premium</span>
+              </motion.div>
+              
+              <motion.h1 
+                variants={itemVariants}
+                className="text-6xl font-bold tracking-tighter md:text-7xl lg:text-8xl xl:text-9xl"
+              >
+                <span className="text-white">LEA IN </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">THE MIX</span>
+              </motion.h1>
+              
+              <motion.p 
+                variants={itemVariants}
+                className="max-w-3xl mx-auto text-xl text-white md:text-2xl lg:text-3xl font-light leading-relaxed"
+              >
+                Librerías de samples que definen el sonido de la nueva generación.
+                <br />
+                <span className="text-white/80">Creadas para productores que buscan la excelencia.</span>
+              </motion.p>
+              
+              <motion.div 
+                variants={itemVariants}
+                className="flex flex-col gap-4 pt-8 sm:flex-row sm:gap-6"
+              >
+                <Link to="/librerias">
+                  <motion.button 
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center px-10 py-5 text-lg font-medium text-white transition-all transform rounded-full shadow-2xl bg-gradient-to-r from-orange-500 to-red-500 shadow-orange-500/30 hover:shadow-orange-500/50"
                   >
-                    Packs Destacados
-                  </motion.h3>
-                  
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    {featuredKits.map((kit, index) => (
-                      <motion.div
-                        key={kit.id}
-                        variants={itemVariants}
-                        transition={{ delay: index * 0.1 }}
-                        className="overflow-hidden transition-all duration-300 rounded-2xl bg-white/10 backdrop-blur-md hover:bg-white/20 hover:scale-105"
-                      >
-                        <div className="relative h-32">
-                          <img
-                            src={kit.image}
-                            alt={kit.title}
-                            className="object-cover w-full h-full"
-                          />
-                          <div className="absolute inset-0 bg-black/40" />
-                          <div className="absolute top-2 left-2">
-                            <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-primary-200">
-                              {kit.category}
-                            </span>
-                          </div>
-                          <div className="absolute top-2 right-2">
-                            <motion.button
-                              whileHover={{ scale: 1.1 }}
-                              whileTap={{ scale: 0.9 }}
-                              className="p-2 text-white transition-colors rounded-full bg-white/20 hover:bg-white/30"
-                            >
-                              <Play size={16} />
-                            </motion.button>
-                          </div>
-                        </div>
-                        
-                        <div className="p-4">
-                          <h4 className="mb-2 font-semibold text-white">{kit.title}</h4>
-                          <div className="flex items-center justify-between mb-3 text-sm text-white/80">
-                            <span>{kit.samples}</span>
-                            <span>{kit.size}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-lg font-bold text-white">{kit.price}</span>
-                            <div className="flex items-center gap-1">
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                    <Package className="w-6 h-6 mr-3" />
+                    Explorar Catálogo
+                  </motion.button>
+                </Link>
+                
+                <motion.button 
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center px-10 py-5 text-lg font-medium text-white transition-all transform border-2 border-white/30 rounded-full backdrop-blur-sm bg-white/10 hover:bg-white/20 hover:border-white/50"
+                >
+                  <Play className="w-6 h-6 mr-3" />
+                  Escuchar Demos
+                </motion.button>
+              </motion.div>
 
-                  {/* Service Card */}
-                  <motion.div
-                    variants={itemVariants}
-                    className="mt-6"
-                  >
-                    <ServiceCard 
-                      icon={<Headphones className="w-6 h-6" />}
-                      title="Calidad Profesional"
-                      description="Samples masterizados y listos para usar en tus producciones. Compatibles con todos los DAWs principales."
-                      color="from-purple-500 to-indigo-500"
-                    />
-                  </motion.div>
-                </div>
+              {/* Floating Elements */}
+              <motion.div
+                variants={itemVariants}
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden lg:block"
+              >
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-white/60"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M12 19L7 14M12 19L17 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </motion.div>
               </motion.div>
             </div>
           </div>
         </div>
+
+        {/* Single Service Card Section */}
+        <motion.div 
+          variants={containerVariants}
+          className="container px-4 mx-auto max-w-7xl -mt-20 relative z-20"
+        >
+          <motion.div
+            variants={itemVariants}
+            className="max-w-md mx-auto"
+          >
+            <ServiceCard 
+              icon={<Headphones className="w-6 h-6" />}
+              title="Packs & Samples"
+              description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
+              color="from-purple-500 to-indigo-500"
+            />
+          </motion.div>
+        </motion.div>
+
         <Biography />
         <Footer />
       </motion.div>
