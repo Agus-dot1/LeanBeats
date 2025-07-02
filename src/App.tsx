@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Music, Headphones } from 'lucide-react';
+import { Play, Music, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';
@@ -56,7 +56,7 @@ function App() {
     <>
           <Helmet>
             <title>LEA IN THE MIX</title>
-            <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+            <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
           </Helmet>
     
       <motion.div 
@@ -77,6 +77,7 @@ function App() {
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.8)',
+                backgroundRepeat: 'no-repeat',
               }}
             />
             <div
@@ -84,6 +85,7 @@ function App() {
               style={{
                 backgroundImage: `url("${heroImageUrl}")`,
                 filter: 'brightness(0.6)',
+                backgroundRepeat: 'no-repeat',
               }}
             />
           </div>
@@ -114,14 +116,14 @@ function App() {
                   variants={itemVariants}
                   className="max-w-xl mx-auto text-lg text-white lg:mx-0"
                 >
-                  Catálogo oficial de Lea In The Mix. Encuentra una amplia variedad de librerías para tus proyectos musicales.
+                  Catálogo oficial de Lea In The Mix. Encuentra una amplia variedad de beats y librerías para tus proyectos musicales.
                 </motion.p>
                 
                 <motion.div 
                   variants={itemVariants}
                   className="flex flex-wrap justify-center gap-4 pt-4 lg:justify-start"
                 >
-                  <Link to="/librerias">
+                                    <Link to="/librerias">
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -131,6 +133,17 @@ function App() {
                       Explorar Librerías
                     </motion.button>
                   </Link>
+                  <Link to="/beats">
+                    <motion.button 
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center px-6 py-3 font-medium text-white transition-all transform border rounded-full border-gray-700/50 bg-gray-800/50 hover:bg-gray-800"
+                    >
+                      <Play className="w-5 h-5 mr-2" />
+                      Explorar Beats
+                    </motion.button>
+                  </Link>
+
                 </motion.div>
               </motion.div>
               
@@ -139,21 +152,29 @@ function App() {
                 className="w-full lg:w-1/2"
               >
                 <div className="grid grid-cols-1 gap-6">
+                                    <motion.div
+                    variants={itemVariants}
+                  >
+                    <ServiceCard 
+                      icon={<Headphones className="w-6 h-6" />}
+                      title="Packs & Samples"
+                      description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
+                      color="from-purple-500 to-indigo-500"
+                    />
+                  </motion.div>
                   <motion.div
                     variants={itemVariants}
                   >
-                    <Link to="/librerias" className="block">
-                      <div className="transition-transform duration-300 hover:scale-105">
-                        <ServiceCard 
-                          icon={<Headphones className="w-6 h-6" />}
-                          title="Packs & Samples"
-                          description="Librerías profesionales con samples de alta calidad para producción musical. Incluye drums, efectos y más."
-                          color="from-purple-500 to-indigo-500"
-                        />
-                      </div>
-                    </Link>
+                    <ServiceCard 
+                      icon={<Music className="w-6 h-6" />}
+                      title="Beats"
+                      description="Beats profesionales y únicos para tus proyectos musicales. Encontrá el sonido perfecto para tu próximo hit."
+                      color="from-orange-500 to-red-500"
+                    />
                   </motion.div>
                 </div>
+
+                
               </motion.div>
             </div>
           </div>
