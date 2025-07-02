@@ -34,7 +34,6 @@ const itemVariants = {
 function App() {
   const heroImageUrl = "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg";
   const [isLoading, setIsLoading] = useState(false);
-  const [isPlayerSticky, setIsPlayerSticky] = useState(false);
   
   // Check if the site is currently loading (controlled by routes.tsx)
   useEffect(() => {
@@ -170,14 +169,6 @@ function App() {
         <Biography />
         <Footer />
       </motion.div>
-
-      {/* Sticky Player for other pages/scroll */}
-      {!isPlayerSticky && (
-        <Player 
-          isInHero={false} 
-          onStickyChange={setIsPlayerSticky}
-        />
-      )}
     </>
   );
 }

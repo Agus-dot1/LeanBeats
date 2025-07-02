@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { Play, Pause, Volume2, Maximize2, Minimize2, SkipBack, SkipForward, Youtube } from 'lucide-react';
 import { Tooltip } from 'react-tooltip';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 interface Song {
   id: string;
@@ -10,7 +11,7 @@ interface Song {
   audioUrl: string;
   duration: string;
   youtubeUrl: string;
-  imageUrl: string; // Added image URL for each song
+  imageUrl: string;
 }
 
 const songs: Song[] = [
@@ -69,32 +70,33 @@ interface PlayerProps {
 const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [isExpanded, setIsExpanded] = useState(isInHero);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isSticky, setIsSticky] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const currentSong = songs[currentSongIndex];
+  const isHomePage = location.pathname === '/';
 
-  // Handle sticky behavior
+  // Handle scroll for sticky behavior and hero animation
   useEffect(() => {
-    if (isInHero) return; // Don't apply sticky behavior when in hero
-
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const shouldBeSticky = scrollY > 100;
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
       
-      if (shouldBeSticky !== isSticky) {
-        setIsSticky(shouldBeSticky);
-        onStickyChange?.(shouldBeSticky);
+      if (!isInHero) {
+        // For sticky player: only show when scrolled down AND not on home page
+        const shouldShow = currentScrollY > 200 && !isHomePage;
+        onStickyChange?.(shouldShow);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isSticky, isInHero, onStickyChange]);
+  }, [isInHero, isHomePage, onStickyChange]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -185,16 +187,24 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
   };
 
   if (isInHero) {
-    // Hero version - large and prominent
+    // Hero version - smaller and with scroll animation
+    const scrollProgress = Math.min(scrollY / 300, 1); // Normalize scroll to 0-1
+    
     return (
       <motion.div 
         ref={playerRef}
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ 
+          opacity: 1, 
+          y: 0,
+          // Simulate following scroll with subtle movement
+          x: scrollProgress * 10,
+          scale: 1 - (scrollProgress * 0.05)
+        }}
         transition={{ duration: 0.8, delay: 0.3 }}
         className="w-full"
       >
-        <div className="overflow-hidden rounded-3xl shadow-2xl bg-bg-200">
+        <div className="overflow-hidden rounded-2xl shadow-xl bg-bg-200">
           <audio
             ref={audioRef}
             onEnded={handleNext}
@@ -204,8 +214,8 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
             }}
           />
 
-          {/* Album Art Section */}
-          <div className="relative h-64 md:h-80">
+          {/* Compact Album Art Section */}
+          <div className="relative h-48 md:h-56">
             <motion.img
               key={currentSong.id}
               src={currentSong.imageUrl}
@@ -215,34 +225,34 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             
             {/* Play button overlay */}
             <motion.button
               onClick={togglePlay}
-              className="absolute p-4 text-white transition-all transform -translate-x-1/2 -translate-y-1/2 rounded-full shadow-lg top-1/2 left-1/2 bg-primary-200 hover:scale-110"
+              className="absolute p-3 text-white transition-all transform -translate-x-1/2 -translate-y-1/2 rounded-full shadow-lg top-1/2 left-1/2 bg-primary-200 hover:scale-110"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isPlaying ? <Pause size={32} /> : <Play size={32} />}
+              {isPlaying ? <Pause size={24} /> : <Play size={24} />}
             </motion.button>
 
             {/* Song info overlay */}
-            <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="mb-1 text-xl font-bold text-white md:text-2xl">{currentSong.title}</h3>
-              <p className="text-white/80">{currentSong.artist}</p>
+            <div className="absolute bottom-3 left-3 right-3">
+              <h3 className="mb-1 text-lg font-bold text-white md:text-xl">{currentSong.title}</h3>
+              <p className="text-sm text-white/80">{currentSong.artist}</p>
             </div>
           </div>
 
-          {/* Controls Section */}
-          <div className="p-6 space-y-4">
+          {/* Compact Controls Section */}
+          <div className="p-4 space-y-3">
             {/* Progress bar */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm text-text-200">
+            <div className="space-y-1">
+              <div className="flex justify-between text-xs text-text-200">
                 <span>{formatTime(currentTime)}</span>
                 <span>{currentSong.duration}</span>
               </div>
-              <div className="w-full h-2 rounded-full bg-bg-300">
+              <div className="w-full h-1.5 rounded-full bg-bg-300">
                 <div 
                   className="h-full transition-all duration-300 rounded-full bg-primary-200"
                   style={{ width: `${(currentTime / (audioRef.current?.duration || 1)) * 100}%` }}
@@ -252,37 +262,37 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
 
             {/* Main controls */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <button
                   onClick={handlePrevious}
-                  className="p-2 transition-colors rounded-full hover:bg-bg-300 text-text-100"
+                  className="p-1.5 transition-colors rounded-full hover:bg-bg-300 text-text-100"
                 >
-                  <SkipBack size={24} />
+                  <SkipBack size={18} />
                 </button>
                 <button
                   onClick={togglePlay}
-                  className="p-3 text-white transition-colors rounded-full bg-primary-200 hover:bg-primary-300"
+                  className="p-2 text-white transition-colors rounded-full bg-primary-200 hover:bg-primary-300"
                 >
-                  {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                  {isPlaying ? <Pause size={20} /> : <Play size={20} />}
                 </button>
                 <button
                   onClick={handleNext}
-                  className="p-2 transition-colors rounded-full hover:bg-bg-300 text-text-100"
+                  className="p-1.5 transition-colors rounded-full hover:bg-bg-300 text-text-100"
                 >
-                  <SkipForward size={24} />
+                  <SkipForward size={18} />
                 </button>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <button
                   onClick={openYoutube}
-                  className="p-2 transition-colors rounded-full hover:bg-bg-300 text-text-100"
+                  className="p-1.5 transition-colors rounded-full hover:bg-bg-300 text-text-100"
                 >
-                  <Youtube size={20} />
+                  <Youtube size={16} />
                 </button>
                 
-                <div className="flex items-center gap-2">
-                  <Volume2 size={20} className="text-text-100" />
+                <div className="items-center hidden gap-2 sm:flex">
+                  <Volume2 size={16} className="text-text-100" />
                   <input
                     type="range"
                     min="0"
@@ -290,31 +300,29 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
                     step="0.1"
                     value={volume}
                     onChange={handleVolumeChange}
-                    className="w-20 h-1 bg-text-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-text-100"
+                    className="w-16 h-1 bg-text-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2.5 [&::-webkit-slider-thumb]:h-2.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-text-100"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Song list */}
-            <div className="pt-4 border-t border-bg-300">
-              <h4 className="mb-3 text-sm font-medium text-text-200">Playlist</h4>
-              <div className="space-y-2 max-h-32 overflow-y-auto">
+            {/* Compact Song list */}
+            <div className="pt-2 border-t border-bg-300">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-xs font-medium text-text-200">Playlist</h4>
+                <span className="text-xs text-text-200">{currentSongIndex + 1}/{songs.length}</span>
+              </div>
+              <div className="flex gap-1 overflow-x-auto">
                 {songs.map((song, index) => (
                   <button
                     key={song.id}
                     onClick={() => setCurrentSongIndex(index)}
-                    className={`w-full text-left p-2 rounded-lg transition-colors ${
+                    className={`flex-shrink-0 w-2 h-2 rounded-full transition-colors ${
                       index === currentSongIndex 
-                        ? 'bg-primary-200/10 text-primary-200' 
-                        : 'hover:bg-bg-300 text-text-200'
+                        ? 'bg-primary-200' 
+                        : 'bg-bg-300 hover:bg-text-200'
                     }`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium truncate">{song.title}</span>
-                      <span className="text-xs">{song.duration}</span>
-                    </div>
-                  </button>
+                  />
                 ))}
               </div>
             </div>
@@ -324,118 +332,113 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
     );
   }
 
-  // Sticky version - compact
+  // Sticky version - only show when scrolled and not on home page
+  const shouldShow = scrollY > 200 && !isHomePage;
+
   return (
     <AnimatePresence>
-      <motion.div 
-        ref={playerRef}
-        className={`fixed ${isSticky ? 'bottom-6 sm:bottom-9' : 'bottom-4 sm:bottom-6'} left-4 sm:left-6 transition-all duration-300 z-40`}
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ 
-          opacity: 1, 
-          y: 0,
-          scale: isSticky ? 0.9 : 1
-        }}
-        transition={{ duration: 0.5, ease: "anticipate" }} 
-        exit={{ opacity: 0, y: 100 }}
-      >
+      {shouldShow && (
         <motion.div 
-          className={`bg-bg-200 rounded-lg sm:rounded-xl shadow-2xl ${isExpanded ? 'p-2 sm:p-3' : 'p-1 sm:p-2'} transition-all duration-200`}
-          animate={{
-            backdropFilter: isSticky ? 'blur(20px)' : 'blur(0px)',
-            backgroundColor: isSticky ? 'rgba(44, 46, 48, 0.95)' : 'var(--bg-200)'
+          ref={playerRef}
+          className="fixed bottom-6 left-6 z-40"
+          initial={{ opacity: 0, y: 100, scale: 0.8 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            scale: 1
           }}
+          exit={{ opacity: 0, y: 100, scale: 0.8 }}
+          transition={{ duration: 0.5, ease: "anticipate" }}
         >
-          <audio
-            ref={audioRef}
-            onEnded={handleNext}
-            onError={(e) => {
-              console.error('Audio playback error:', e);
-              setIsPlaying(false);
-            }}
-          />
-
           <motion.div 
-            className={`flex items-center transition-all duration-100 gap-1 sm:gap-4 ${isExpanded ? 'w-[250px] sm:w-[300px] md:w-[400px]' : 'w-[150px] sm:w-[170px] md:w-[300px]'}`}
+            className={`bg-bg-200/95 backdrop-blur-xl rounded-xl shadow-2xl border border-bg-300/50 ${isExpanded ? 'p-3' : 'p-2'} transition-all duration-200`}
           >
-            {/* Song Info */}
-            {isExpanded && (
-              <motion.div 
-                className="flex-1 min-w-0 overflow-x-hidden"
-              >
-                <h3
-                  className="text-sm font-medium truncate text-text-100"
-                  data-tooltip-id="song-title-tooltip"
-                  data-tooltip-content={currentSong.title}
+            <audio
+              ref={audioRef}
+              onEnded={handleNext}
+              onError={(e) => {
+                console.error('Audio playback error:', e);
+                setIsPlaying(false);
+              }}
+            />
+
+            <motion.div 
+              className={`flex items-center transition-all duration-200 gap-3 ${isExpanded ? 'w-[320px]' : 'w-[180px]'}`}
+            >
+              {/* Album art thumbnail */}
+              <div className="relative flex-shrink-0">
+                <img
+                  src={currentSong.imageUrl}
+                  alt={currentSong.title}
+                  className="object-cover w-12 h-12 rounded-lg"
+                />
+                <button
+                  onClick={togglePlay}
+                  className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/50 rounded-lg opacity-0 hover:opacity-100"
                 >
-                  {currentSong.title}
-                </h3>
-                <Tooltip id="song-title-tooltip" place="top" />
-                <p className="text-xs truncate text-text-100">{currentSong.artist}</p>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-text-100">{currentSong.duration}</span>
-                  <button
-                    onClick={openYoutube}
-                    className="p-1 rounded-full hover:bg-bg-300"
-                  >
-                    <Youtube size={14} className="text-text-100" />
-                  </button>
-                </div>
-              </motion.div>
-            )}
+                  {isPlaying ? <Pause size={16} className="text-white" /> : <Play size={16} className="text-white" />}
+                </button>
+              </div>
 
-            {/* Controls */}
-            <motion.div 
-              className="flex items-center gap-2"
-            >
-              <button
-                onClick={handlePrevious}
-                className="p-1.5 sm:p-2 rounded-full transition-colors hover:bg-bg-300 text-text-100"
-              >
-                <SkipBack size={16} className="sm:w-[18px] sm:h-[18px]" />
-              </button>
-              <button
-                onClick={togglePlay}
-                className="p-2 transition-colors rounded-full bg-primary-200 hover:bg-bg-300 text-text-100"
-              >
-                {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-              </button>
-              <button
-                onClick={handleNext}
-                className="p-2 transition-colors rounded-full hover:bg-bg-300 text-text-100"
-              >
-                <SkipForward size={18} />
-              </button>
-            </motion.div>
+              {/* Song Info */}
+              {isExpanded && (
+                <motion.div 
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: 'auto' }}
+                  exit={{ opacity: 0, width: 0 }}
+                  className="flex-1 min-w-0 overflow-hidden"
+                >
+                  <h3 className="text-sm font-medium truncate text-text-100">
+                    {currentSong.title}
+                  </h3>
+                  <p className="text-xs truncate text-text-200">{currentSong.artist}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs text-text-200">{currentSong.duration}</span>
+                    <button
+                      onClick={openYoutube}
+                      className="p-0.5 rounded hover:bg-bg-300"
+                    >
+                      <Youtube size={12} className="text-text-100" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
 
-            {/* Volume Control */}
-            <motion.div 
-              className="items-center hidden gap-2 group md:flex"
-            >
-              <Volume2 size={18} className="text-text-100" />
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={volume}
-                onChange={handleVolumeChange}
-                className="w-20 h-1 bg-text-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-text-100"
-              />
-            </motion.div>
+              {/* Controls */}
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handlePrevious}
+                  className="p-1.5 rounded-full transition-colors hover:bg-bg-300 text-text-100"
+                >
+                  <SkipBack size={14} />
+                </button>
+                <button
+                  onClick={togglePlay}
+                  className="p-2 text-white transition-colors rounded-full bg-primary-200 hover:bg-primary-300"
+                >
+                  {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="p-1.5 rounded-full transition-colors hover:bg-bg-300 text-text-100"
+                >
+                  <SkipForward size={14} />
+                </button>
+              </div>
 
-            {/* Expand/Collapse Button */}
-            <motion.button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1.5 rounded-full transition-colors hover:bg-bg-300 text-text-100"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-            </motion.button>
+              {/* Expand/Collapse Button */}
+              <motion.button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="p-1.5 rounded-full transition-colors hover:bg-bg-300 text-text-100"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isExpanded ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+              </motion.button>
+            </div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </AnimatePresence>
   );
 };

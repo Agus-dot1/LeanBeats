@@ -75,7 +75,7 @@ const RoutesApp = () => {
           <Router>
             {initialLoading && <Loader onLoadingComplete={handleInitialLoadingComplete} />}
             
-            {/* Global sticky player - only show on non-home pages */}
+            {/* Global sticky player - shows on all pages except home when scrolled */}
             <Player />
             
             <Suspense fallback={<LoadingFallback />}>
