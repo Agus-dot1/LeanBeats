@@ -333,7 +333,7 @@ const Player: React.FC<PlayerProps> = ({ isInHero = false, onStickyChange }) => 
   }
 
   // Sticky version - only show when scrolled and not on home page
-  const shouldShow = scrollY > 200 && !isHomePage;
+  const shouldShow = scrollY > 200;
 
   return (
     <AnimatePresence>
