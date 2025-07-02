@@ -11,23 +11,16 @@ const socialLinks = [
 
 const navLinks = [
   { name: 'Inicio', path: '/' },
-  { name: 'Beats', path: '/beats' },
   { name: 'Librerias', path: '/librerias' },
   { name: 'Contacto', path: '/contacto' },
 ];
 
-const beatTypes = [
-  { name: 'Aleteo', path: '/beats?genre=trap-soul' },
-  { name: 'Remix Drop', path: '/beats?genre=latin-house' },
-  { name: 'Reggaeton', path: '/beats?genre=reggaeton' },
-  { name: 'RKT', path: '/beats?genre=pop' },
-];
 
 export const Footer: React.FC = () => {
   return (
     <footer className="relative pt-20 pb-10 overflow-hidden bg-bg-100">
       <div className="container max-w-6xl px-4 mx-auto">
-        <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2 lg:grid-cols-3">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -62,8 +55,8 @@ export const Footer: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h4 className="mb-6 text-lg font-semibold text-text-100">Navegación</h4>
-            <ul className="space-y-3">
+            <h4 className="pl-10 mb-6 text-lg font-semibold text-text-100">Navegación</h4>
+            <ul className="pl-10 space-y-3 ">
               {navLinks.map(({ name, path }) => (
                 <li key={name}>
                   <Link to={path}>
@@ -80,30 +73,7 @@ export const Footer: React.FC = () => {
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h4 className="mb-6 text-lg font-semibold text-text-100">Beats</h4>
-            <ul className="space-y-3">
-              {beatTypes.map(({ name, path }) => (
-                <li key={name}>
-                  <Link to={path}>
-                    <motion.div
-                      whileHover={{ x: 3 }}
-                      className="flex items-center transition-colors group text-text-200 hover:text-primary-200"
-                    >
-                      <ArrowRight className="w-4 h-4 -ml-4 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-0" />
-                      <span>{name}</span>
-                    </motion.div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
