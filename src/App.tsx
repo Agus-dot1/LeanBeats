@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Music, Headphones } from 'lucide-react';
+import { Music, Headphones } from 'lucide-react';
 import { Footer } from './components/Footer';
 import { Link } from 'react-router-dom'; 
 import ServiceCard from './components/ServiceCard';

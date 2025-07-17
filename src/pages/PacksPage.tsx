@@ -252,7 +252,7 @@ const PacksPage: React.FC = () => {
       title: 'SAMPLE PACK ALETEO Vol. 1',
       color: 'bg-gradient-to-br from-orange-500 to-yellow-500',
       description: 'Este pack es una herramienta indispensable para cualquier productor de música electrónica que busque crear pistas con un sonido único y atractivo. Con sonidos inspirados en mis propias producciones y remixs, este pack te brinda la oportunidad de agregar un toque personal a tus creaciones.',
-      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1747593291/0D57FE94-C257-4747-BDDF-1F444ACDBFC9_eexnof.png',
+      imageUrl: 'https://hidfzvotnlochxeuoqdj.supabase.co/storage/v1/object/public/images//SAMPLE%20PACK%201.png',
       price: 40,
       category: 'ALETEO',
       gumroadUrl: 'https://agustory06.gumroad.com/l/your-pack-1-url', // Add your Gumroad URL
@@ -321,10 +321,10 @@ const PacksPage: React.FC = () => {
       title: 'SAMPLE PACK TURREO - RKT - REMIXDROP Vol. 1',
       description: 'Descubre una colección exclusiva de sonidos únicos, cuidadosamente elaborados a lo largo de mi carrera como DJ y productor. Cada sample refleja mi esencia creativa, listo para enriquecer tu música con un toque personal.',
       color: 'bg-gradient-to-br from-purple-500 to-pink-500',
-      imageUrl: 'https://res.cloudinary.com/do17gdc0b/image/upload/v1750768510/SAMPLE_PACK_TURREO_RKT_REMIXDROP_VOL_1_lp5ql6.jpg',
+      imageUrl: 'https://hidfzvotnlochxeuoqdj.supabase.co/storage/v1/object/public/images//SAMPEL%20PACK%202.jpg',
       price: 40,
       category: 'RKT',
-      gumroadUrl: 'https://leainthemix.gumroad.com/l/sptrrvol1', // Add your Gumroad URL
+      gumroadUrl: 'https://leainthemix.gumroad.com/l/sptrrvol1',
       features: {
         samples: '150 - 248',
         formats: ['WAV'],
