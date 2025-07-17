@@ -75,7 +75,7 @@ const RoutesApp = () => {
         <ToastProvider>
           <Router>
             {initialLoading && <Loader onLoadingComplete={handleInitialLoadingComplete} />}
-            <Player />
+
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
                 <Route element={<Layout />}>
