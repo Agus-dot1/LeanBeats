@@ -7,6 +7,7 @@ import { ToastProvider } from './context/ToastContext';
 import { CartDrawer } from './components/CartDrawer';
 import { CookieConsent } from './components/CookieConsent';
 import { Loader } from './components/Loader';
+import { Analytics } from "@vercel/analytics/next"
 
 // Import Player directly to avoid unnecessary suspense
 import Player from './components/MediaPlayer';
@@ -22,7 +23,6 @@ const queryClient = new QueryClient({
 
 // Lazy load components with prefetch
 const App = lazy(() => import('./App'));
-const BeatsPage = lazy(() => import('./pages/BeatsPage'));
 const BeatsUnavailable = lazy(() => import('./pages/BeatsUnavailablePage'));
 const PacksPage = lazy(() => import('./pages/PacksPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -31,7 +31,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Simple loading component
 const LoadingFallback = () => (
-  <div className="flex justify-center items-center min-h-screen bg-bg-100">
+  <div className="flex items-center justify-center min-h-screen bg-bg-100">
     <div className="w-10 h-10 rounded-full animate-spin border-3 border-primary-200 border-t-transparent"></div>
   </div>
 );
@@ -70,25 +70,14 @@ const RoutesApp = () => {
     };
   }, []);
 
-  // Prefetch important routes
-  useEffect(() => {
-    // Prefetch the home page
-    const prefetchHome = import('./App');
-    
-    // Prefetch the most commonly visited page
-    const prefetchLibraries = import('./pages/PacksPage');
-    
-    return () => {
-      // Clean up prefetch if needed
-    };
-  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <ToastProvider>
           <Router>
             {initialLoading && <Loader onLoadingComplete={handleInitialLoadingComplete} />}
-            
+            <Analytics />
             <Player />
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
