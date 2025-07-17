@@ -7,8 +7,6 @@ import { ToastProvider } from './context/ToastContext';
 import { CartDrawer } from './components/CartDrawer';
 import { CookieConsent } from './components/CookieConsent';
 import { Loader } from './components/Loader';
-import { Analytics } from "@vercel/analytics/next"
-
 // Import Player directly to avoid unnecessary suspense
 import Player from './components/MediaPlayer';
 
@@ -77,7 +75,6 @@ const RoutesApp = () => {
         <ToastProvider>
           <Router>
             {initialLoading && <Loader onLoadingComplete={handleInitialLoadingComplete} />}
-            <Analytics />
             <Player />
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
