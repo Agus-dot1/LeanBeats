@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, ExternalLink, Music2 } from 'lucide-react';
+import { ExternalLink, Music2 } from 'lucide-react';
 
 interface Release {
   id: string;
@@ -21,7 +21,7 @@ const defaultRelease: Release = {
   id: 'retumba-la-bocina',
   title: "LA PRE$IÓN 危 Vol • 1",
   artist: "Lea in the Mix",
-  videoUrl: "https://res.cloudinary.com/do17gdc0b/image/upload/v1751131606/Bio_2_tfdjge.webp",
+  videoUrl: "https://hidfzvotnlochxeuoqdj.supabase.co/storage/v1/object/public/images//Bio%202.webp",
   youtubeUrl: "https://www.youtube.com/watch?v=KcdNDoIfGbs",
   views: "1M+",
   releaseDate: "2025"
@@ -93,20 +93,20 @@ export const LatestRelease: React.FC<LatestReleaseProps> = ({
                   transition={{ delay: 0.2 }}
                   className="space-y-4"
                 >
-                  <h3 className="text-4xl lg:text-6xl font-bold mb-2">
+                  <h3 className="mb-2 text-4xl font-bold lg:text-6xl">
                     {release.title}
                   </h3>
-                  <p className="text-xl lg:text-2xl text-white/90 mb-6">{release.artist}</p>
+                  <p className="mb-6 text-xl lg:text-2xl text-white/90">{release.artist}</p>
 
                   {/* Stats */}
                   <div className="flex items-center justify-center gap-8 mb-8 text-white/80">
                     <div className="text-center">
-                      <div className="text-2xl lg:text-3xl font-bold text-primary-200">{release.views}</div>
+                      <div className="text-2xl font-bold lg:text-3xl text-primary-200">{release.views}</div>
                       <div className="text-sm lg:text-base">Reproducciones</div>
                     </div>
                     <div className="w-px h-12 bg-white/30"></div>
                     <div className="text-center">
-                      <div className="text-2xl lg:text-3xl font-bold text-primary-200">{release.releaseDate}</div>
+                      <div className="text-2xl font-bold lg:text-3xl text-primary-200">{release.releaseDate}</div>
                       <div className="text-sm lg:text-base">Lanzamiento</div>
                     </div>
                   </div>
@@ -118,7 +118,7 @@ export const LatestRelease: React.FC<LatestReleaseProps> = ({
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/20"
+                    className="inline-flex items-center gap-3 px-8 py-4 font-semibold text-white transition-all border bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 border-white/20"
                   >
                     Ver en YouTube
                     <ExternalLink size={20} />

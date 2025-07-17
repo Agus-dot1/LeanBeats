@@ -32,7 +32,7 @@ const itemVariants = {
 };
 
 function App() {
-  const heroImageUrl = "https://res.cloudinary.com/do17gdc0b/image/upload/v1746479152/Lean_in_the_mix___imruso003_q4xmja.jpg";
+  const heroImageUrl = "https://hidfzvotnlochxeuoqdj.supabase.co/storage/v1/object/public/images//hero.webp";
   const [isLoading, setIsLoading] = useState(false);
   
   // Check if the site is currently loading (controlled by routes.tsx)
