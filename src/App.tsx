@@ -56,7 +56,7 @@ function App() {
     <>
           <Helmet>
             <title>LEA IN THE MIX</title>
-            <meta name="description" content="Packs de samples y kits de batería profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
+            <meta name="description" content="Packs de samples profesionales para productores musicales. Sonidos de alta calidad para tus producciones." />
           </Helmet>
     
       <motion.div 

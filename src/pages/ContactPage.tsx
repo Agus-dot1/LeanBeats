@@ -98,7 +98,7 @@ const ContactPage: React.FC = () => {
     <div className="min-h-screen pb-20 pt-28 bg-gradient-to-b from-bg-300 via-bg-100 to-bg-100">
       <Helmet>
         <title>CONTACTO | LEA IN THE MIX</title>
-        <meta name="description" content="Contáctanos para producción musical, reservas de estudio o cualquier consulta." />
+        <meta name="description" content="Contáctanos para cualquier consulta." />
       </Helmet>
 
       <div className="container px-4 mx-auto max-w-7xl">
